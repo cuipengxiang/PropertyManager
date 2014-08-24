@@ -1,0 +1,23 @@
+//
+//  Prefix header
+//
+//  The contents of this file are implicitly included at the beginning of every source file.
+//
+
+#import <Availability.h>
+#import <JSONKit.h>
+#import <Base64.h>
+
+#ifndef __IPHONE_3_0
+#warning "This project uses features only available in iOS SDK 3.0 and later."
+#endif
+
+#define IS_iOS7 [[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0
+#define Nav_Height ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0 ? 64.0 : 44.0)
+#define App_Height ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0 ? [UIScreen mainScreen].bounds.size.height : [UIScreen mainScreen].applicationFrame.size.height)
+#define App_Width ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0 ? [UIScreen mainScreen].bounds.size.width : [UIScreen mainScreen].applicationFrame.size.width)
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+    #import <Foundation/Foundation.h>
+#endif

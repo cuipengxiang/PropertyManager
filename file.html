@@ -1,0 +1,169 @@
+
+<!-- saved from url=(0077)http://219.146.138.106:8888/ourally/app/property/environ/environGreenCkeck.do -->
+<html class="ui-mobile"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><!--<base href="http://219.146.138.106:8888/ourally/app/property/environ/environGreenCkeck.do">--><base href=".">
+
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>绿化检查新建</title>
+<link rel="stylesheet" href="./绿化检查新建_files/base.css">
+<link rel="stylesheet" type="text/css" href="./绿化检查新建_files/base.css">
+<link rel="stylesheet" type="text/css" href="./绿化检查新建_files/base(1).css">
+<link rel="stylesheet" type="text/css" href="./绿化检查新建_files/owner.css">
+<link rel="stylesheet" type="text/css" href="./绿化检查新建_files/form.css">
+<link rel="stylesheet" type="text/css" href="./绿化检查新建_files/owner-common.css">
+
+<link rel="stylesheet" href="http://219.146.138.106:8888/ourally/css/validate/jquery.validate.css">
+<link rel="stylesheet" href="http://219.146.138.106:8888/ourally/css/jqueryMobile/jquery.mobile-1.4.2.min.css">
+<link rel="stylesheet" href="http://219.146.138.106:8888/ourally/css/jqueryMobile/mobiscroll/mobiscroll.core-2.5.2.css">
+<link rel="stylesheet" href="http://219.146.138.106:8888/ourally/css/jqueryMobile/mobiscroll/mobiscroll.animation-2.5.2.css">
+<link rel="stylesheet" href="http://219.146.138.106:8888/ourally/css/jqueryMobile/mobiscroll/mobiscroll.android-ics-2.5.2.css">
+
+<script src="./绿化检查新建_files/jquery-1.7.2.min.js"></script>
+<script src="./绿化检查新建_files/jquery.prompt.js"></script>
+<script src="./绿化检查新建_files/ajaxFileUpload.js"></script>
+<script src="./绿化检查新建_files/jquery.mobile-1.4.2.min.js"></script>
+
+<!-- 时间控件 -->
+<script src="./绿化检查新建_files/mobiscroll.core-2.5.2.js" type="text/javascript"></script>
+<script src="./绿化检查新建_files/mobiscroll.core-2.5.2-zh.js" type="text/javascript"></script>
+<script src="./绿化检查新建_files/mobiscroll.datetime-2.5.1.js" type="text/javascript"></script>
+<script src="./绿化检查新建_files/mobiscroll.datetime-2.5.1-zh.js" type="text/javascript"></script>
+<script src="./绿化检查新建_files/mobiscroll.android-ics-2.5.2.js" type="text/javascript"></script>
+
+<script src="./绿化检查新建_files/jquery.validate.js"></script>
+<script src="./绿化检查新建_files/jquery.metadata.js"></script>
+<script type="text/javascript">
+function showVoid(fileName,message,_id){
+	$("#"+_id).val(fileName);
+	$.Prompt(message);
+	if(fileName!=null)
+	{
+		$("#showVoid").show();
+		Media =  document.getElementById("audio_player");
+		Media.src="/ourally/upload/voice/"+fileName;
+
+	}
+}
+function submitAjax(formId, url) {
+	var validater = $("#" + formId).validate({
+		rules : {},
+		messages : {}
+	}).form();
+	if(validater){
+		$.ajax({
+			type : "post",
+			data : $("#" + formId).serialize(),
+			dataType :"text",
+			url : url,
+			success : function(data) {
+				var _data = eval("(" + data + ")");
+				if (_data.success) {
+					$.Prompt("提交成功!");
+					onSuccessForm = false;
+					window.location.href = "environGreenList.do";
+				} else {
+					$.Prompt(_data.text);
+				}
+			},
+			error : function() {
+				$.Prompt("网络繁忙,请稍后再试...");
+			}
+		});
+	}
+}
+//原生返回时间添加到表单中
+function setDateTime(time,inputId) {
+	 $('#'+inputId).val(time);
+}
+
+//原生返回时间添加到表单中
+function sendObjcCommand(funcname,params) {
+    document.activeElement.blur();
+    document.location="objc://"+funcname+":"+params;
+}
+
+//原生添加图片后调用
+function showPic(picString,_id) {
+	$("#"+_id).val(picString);
+	var imgs = picString.split(",");
+	if(imgs.length>0){
+		$(".list-photo").html(null);
+		$("li[name='showPic_li']").show();
+		for(var i=0;i<imgs.length;i++){
+			if(imgs[i] != null&&imgs[i]!=""){
+				$(".list-photo").append("<img onerror=\"this.src='/ourally/images/error-pic1.jpg'\" src=\"/ourally/upload/images/"+imgs[i]+"\" style=\"width: 100px;height:100px;\" />");
+			}
+			
+		}
+	} else {
+		$("li[name='showPic_li']").hide();
+	}
+}
+</script>
+</head>
+<body class="ui-mobile-viewport ui-overlay-a">
+<div data-role="page" data-url="/ourally/app/property/environ/environGreenCkeck.do" tabindex="0" class="ui-page ui-page-theme-a ui-page-active" style="min-height: 507px;">
+<header>
+	<a class="header-btn-l header-back ui-link" href="javascript:window.location.href='../environ/environGreenList.do.do'">后退</a>
+	<h2>检查新建</h2>
+	<a class="header-btn-r ui-link" href="javascript:void(0)">&nbsp;</a>
+</header>
+<div data-role="content" class="container ui-content" role="main">
+	<form action="http://219.146.138.106:8888/ourally/app/property/environ/environGreenCkeckSub.do" method="post" id="form1">
+		<label for="greenId">检查绿化名称</label>
+		<div class="ui-select"><div id="greenId-button" class="ui-btn ui-icon-carat-d ui-btn-icon-right ui-corner-all ui-shadow"><span class="{required:true,messages:{required:&#39;请选择检查名称&#39;}}">&nbsp;</span><select name="greenId" id="greenId" class="{required:true,messages:{required:&#39;请选择检查名称&#39;}}">
+		<option value=""></option>
+			
+				<option value="4028805e47dc5a960147dc96fb86000a,1">1</option>
+			
+		</select></div></div><input id="voice" name="voice" type="hidden">
+		<div id="showVoid" style="display:none">
+		<label for="audio_player">录音 :</label>
+				<div style="margin-left: 40px;">
+					<audio controls="controls" id="audio_player">
+						<source src="">
+					</audio>
+				</div>
+		</div>
+		<label for="lname">上传语音:</label> 
+		<a class="btn-lg btn-purple ui-link" onclick="window.JsInterFace.showVoid(&#39;402880c347ce01770147ce0a017e000d&#39;,&#39;voice&#39;)">上传语音(最多30秒)</a> 
+		<label for="lname">上传照片:</label> 
+		<a class="btn-lg btn-purple ui-link" onclick="window.JsInterFace.addPic(&#39;402880c347ce01770147ce0a017e000d&#39;,&#39;pic&#39;)">上传照片</a> 
+		<input type="hidden" name="pic" id="pic"> 
+		<li name="showPic_li" class="list-item" style="display: none;"><h3 class="list-title">图片</h3></li>
+		<li name="showPic_li" class="list-photo" style="display: none;"></li> 
+		<label for="checkResult">检查结果:</label>
+		<textarea data-role="none" name="checkResult" id="checkResult" class="{required:true,maxlength:1000,messages:{required:&#39;请填写检查情况&#39;}}"></textarea>
+		<label for="lname">检查时间:</label> 
+		<input data-role="none" type="text" name="checkDate" id="checkDate" onfocus="sendObjcCommand('getDateTime','checkDate')" class="{required:true,bfTime:true,messages:{required:&#39;请填写检查时间&#39;}}">
+		<label for="lname">检查状态:</label> <div class="ui-select"><div id="handleStatus-button" class="ui-btn ui-icon-carat-d ui-btn-icon-right ui-corner-all ui-shadow"><span>&nbsp;</span><select name="handleStatus" id="handleStatus">
+			<option value=""></option>
+			
+				<option value="1">已完成</option>
+			
+				<option value="2">未完成</option>
+			
+		</select></div></div>
+		<label for="lname">处理人:</label> <div class="ui-select"><div id="handleMan-button" class="ui-btn ui-icon-carat-d ui-btn-icon-right ui-corner-all ui-shadow"><span>&nbsp;</span><select name="handleMan" id="handleMan">
+			<option value=""></option>
+			
+				<option value="402880c347ce01770147ce0a01cd0010">中俄</option>
+			
+				<option value="402880c347d8f1ed0147d8f40b030001">小鹏</option>
+			
+		</select></div></div>
+		<label for="lname">处理时间 :</label>
+		<input data-role="none" type="text" name="handleTime" id="handleTime" onclick="window.JsInterFace.getDateTime(&#39;handleTime&#39;);" class="{bfTime:true}">
+		<label for="lname">处理情况 :</label>
+		<textarea data-role="none" name="handleCase" id="handleCase" class="{maxlength:1000}"></textarea>
+		<a class="btn-lg btn-orange ui-link" href="javascript:void(0);" onclick="submitAjax(&#39;form1&#39;,&#39;environGreenCkeckSub.do&#39;)">提交</a>
+	</form>
+</div>
+
+<footer>
+<!--	<a href="javascript:history.go(-1);" class="footer-back">后退</a> -->
+	<a href="javascript:window.location.href='../sys/companyMain.do'" class="footer-home ui-link">首页</a>
+	<a href="javascript:window.location.href='../staff/staffMainList.do'" class="footer-center ui-link">个人中心</a>
+</footer>
+</div>
+
+<div class="ui-loader ui-corner-all ui-body-a ui-loader-default"><span class="ui-icon-loading"></span><h1>loading</h1></div></body></html>
