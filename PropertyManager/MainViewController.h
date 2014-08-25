@@ -21,5 +21,7 @@
 @property (nonatomic, strong) LCVoice *voice;
 @property (nonatomic, strong) NSMutableArray *imagesSelected;
 @property (nonatomic, strong) NSMutableArray *imagesDataToUpLoad;
+@property (nonatomic, strong) NSString *imageCompanyID;
+@property (nonatomic, strong) NSString *imageInputID;
 
 @end

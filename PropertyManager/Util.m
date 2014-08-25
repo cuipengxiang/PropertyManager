@@ -7,6 +7,7 @@
 //
 
 #import "Util.h"
+#import "TFHpple.h"
 
 @implementation Util
 
@@ -36,18 +37,25 @@
     return destDateString;
 }
 
-+ (NSString *)dataToXMLString:(NSArray *)datas
++ (NSMutableArray *)dataToXMLString:(NSArray *)datas companyID:(NSString *)companyID inputID:(NSString *)inputID
 {
+    NSMutableArray *array = [[NSMutableArray alloc] init];
     NSMutableString *xmlString = [NSMutableString stringWithString:@""];
+    NSMutableString *filenames = [NSMutableString stringWithString:@""];
     [xmlString appendString:@"<root>"];
     [xmlString appendString:@"<Serializable_Value_Object>"];
     [xmlString appendString:@"<address><![CDATA[山东省 烟台市 莱山区 G18荣乌高速 靠近烟台北方星空自控科技有限公司]]></address>"];
     [xmlString appendString:@"<latitude>37.423774</latitude>"];
     [xmlString appendString:@"<longitude>121.5378</longitude>"];
     [xmlString appendString:@"<device_id>1</device_id>"];
-    for(NSData *data in datas) {
+    for(int i = 0;i < datas.count; i++) {
+        NSData *data = [datas objectAtIndex:i];
         NSString *base64String = [data base64EncodedString];
-        NSString *name = [NSString stringWithFormat:@"company%@udid%d", [Util stringFromDateForFileName:[NSDate date]], 1];
+        NSString *name = [NSString stringWithFormat:@"%@/%@/%d.jpg", companyID, [Util stringFromDateForFileName:[NSDate date]], 123];
+        [filenames appendString:name];
+        if (i < datas.count - 1) {
+            [filenames appendString:@","];
+        }
         [xmlString appendString:@"<serial_object>"];
         [xmlString appendString:@"<Haitao_Upload_File>"];
         [xmlString appendString:@"<serial_version_u_i_d>1</serial_version_u_i_d>"];
@@ -62,7 +70,9 @@
     [xmlString appendString:@"</Serializable_Value_Object>"];
     [xmlString appendString:@"</root>"];
     
-    return xmlString;
+    [array addObject:xmlString];
+    [array addObject:filenames];
+    return array;
 }
 
 

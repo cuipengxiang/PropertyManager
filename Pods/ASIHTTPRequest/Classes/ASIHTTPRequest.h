@@ -1001,4 +1001,6 @@ typedef void (^ASIDataBlock)(NSData *data);
 @property (retain) ASIDataDecompressor *dataDecompressor;
 @property (assign) BOOL shouldWaitToInflateCompressedResponses;
 
+//自定义，用于传递数据
+@property (nonatomic, strong) NSDictionary *contain;
 @end

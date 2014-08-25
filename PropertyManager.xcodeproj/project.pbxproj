@@ -50,6 +50,8 @@
 		D87A840319A63F560059916C /* LXActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = D87A840219A63F560059916C /* LXActivity.m */; };
 		D87A840619A6432E0059916C /* addPic.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D87A840519A6432E0059916C /* addPic.jpg */; };
 		D88E405A19A591CF00813566 /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = D88E405919A591CF00813566 /* Util.m */; };
+		D8C9AD8E19AB133C0071F211 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D8C9AD8B19AB133C0071F211 /* SVProgressHUD.bundle */; };
+		D8C9AD8F19AB133C0071F211 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C9AD8D19AB133C0071F211 /* SVProgressHUD.m */; };
 		D8CC94F619A82A70002D64BA /* LXVoiceActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = D8CC94F519A82A70002D64BA /* LXVoiceActivity.m */; };
 		D8CC94FE19A8343A002D64BA /* LCVoice.m in Sources */ = {isa = PBXBuildFile; fileRef = D8CC94FB19A8343A002D64BA /* LCVoice.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D8CC94FF19A8343A002D64BA /* LCVoiceHud.m in Sources */ = {isa = PBXBuildFile; fileRef = D8CC94FD19A8343A002D64BA /* LCVoiceHud.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -132,6 +134,9 @@
 		D87A840519A6432E0059916C /* addPic.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = addPic.jpg; sourceTree = "<group>"; };
 		D88E405819A591CF00813566 /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
 		D88E405919A591CF00813566 /* Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Util.m; sourceTree = "<group>"; };
+		D8C9AD8B19AB133C0071F211 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		D8C9AD8C19AB133C0071F211 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		D8C9AD8D19AB133C0071F211 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		D8CC94F419A82A70002D64BA /* LXVoiceActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXVoiceActivity.h; sourceTree = "<group>"; };
 		D8CC94F519A82A70002D64BA /* LXVoiceActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXVoiceActivity.m; sourceTree = "<group>"; };
 		D8CC94FA19A8343A002D64BA /* LCVoice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCVoice.h; sourceTree = "<group>"; };
@@ -242,6 +247,7 @@
 		D877FF18199F7B5C00BB893D /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				D8C9AD8A19AB13250071F211 /* SVProgressHUD */,
 				D8CC94F919A83419002D64BA /* LCVoiceHud */,
 				D87A840019A63F3A0059916C /* LxActivity */,
 				D87A83E819A6208B0059916C /* UzysAssetsPicker */,
@@ -337,6 +343,16 @@
 			path = PropertyManager/Resources;
 			sourceTree = "<group>";
 		};
+		D8C9AD8A19AB13250071F211 /* SVProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				D8C9AD8B19AB133C0071F211 /* SVProgressHUD.bundle */,
+				D8C9AD8C19AB133C0071F211 /* SVProgressHUD.h */,
+				D8C9AD8D19AB133C0071F211 /* SVProgressHUD.m */,
+			);
+			path = SVProgressHUD;
+			sourceTree = "<group>";
+		};
 		D8CC94F919A83419002D64BA /* LCVoiceHud */ = {
 			isa = PBXGroup;
 			children = (
@@ -416,6 +432,7 @@
 				D8CC950719A83489002D64BA /* wave70x117@2x.png in Resources */,
 				D87A840619A6432E0059916C /* addPic.jpg in Resources */,
 				D877FF12199F481900BB893D /* Default@2x.png in Resources */,
+				D8C9AD8E19AB133C0071F211 /* SVProgressHUD.bundle in Resources */,
 				D8CC950419A83489002D64BA /* black_bg_ip5@2x.png in Resources */,
 				D877FF10199F481900BB893D /* Default-568h@2x.png in Resources */,
 				D8CC950519A83489002D64BA /* mic_normal_358x358@2x.png in Resources */,
@@ -475,6 +492,7 @@
 				D877FF59199F897300BB893D /* ActionSheetStringPicker.m in Sources */,
 				D87A83FF19A6209D0059916C /* UzysWrapperPickerController.m in Sources */,
 				D8CC94FF19A8343A002D64BA /* LCVoiceHud.m in Sources */,
+				D8C9AD8F19AB133C0071F211 /* SVProgressHUD.m in Sources */,
 				D87A83F919A6209D0059916C /* UzysAssetsPickerController.m in Sources */,
 				D8CC94F619A82A70002D64BA /* LXVoiceActivity.m in Sources */,
 				D877FF3E199F84BB00BB893D /* GzipCompressor.m in Sources */,

@@ -13,6 +13,6 @@
 + (NSDate*)dateFromString:(NSString*)string;
 + (NSString*)stringFromDate:(NSDate *)date;
 + (NSString*)stringFromDateForFileName:(NSDate *)date;
-+ (NSString *)dataToXMLString:(NSArray *)datas;
++ (NSMutableArray *)dataToXMLString:(NSArray *)datas companyID:(NSString *)companyID inputID:(NSString *)inputID;
 
 @end

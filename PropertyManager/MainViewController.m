@@ -9,6 +9,7 @@
 #import "MainViewController.h"
 #import "ActionSheetDatePicker.h"
 #import "Util.h"
+#import "SVProgressHUD.h"
 
 @interface MainViewController ()
 
@@ -59,6 +60,10 @@
     {
         NSArray *arrFucnameAndParameter = [(NSString*)[urlComps objectAtIndex:1] componentsSeparatedByString:@":"];
         NSString *funcStr = [arrFucnameAndParameter objectAtIndex:0];
+        NSArray *params;
+        if (arrFucnameAndParameter.count > 1) {
+            params = [[arrFucnameAndParameter objectAtIndex:1] componentsSeparatedByString:@","];
+        }
         
         if ([funcStr isEqualToString:@"getDateTime"]) {
             [self showDatePicker:YES];
@@ -67,6 +72,8 @@
             [self showDatePicker:NO];
         }
         if ([funcStr isEqualToString:@"addPic"]) {
+            self.imageCompanyID = [params objectAtIndex:0];
+            self.imageInputID = [params objectAtIndex:1];
             [self showPicAlertView];
         }
         if ([funcStr isEqualToString:@"showVoid"]) {
@@ -202,15 +209,20 @@
             [self.imagesDataToUpLoad addObject:imageData];
         }
         NSString *xmlString;
+        NSString *filenames;
         if (self.imagesDataToUpLoad.count > 0) {
-            xmlString = [Util dataToXMLString:self.imagesDataToUpLoad];
+            NSArray *array = [Util dataToXMLString:self.imagesDataToUpLoad companyID:self.imageCompanyID inputID:self.imageInputID];
+            xmlString = [array objectAtIndex:0];
+            filenames = [array objectAtIndex:1];
         }
         if (xmlString) {
-            NSLog(xmlString);
             NSURL *url = [NSURL URLWithString:@"http://219.146.138.106:8888/ourally/android/AndroidServlet"];
+            NSMutableDictionary *contain = [[NSMutableDictionary alloc] init];
+            [contain setObject:filenames forKey:@"filenames"];
             
             ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
             [request setDelegate:self];
+            request.contain = contain;
             [request setPostValue:@"uploadFileAction" forKey:@"service"];
             [request setPostValue:@"com.ht.ourally.common.action.UploadFileAction" forKey:@"classname"];
             [request setPostValue:@"uploadFilePic" forKey:@"method"];
@@ -219,6 +231,8 @@
             [request buildPostBody];
             [request startAsynchronous];
             
+            [SVProgressHUD showWithStatus:@"正常上传,请稍后..."];
+            
             [activity tappedCancel];
         }
     }
@@ -226,16 +240,18 @@
 
 - (void)requestFinished:(ASIHTTPRequest *)request
 {
+    [SVProgressHUD dismissWithSuccess:@"上传成功"];
     NSData *responseData = [request responseData];
     NSString *string = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-    NSLog(@"%@", string);
-    //NSString *jsFunction = [NSString stringWithFormat:@"setDateTime('%@','checkDate')", [Util stringFromDate:selectedDate]];
-    //[self.mainWebView stringByEvaluatingJavaScriptFromString:jsFunction];
+    
+    NSString *filenames = [request.contain objectForKey:@"filenames"];
+    NSString *jsFunction = [NSString stringWithFormat:@"showPic('%@', '%@')", filenames, self.imageInputID];
+    [self.mainWebView stringByEvaluatingJavaScriptFromString:jsFunction];
 }
 
 - (void)requestFailed:(ASIHTTPRequest *)request
 {
-    NSLog(@"%@", request.responseString);
+    [SVProgressHUD dismissWithError:@"上传失败"];
 }
 
 - (void)recordStart
