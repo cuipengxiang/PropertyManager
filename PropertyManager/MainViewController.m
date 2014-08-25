@@ -10,6 +10,7 @@
 #import "ActionSheetDatePicker.h"
 #import "Util.h"
 #import "SVProgressHUD.h"
+#import "lame.h"
 
 @interface MainViewController ()
 
@@ -21,7 +22,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+
     }
     return self;
 }
@@ -44,11 +45,6 @@
 	NSURL *url=[NSURL URLWithString:urlString];
 	NSURLRequest *request=[NSURLRequest requestWithURL:url];
 	[self.mainWebView loadRequest:request];
-    /*
-    NSString *filePath = [[NSBundle mainBundle]pathForResource:@"file" ofType:@"html"];
-    NSString *htmlString = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
-    [self.mainWebView loadHTMLString:htmlString baseURL:[NSURL URLWithString:filePath]];
-    */
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
@@ -67,9 +63,13 @@
         
         if ([funcStr isEqualToString:@"getDateTime"]) {
             [self showDatePicker:YES];
+            self.timeInputID = [params objectAtIndex:0];
+            self.hasTime = YES;
         }
         if ([funcStr isEqualToString:@"getDateNOTime"]) {
             [self showDatePicker:NO];
+            self.timeInputID = [params objectAtIndex:0];
+            self.hasTime = NO;
         }
         if ([funcStr isEqualToString:@"addPic"]) {
             self.imageCompanyID = [params objectAtIndex:0];
@@ -77,6 +77,8 @@
             [self showPicAlertView];
         }
         if ([funcStr isEqualToString:@"showVoid"]) {
+            self.voiceCompanyID = [params objectAtIndex:0];
+            self.voiceInputID = [params objectAtIndex:1];
             [self showVoiceAlertView];
         }
         
@@ -94,7 +96,7 @@
 }
 
 - (void)dateWasSelected:(NSDate *)selectedDate {
-    NSString *jsFunction = [NSString stringWithFormat:@"setDateTime('%@','checkDate')", [Util stringFromDate:selectedDate]];
+    NSString *jsFunction = [NSString stringWithFormat:@"setDateTime('%@','%@')", [Util stringFromDate:selectedDate hasTime:self.hasTime], self.timeInputID];
     [self.mainWebView stringByEvaluatingJavaScriptFromString:jsFunction];
 }
 
@@ -108,6 +110,8 @@
 {
     LXVoiceActivity *lxActivity = [[LXVoiceActivity alloc] initWithTitle:nil delegate:self];
     [lxActivity showInView:self.view];
+    self.hasRecorded = NO;
+    [Util deleteOldVoiceFile];
 }
 
 - (void)keyboardWillShow:(id)sender
@@ -222,6 +226,7 @@
             
             ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
             [request setDelegate:self];
+            [request setTag:1000];
             request.contain = contain;
             [request setPostValue:@"uploadFileAction" forKey:@"service"];
             [request setPostValue:@"com.ht.ourally.common.action.UploadFileAction" forKey:@"classname"];
@@ -231,7 +236,7 @@
             [request buildPostBody];
             [request startAsynchronous];
             
-            [SVProgressHUD showWithStatus:@"正常上传,请稍后..."];
+            [SVProgressHUD showWithStatus:@"正在上传,请稍后..."];
             
             [activity tappedCancel];
         }
@@ -240,13 +245,30 @@
 
 - (void)requestFinished:(ASIHTTPRequest *)request
 {
-    [SVProgressHUD dismissWithSuccess:@"上传成功"];
-    NSData *responseData = [request responseData];
-    NSString *string = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-    
-    NSString *filenames = [request.contain objectForKey:@"filenames"];
-    NSString *jsFunction = [NSString stringWithFormat:@"showPic('%@', '%@')", filenames, self.imageInputID];
-    [self.mainWebView stringByEvaluatingJavaScriptFromString:jsFunction];
+    if (request.tag == 1000) {
+        NSData *responseData = [request responseData];
+        NSString *resultCode = [Util xmlDataToResultCode:responseData];
+        if ([resultCode isEqualToString:@"0001"]) {
+            [SVProgressHUD dismissWithSuccess:@"上传成功"];
+            NSString *filenames = [request.contain objectForKey:@"filenames"];
+            NSString *jsFunction = [NSString stringWithFormat:@"showPic('%@', '%@')", filenames, self.imageInputID];
+            [self.mainWebView stringByEvaluatingJavaScriptFromString:jsFunction];
+        } else {
+            [SVProgressHUD dismissWithError:@"上传失败"];
+        }
+    } else if (request.tag == 2000) {
+        NSData *responseData = [request responseData];
+        NSString *resultCode = [Util xmlDataToResultCode:responseData];
+        NSString *filename = [Util xmlDataToFilename:responseData];
+        NSString *resultMessage = [Util xmlDataToMessage:responseData];
+        if ([resultCode isEqualToString:@"0001"]) {
+            [SVProgressHUD dismiss];
+            NSString *jsFunction = [NSString stringWithFormat:@"showVoid('%@', '%@', '%@')", filename, resultMessage, self.voiceInputID];
+            [self.mainWebView stringByEvaluatingJavaScriptFromString:jsFunction];
+        } else {
+            [SVProgressHUD dismiss];
+        }
+    }
 }
 
 - (void)requestFailed:(ASIHTTPRequest *)request
@@ -264,8 +286,9 @@
 {
     [self.voice stopRecordWithCompletionBlock:^{
         if (self.voice.recordTime > 0.0f) {
-            UIAlertView * alert = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"\nrecord finish ! \npath:%@ \nduration:%f",self.voice.recordPath,self.voice.recordTime] delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+            UIAlertView * alert = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"\n录音完成!\n录音时长:%f", self.voice.recordTime] delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
             [alert show];
+            self.hasRecorded = YES;
         }
     }];
 }
@@ -274,8 +297,88 @@
 {
     [self.voice cancelled];
     
-    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:nil message:@"取消了" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:nil message:@"取消录音" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
     [alert show];
+}
+
+- (void)didClickOnSendButton:(LXVoiceActivity *)activity
+{
+    if (self.hasRecorded) {
+        [SVProgressHUD showWithStatus:@"正在上传,请稍后..."];
+        [activity tappedCancel];
+        [NSThread detachNewThreadSelector:@selector(toMp3) toTarget:self withObject:nil];
+    }
+}
+
+- (void)toMp3
+{
+    NSString *cafFilePath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/MySound.caf"];
+    
+    NSString *mp3FilePath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/MySound.mp3"];
+    
+    @try {
+        int read, write;
+        
+        FILE *pcm = fopen([cafFilePath cStringUsingEncoding:1], "rb");  //source 被转换的音频文件位置
+        fseek(pcm, 4*1024, SEEK_CUR);                                   //skip file header
+        FILE *mp3 = fopen([mp3FilePath cStringUsingEncoding:1], "wb");  //output 输出生成的Mp3文件位置
+        
+        const int PCM_SIZE = 8192;
+        const int MP3_SIZE = 8192;
+        short int pcm_buffer[PCM_SIZE*2];
+        unsigned char mp3_buffer[MP3_SIZE];
+        
+        lame_t lame = lame_init();
+        lame_set_in_samplerate(lame, 11025.0);
+        lame_set_VBR(lame, vbr_default);
+        lame_init_params(lame);
+        
+        do {
+            read = fread(pcm_buffer, 2*sizeof(short int), PCM_SIZE, pcm);
+            if (read == 0)
+                write = lame_encode_flush(lame, mp3_buffer, MP3_SIZE);
+            else
+                write = lame_encode_buffer_interleaved(lame, pcm_buffer, read, mp3_buffer, MP3_SIZE);
+            
+            fwrite(mp3_buffer, write, 1, mp3);
+            
+        } while (read != 0);
+        
+        lame_close(lame);
+        fclose(mp3);
+        fclose(pcm);
+    }
+    @catch (NSException *exception) {
+        NSLog(@"%@",[exception description]);
+    }
+    @finally {
+        [self performSelectorOnMainThread:@selector(convertMp3Finish)
+                               withObject:nil
+                            waitUntilDone:YES];
+    }
+}
+
+- (void)convertMp3Finish
+{
+    NSString *mp3FilePath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/MySound.mp3"];
+    NSData *data = [[NSData alloc] initWithContentsOfFile:mp3FilePath];
+    
+    NSString *xmlString = [Util dataToXMLString:data fileName:self.voiceCompanyID];
+    
+    if (xmlString) {
+        NSURL *url = [NSURL URLWithString:@"http://219.146.138.106:8888/ourally/android/AndroidServlet"];
+        
+        ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+        [request setDelegate:self];
+        [request setTag:2000];
+        [request setPostValue:@"uploadFileAction" forKey:@"service"];
+        [request setPostValue:@"com.ht.ourally.common.action.UploadFileAction" forKey:@"classname"];
+        [request setPostValue:@"uploadFileVoid" forKey:@"method"];
+        [request setPostValue:@"com.ht.mobile.android.entity" forKey:@"entityPageName"];
+        [request setPostValue:xmlString forKey:@"data"];
+        [request buildPostBody];
+        [request startAsynchronous];
+    }
 }
 
 - (void)didReceiveMemoryWarning

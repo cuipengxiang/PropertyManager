@@ -11,8 +11,13 @@
 @interface Util : NSObject
 
 + (NSDate*)dateFromString:(NSString*)string;
-+ (NSString*)stringFromDate:(NSDate *)date;
++ (NSString*)stringFromDate:(NSDate *)date hasTime:(BOOL)time;
 + (NSString*)stringFromDateForFileName:(NSDate *)date;
 + (NSMutableArray *)dataToXMLString:(NSArray *)datas companyID:(NSString *)companyID inputID:(NSString *)inputID;
++ (void)deleteOldVoiceFile;
++ (NSString *)dataToXMLString:(NSData *)data fileName:(NSString *)filename;
++ (NSString *)xmlDataToResultCode:(NSData *)data;
++ (NSString *)xmlDataToFilename:(NSData *)data;
++ (NSString *)xmlDataToMessage:(NSData *)data;
 
 @end

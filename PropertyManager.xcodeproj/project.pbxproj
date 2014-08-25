@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		812EA51ABFDA425C815E5D29 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0B7678C99424030AC633148 /* libPods.a */; };
+		D806DADC19AB6CD9008B8B77 /* libmp3lame.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D806DADB19AB6CD9008B8B77 /* libmp3lame.a */; };
 		D82BF65D19A9902F00FB646A /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D82BF65C19A9902F00FB646A /* MobileCoreServices.framework */; };
 		D877FEDF199F475B00BB893D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D877FEDE199F475B00BB893D /* Foundation.framework */; };
 		D877FEE1199F475B00BB893D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D877FEE0199F475B00BB893D /* CoreGraphics.framework */; };
@@ -63,6 +64,8 @@
 
 /* Begin PBXFileReference section */
 		D0B7678C99424030AC633148 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D806DADA19AB6CD9008B8B77 /* lame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lame.h; sourceTree = "<group>"; };
+		D806DADB19AB6CD9008B8B77 /* libmp3lame.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libmp3lame.a; sourceTree = "<group>"; };
 		D82BF65C19A9902F00FB646A /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		D82BF65E19A9904900FB646A /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		D877FEDB199F475B00BB893D /* PropertyManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PropertyManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -160,6 +163,7 @@
 				D877FF44199F851400BB893D /* libc++.dylib in Frameworks */,
 				D877FF42199F84F500BB893D /* Security.framework in Frameworks */,
 				D877FF2E199F829800BB893D /* libz.dylib in Frameworks */,
+				D806DADC19AB6CD9008B8B77 /* libmp3lame.a in Frameworks */,
 				D877FF2C199F829100BB893D /* SystemConfiguration.framework in Frameworks */,
 				D877FF30199F846800BB893D /* libBPush.a in Frameworks */,
 				D877FF2A199F828000BB893D /* CoreTelephony.framework in Frameworks */,
@@ -173,6 +177,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D806DAD919AB6CC6008B8B77 /* lame */ = {
+			isa = PBXGroup;
+			children = (
+				D806DADA19AB6CD9008B8B77 /* lame.h */,
+				D806DADB19AB6CD9008B8B77 /* libmp3lame.a */,
+			);
+			path = lame;
+			sourceTree = "<group>";
+		};
 		D877FED2199F475A00BB893D = {
 			isa = PBXGroup;
 			children = (
@@ -247,6 +260,7 @@
 		D877FF18199F7B5C00BB893D /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				D806DAD919AB6CC6008B8B77 /* lame */,
 				D8C9AD8A19AB13250071F211 /* SVProgressHUD */,
 				D8CC94F919A83419002D64BA /* LCVoiceHud */,
 				D87A840019A63F3A0059916C /* LxActivity */,
@@ -604,10 +618,11 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/PropertyManager/Vendors/BPush",
+					"$(PROJECT_DIR)/PropertyManager/Vendors/lame",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f5b95155-3817-4919-94b9-04be235ab396";
+				PROVISIONING_PROFILE = "bc1d771d-cc93-46fe-9daa-a8ed47f2cb33";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -625,10 +640,11 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/PropertyManager/Vendors/BPush",
+					"$(PROJECT_DIR)/PropertyManager/Vendors/lame",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f5b95155-3817-4919-94b9-04be235ab396";
+				PROVISIONING_PROFILE = "bc1d771d-cc93-46fe-9daa-a8ed47f2cb33";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};

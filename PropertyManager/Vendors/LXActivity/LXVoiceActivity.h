@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class LXVoiceActivity;
 @protocol LXVoiceActivityDelegate <NSObject>
 
 @optional
@@ -15,7 +15,7 @@
 - (void)recordStart;
 - (void)recordEnd;
 - (void)recordCancel;
-- (void)didClickOnSendButton;
+- (void)didClickOnSendButton:(LXVoiceActivity *)activity;
 
 @end
 
@@ -24,6 +24,6 @@
 
 - (id)initWithTitle:(NSString *)title delegate:(id<LXVoiceActivityDelegate>)delegate;
 - (void)showInView:(UIView *)view;
-
+- (void)tappedCancel;
 
 @end

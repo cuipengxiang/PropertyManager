@@ -263,8 +263,8 @@
 - (void)didClickOnSendButton
 {
     if (self.delegate) {
-        if ([self.delegate respondsToSelector:@selector(didClickOnSendButton)] == YES) {
-            [self.delegate didClickOnSendButton];
+        if ([self.delegate respondsToSelector:@selector(didClickOnSendButton:)] == YES) {
+            [self.delegate didClickOnSendButton:self];
         }
     }
 }

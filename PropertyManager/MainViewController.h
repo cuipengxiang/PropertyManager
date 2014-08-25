@@ -23,5 +23,10 @@
 @property (nonatomic, strong) NSMutableArray *imagesDataToUpLoad;
 @property (nonatomic, strong) NSString *imageCompanyID;
 @property (nonatomic, strong) NSString *imageInputID;
+@property (nonatomic, strong) NSString *timeInputID;
+@property (nonatomic) BOOL hasTime;
+@property (nonatomic) BOOL hasRecorded;
+@property (nonatomic, strong) NSString *voiceCompanyID;
+@property (nonatomic, strong) NSString *voiceInputID;
 
 @end

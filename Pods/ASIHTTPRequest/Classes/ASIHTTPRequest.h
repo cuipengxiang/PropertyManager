@@ -84,7 +84,7 @@ typedef void (^ASIDataBlock)(NSData *data);
 @interface ASIHTTPRequest : NSOperation <NSCopying> {
 	
 	// The url for this operation, should include GET params in the query string where appropriate
-	NSURL *url; 
+	NSURL *url;
 	
 	// Will always contain the original url used for making the request (the value of url can change when a request is redirected)
 	NSURL *originalURL;

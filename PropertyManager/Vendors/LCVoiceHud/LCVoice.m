@@ -67,9 +67,10 @@
 	
 	NSMutableDictionary * recordSetting = [NSMutableDictionary dictionary];
 	
-	[recordSetting setValue :[NSNumber numberWithInt:kAudioFormatAppleIMA4] forKey:AVFormatIDKey];
-	[recordSetting setValue:[NSNumber numberWithFloat:16000.0] forKey:AVSampleRateKey];
-	[recordSetting setValue:[NSNumber numberWithInt: 1] forKey:AVNumberOfChannelsKey];
+	[recordSetting setValue:[NSNumber numberWithInt:kAudioFormatLinearPCM] forKey:AVFormatIDKey];
+	[recordSetting setValue:[NSNumber numberWithFloat:11025.0] forKey:AVSampleRateKey];
+	[recordSetting setValue:[NSNumber numberWithInt:2] forKey:AVNumberOfChannelsKey];
+    [recordSetting setValue:[NSNumber numberWithInt:AVAudioQualityMin] forKey:AVEncoderAudioQualityKey];
 	
 /*
 	[recordSetting setValue :[NSNumber numberWithInt:16] forKey:AVLinearPCMBitDepthKey];
@@ -124,7 +125,7 @@
         return;
 	}
 	
-	[_recorder recordForDuration:(NSTimeInterval) 60];
+	[_recorder record];
     
     self.recordTime = 0;
     [self resetTimer];
@@ -136,7 +137,12 @@
 }
 
 -(void) stopRecordWithCompletionBlock:(void (^)())completion
-{    
+{
+    [_recorder stop];
+    if (_recorder) {
+        [_recorder release];
+        _recorder = nil;
+    }
     dispatch_async(dispatch_get_main_queue(),completion);
 
     [self resetTimer];
