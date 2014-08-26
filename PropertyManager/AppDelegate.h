@@ -23,6 +23,6 @@
 @property (nonatomic, strong) NSString *address;
 
 @property (nonatomic, strong) MainViewController *mainController;
-
+@property (nonatomic, strong) NSDate *lastUpdateDate;
 
 @end

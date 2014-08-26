@@ -36,7 +36,7 @@
     [self.locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
     [self.locationManager startUpdatingLocation];
     
-    [NSTimer scheduledTimerWithTimeInterval:600 target:self selector:@selector(startToGetLocation) userInfo:nil repeats:YES];
+    [NSTimer scheduledTimerWithTimeInterval:1800 target:self selector:@selector(startToGetLocation) userInfo:nil repeats:YES];
     
     return YES;
 }
@@ -142,6 +142,15 @@
 
 - (void)sendLocationInfoToServer
 {
+    if (self.lastUpdateDate) {
+        NSTimeInterval timeInterval = [self.lastUpdateDate timeIntervalSinceNow];
+        timeInterval = -timeInterval;
+        long temp = 0;
+        if((temp = timeInterval/60) < 60){
+            return;
+        }
+    }
+    self.lastUpdateDate = [NSDate date];
     Util *util = [[Util alloc] initWithAddress:self.address lat:self.lat lon:self.lon channelid:self.mainController.channelid deviceid:self.mainController.deviceid];
     if (self.mainController.userid) {
         util.userid = self.mainController.userid;
@@ -161,7 +170,7 @@
 
 - (void)requestFinished:(ASIHTTPRequest *)request
 {
-    
+    NSLog(@"%@", request.responseString);
 }
 
 - (void)requestFailed:(ASIHTTPRequest *)request
