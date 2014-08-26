@@ -9,7 +9,7 @@
 #import "Util.h"
 #import "TFHpple.h"
 
-extern NSString *CTSettingCopyMyPhoneNumber();
+//extern NSString *CTSettingCopyMyPhoneNumber();
 
 @implementation Util
 
@@ -161,10 +161,6 @@ extern NSString *CTSettingCopyMyPhoneNumber();
     return nameString;
 }
 
-+ (NSString *)myNumber{
-    return CTSettingCopyMyPhoneNumber();
-}
-
 - (NSString *)locationToXMLString:(NSString *)location lat:(double)lat lon:(double)lon time:(NSString *)time
 {
     NSMutableString *xmlString = [NSMutableString stringWithString:@""];
@@ -203,5 +199,11 @@ extern NSString *CTSettingCopyMyPhoneNumber();
     [xmlString appendString:@"</root>"];
     return xmlString;
 }
+
+/*
++ (NSString *)myNumber{
+    return CTSettingCopyMyPhoneNumber();
+}
+ */
 
 @end

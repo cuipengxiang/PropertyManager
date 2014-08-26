@@ -11,6 +11,7 @@
 		D806DADC19AB6CD9008B8B77 /* libmp3lame.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D806DADB19AB6CD9008B8B77 /* libmp3lame.a */; };
 		D82BF65D19A9902F00FB646A /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D82BF65C19A9902F00FB646A /* MobileCoreServices.framework */; };
 		D83861E919AC0C4700D7BF99 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83861E819AC0C4700D7BF99 /* CoreLocation.framework */; };
+		D83861EB19AC9CA100D7BF99 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D877FF29199F828000BB893D /* CoreTelephony.framework */; };
 		D877FEDF199F475B00BB893D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D877FEDE199F475B00BB893D /* Foundation.framework */; };
 		D877FEE1199F475B00BB893D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D877FEE0199F475B00BB893D /* CoreGraphics.framework */; };
 		D877FEE3199F475B00BB893D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D877FEE2199F475B00BB893D /* UIKit.framework */; };
@@ -24,7 +25,6 @@
 		D877FF15199F484B00BB893D /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D877FF14199F484B00BB893D /* MainViewController.m */; };
 		D877FF17199F6E1200BB893D /* file.html in Resources */ = {isa = PBXBuildFile; fileRef = D877FF16199F6E1200BB893D /* file.html */; };
 		D877FF22199F7C5D00BB893D /* BPushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = D877FF21199F7C5D00BB893D /* BPushConfig.plist */; };
-		D877FF2A199F828000BB893D /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D877FF29199F828000BB893D /* CoreTelephony.framework */; };
 		D877FF2C199F829100BB893D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D877FF2B199F829100BB893D /* SystemConfiguration.framework */; };
 		D877FF2E199F829800BB893D /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D877FF2D199F829800BB893D /* libz.dylib */; };
 		D877FF30199F846800BB893D /* libBPush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D877FF2F199F846800BB893D /* libBPush.a */; };
@@ -160,6 +160,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D83861EB19AC9CA100D7BF99 /* CoreTelephony.framework in Frameworks */,
 				D83861E919AC0C4700D7BF99 /* CoreLocation.framework in Frameworks */,
 				D82BF65D19A9902F00FB646A /* MobileCoreServices.framework in Frameworks */,
 				D877FF46199F855500BB893D /* CFNetwork.framework in Frameworks */,
@@ -169,7 +170,6 @@
 				D806DADC19AB6CD9008B8B77 /* libmp3lame.a in Frameworks */,
 				D877FF2C199F829100BB893D /* SystemConfiguration.framework in Frameworks */,
 				D877FF30199F846800BB893D /* libBPush.a in Frameworks */,
-				D877FF2A199F828000BB893D /* CoreTelephony.framework in Frameworks */,
 				D877FEE1199F475B00BB893D /* CoreGraphics.framework in Frameworks */,
 				D877FEE3199F475B00BB893D /* UIKit.framework in Frameworks */,
 				D877FEDF199F475B00BB893D /* Foundation.framework in Frameworks */,
