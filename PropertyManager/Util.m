@@ -69,7 +69,7 @@
     for(int i = 0;i < datas.count; i++) {
         NSData *data = [datas objectAtIndex:i];
         NSString *base64String = [data base64EncodedString];
-        NSString *name = [NSString stringWithFormat:@"%@/%@/%d.jpg", companyID, [Util stringFromDateForFileName:[NSDate date]], 123];
+        NSString *name = [NSString stringWithFormat:@"%@/%@/%d.jpg", companyID, [Util stringFromDateForFileName:[NSDate date]], [self getRandomNumber:0 to:INT32_MAX] + [self getRandomNumber:0 to:INT32_MAX]];
         [filenames appendString:name];
         if (i < datas.count - 1) {
             [filenames appendString:@","];
@@ -198,6 +198,11 @@
     [xmlString appendString:@"</Serializable_Value_Object>"];
     [xmlString appendString:@"</root>"];
     return xmlString;
+}
+
+-(int)getRandomNumber:(int)from to:(int)to
+{
+    return (int)(from + (arc4random() % (to - from + 1))); //+1,result is [from to]; else is [from, to)!!!!!!!
 }
 
 /*
