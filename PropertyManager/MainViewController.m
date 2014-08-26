@@ -81,6 +81,12 @@
             self.voiceInputID = [params objectAtIndex:1];
             [self showVoiceAlertView];
         }
+        if ([funcStr isEqualToString:@"SendUserId"]) {
+            [[NSUserDefaults standardUserDefaults] setObject:[params objectAtIndex:0] forKey:@"userid"];
+            self.userid = [params objectAtIndex:0];
+            NSString *jsFunction = [NSString stringWithFormat:@"upUserChannelId('%@','%@')", [[NSUserDefaults standardUserDefaults] objectForKey:@"channelid"], [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceid"]];
+            [self.mainWebView stringByEvaluatingJavaScriptFromString:jsFunction];
+        }
         
         return NO;   
     };   
@@ -209,13 +215,14 @@
             UIImage *img = [UIImage imageWithCGImage:alAsset.defaultRepresentation.fullResolutionImage
                                                scale:alAsset.defaultRepresentation.scale
                                          orientation:(UIImageOrientation)alAsset.defaultRepresentation.orientation];
-            NSData *imageData = UIImageJPEGRepresentation(img, 0.5);
+            NSData *imageData = UIImageJPEGRepresentation(img, 0.1);
             [self.imagesDataToUpLoad addObject:imageData];
         }
         NSString *xmlString;
         NSString *filenames;
         if (self.imagesDataToUpLoad.count > 0) {
-            NSArray *array = [Util dataToXMLString:self.imagesDataToUpLoad companyID:self.imageCompanyID inputID:self.imageInputID];
+            Util *util = [[Util alloc] initWithAddress:self.address lat:self.lat lon:self.lon channelid:self.channelid deviceid:self.deviceid];
+            NSArray *array = [util dataToXMLString:self.imagesDataToUpLoad companyID:self.imageCompanyID inputID:self.imageInputID];
             xmlString = [array objectAtIndex:0];
             filenames = [array objectAtIndex:1];
         }
@@ -363,7 +370,8 @@
     NSString *mp3FilePath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/MySound.mp3"];
     NSData *data = [[NSData alloc] initWithContentsOfFile:mp3FilePath];
     
-    NSString *xmlString = [Util dataToXMLString:data fileName:self.voiceCompanyID];
+    Util *util = [[Util alloc] initWithAddress:self.address lat:self.lat lon:self.lon channelid:self.channelid deviceid:self.deviceid];
+    NSString *xmlString = [util dataToXMLString:data fileName:self.voiceCompanyID];
     
     if (xmlString) {
         NSURL *url = [NSURL URLWithString:@"http://219.146.138.106:8888/ourally/android/AndroidServlet"];

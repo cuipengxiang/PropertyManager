@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "MainViewController.h"
 
 @implementation AppDelegate
 
@@ -17,8 +16,8 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
-    MainViewController *controller = [[MainViewController alloc] initWithNibName:nil bundle:nil];
-    self.window.rootViewController = controller;
+    self.mainController = [[MainViewController alloc] initWithNibName:nil bundle:nil];
+    self.window.rootViewController = self.mainController;
     
     [BPush setupChannel:launchOptions]; // 必须
     
@@ -31,7 +30,20 @@
      | UIRemoteNotificationTypeBadge
      | UIRemoteNotificationTypeSound];
     
+    //定位服务初始化
+    self.locationManager = [[CLLocationManager alloc] init];
+    [self.locationManager setDelegate:self];
+    [self.locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
+    [self.locationManager startUpdatingLocation];
+    
+    [NSTimer scheduledTimerWithTimeInterval:600 target:self selector:@selector(startToGetLocation) userInfo:nil repeats:YES];
+    
     return YES;
+}
+
+- (void)startToGetLocation
+{
+    [self.locationManager startUpdatingLocation];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -44,11 +56,21 @@
 {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    // 当程序退到后台时，进行定位的重新计算
+    self.executingInBackground = YES;
+    [self.locationManager stopUpdatingLocation];
+    [self.locationManager setDesiredAccuracy:kCLLocationAccuracyHundredMeters];
+    [self.locationManager startMonitoringSignificantLocationChanges];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    // 程序进入前台，转化为高精确定位
+    self.executingInBackground = NO;
+    [self.locationManager stopMonitoringSignificantLocationChanges];
+    [self.locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
+    [self.locationManager startUpdatingLocation];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
@@ -86,7 +108,65 @@
         NSString *channelid = [res valueForKey:BPushRequestChannelIdKey];
         int returnCode = [[res valueForKey:BPushRequestErrorCodeKey] intValue];
         NSString *requestid = [res valueForKey:BPushRequestRequestIdKey];
+        
+        self.mainController.channelid = channelid;
+        self.mainController.deviceid = userid;
     }
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+{
+    CLLocation *currentLocation = [locations lastObject];
+    CLLocationCoordinate2D coor = currentLocation.coordinate;
+    CLGeocoder *geo = [[CLGeocoder alloc] init];
+    [geo reverseGeocodeLocation:currentLocation completionHandler:^(NSArray *placemarks, NSError *error) {
+        CLPlacemark *place = [placemarks lastObject];
+        NSArray *addressArray = [[place addressDictionary] objectForKey:@"FormattedAddressLines"];
+        self.address = [addressArray objectAtIndex:0];
+        self.lat = coor.latitude;
+        self.lon = coor.longitude;
+        NSLog(@"%@", self.address);
+        [self sendLocationInfoToServer];
+    }];
+    if (self.executingInBackground) {
+        
+    } else {
+        [manager stopUpdatingLocation];
+    }
+}
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    NSLog(@"无法获得定位信息");
+}
+
+- (void)sendLocationInfoToServer
+{
+    Util *util = [[Util alloc] initWithAddress:self.address lat:self.lat lon:self.lon channelid:self.mainController.channelid deviceid:self.mainController.deviceid];
+    if (self.mainController.userid) {
+        util.userid = self.mainController.userid;
+    }
+    NSURL *url = [NSURL URLWithString:@"http://219.146.138.106:8888/ourally/android/AndroidServlet"];
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    [request setDelegate:self];
+    [request setTag:3000];
+    [request setPostValue:@"commBaseServiceAction" forKey:@"service"];
+    [request setPostValue:@"com.ht.mobile.android.comm.web.action.CommBaseServiceAction" forKey:@"classname"];
+    [request setPostValue:@"updateMemberGPSService" forKey:@"method"];
+    [request setPostValue:@"com.ht.mobile.android.entity" forKey:@"entityPageName"];
+    [request setPostValue:[util locationToXMLString:self.address lat:self.lat lon:self.lon time:[Util stringFromDate:[NSDate date] hasTime:YES]] forKey:@"data"];
+    [request buildPostBody];
+    [request startAsynchronous];
+}
+
+- (void)requestFinished:(ASIHTTPRequest *)request
+{
+    
+}
+
+- (void)requestFailed:(ASIHTTPRequest *)request
+{
+    
 }
 
 @end

@@ -9,7 +9,22 @@
 #import "Util.h"
 #import "TFHpple.h"
 
+extern NSString *CTSettingCopyMyPhoneNumber();
+
 @implementation Util
+
+- (id)initWithAddress:(NSString *)address lat:(double)lat lon:(double)lon channelid:(NSString *)channelid deviceid:(NSString *)deviceid
+{
+    self = [super init];
+    if (self) {
+        self.address = address;
+        self.lat = lat;
+        self.lon = lon;
+        self.channelid = channelid;
+        self.deviceid = deviceid;
+    }
+    return self;
+}
 
 + (NSDate*)dateFromString:(NSString*)string
 {
@@ -40,16 +55,16 @@
     return destDateString;
 }
 
-+ (NSMutableArray *)dataToXMLString:(NSArray *)datas companyID:(NSString *)companyID inputID:(NSString *)inputID
+- (NSMutableArray *)dataToXMLString:(NSArray *)datas companyID:(NSString *)companyID inputID:(NSString *)inputID
 {
     NSMutableArray *array = [[NSMutableArray alloc] init];
     NSMutableString *xmlString = [NSMutableString stringWithString:@""];
     NSMutableString *filenames = [NSMutableString stringWithString:@""];
     [xmlString appendString:@"<root>"];
     [xmlString appendString:@"<Serializable_Value_Object>"];
-    [xmlString appendString:@"<address><![CDATA[山东省 烟台市 莱山区 G18荣乌高速 靠近烟台北方星空自控科技有限公司]]></address>"];
-    [xmlString appendString:@"<latitude>37.423774</latitude>"];
-    [xmlString appendString:@"<longitude>121.5378</longitude>"];
+    [xmlString appendString:[NSString stringWithFormat:@"<address><![CDATA[%@]]></address>", self.address]];
+    [xmlString appendString:[NSString stringWithFormat:@"<latitude>%f</latitude>", self.lat]];
+    [xmlString appendString:[NSString stringWithFormat:@"<longitude>%f</longitude>", self.lon]];
     [xmlString appendString:@"<device_id>1</device_id>"];
     for(int i = 0;i < datas.count; i++) {
         NSData *data = [datas objectAtIndex:i];
@@ -78,14 +93,14 @@
     return array;
 }
 
-+ (NSString *)dataToXMLString:(NSData *)data fileName:(NSString *)filename
+- (NSString *)dataToXMLString:(NSData *)data fileName:(NSString *)filename
 {
     NSMutableString *xmlString = [NSMutableString stringWithString:@""];
     [xmlString appendString:@"<root>"];
     [xmlString appendString:@"<Serializable_Value_Object>"];
-    [xmlString appendString:@"<address><![CDATA[山东省 烟台市 莱山区 G18荣乌高速 靠近烟台北方星空自控科技有限公司]]></address>"];
-    [xmlString appendString:@"<latitude>37.423774</latitude>"];
-    [xmlString appendString:@"<longitude>121.5378</longitude>"];
+    [xmlString appendString:[NSString stringWithFormat:@"<address><![CDATA[%@]]></address>", self.address]];
+    [xmlString appendString:[NSString stringWithFormat:@"<latitude>%f</latitude>", self.lat]];
+    [xmlString appendString:[NSString stringWithFormat:@"<longitude>%f</longitude>", self.lon]];
     [xmlString appendString:@"<device_id>1</device_id>"];
     NSString *base64String = [data base64EncodedString];
     [xmlString appendString:@"<serial_object>"];
@@ -144,6 +159,49 @@
     TFHppleElement *nameElement = [name objectAtIndex:0];
     NSString *nameString = [[nameElement.children objectAtIndex:0] content];
     return nameString;
+}
+
++ (NSString *)myNumber{
+    return CTSettingCopyMyPhoneNumber();
+}
+
+- (NSString *)locationToXMLString:(NSString *)location lat:(double)lat lon:(double)lon time:(NSString *)time
+{
+    NSMutableString *xmlString = [NSMutableString stringWithString:@""];
+    [xmlString appendString:@"<root>"];
+    [xmlString appendString:@"<Serializable_Value_Object>"];
+    [xmlString appendString:[NSString stringWithFormat:@"<address><![CDATA[%@]]></address>", location]];
+    [xmlString appendString:[NSString stringWithFormat:@"<latitude>%f</latitude>", lat]];
+    [xmlString appendString:[NSString stringWithFormat:@"<longitude>%f</longitude>", lon]];
+    [xmlString appendString:@"<device_id>1</device_id>"];
+    [xmlString appendString:@"<serial_object>"];
+    [xmlString appendString:@"<Base_G_P_S_Location>"];
+    [xmlString appendString:[NSString stringWithFormat:@"<address><![CDATA[%@]]></address>", location]];
+    if (self.channelid) {
+        [xmlString appendString:[NSString stringWithFormat:@"<channel_id><![CDATA[%@]]></channel_id>", self.channelid]];
+    } else {
+        [xmlString appendString:@"<channel_id><![CDATA[]]></channel_id>"];
+    }
+    if (self.deviceid) {
+        [xmlString appendString:[NSString stringWithFormat:@"<device_id><![CDATA[%@]]></device_id>", self.deviceid]];
+    } else {
+        [xmlString appendString:@"<device_id><![CDATA[]]></device_id>"];
+    }
+    [xmlString appendString:@"<id><![CDATA[]]></id>"];
+    [xmlString appendString:@"<user_num><![CDATA[]]></user_num>"];
+    if (self.userid) {
+        [xmlString appendString:[NSString stringWithFormat:@"<user_id><![CDATA[%@]]></user_id>", self.userid]];
+    } else {
+        [xmlString appendString:@"<user_id><![CDATA[]]></user_id>"];
+    }
+    [xmlString appendString:[NSString stringWithFormat:@"<update_time>%@</update_time>", time]];
+    [xmlString appendString:[NSString stringWithFormat:@"<lat>%f</lat>", lat]];
+    [xmlString appendString:[NSString stringWithFormat:@"<lon>%f</lon>", lon]];
+    [xmlString appendString:@"</Base_G_P_S_Location>"];
+    [xmlString appendString:@"</serial_object>"];
+    [xmlString appendString:@"</Serializable_Value_Object>"];
+    [xmlString appendString:@"</root>"];
+    return xmlString;
 }
 
 @end

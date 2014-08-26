@@ -10,6 +10,7 @@
 		812EA51ABFDA425C815E5D29 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0B7678C99424030AC633148 /* libPods.a */; };
 		D806DADC19AB6CD9008B8B77 /* libmp3lame.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D806DADB19AB6CD9008B8B77 /* libmp3lame.a */; };
 		D82BF65D19A9902F00FB646A /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D82BF65C19A9902F00FB646A /* MobileCoreServices.framework */; };
+		D83861E919AC0C4700D7BF99 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83861E819AC0C4700D7BF99 /* CoreLocation.framework */; };
 		D877FEDF199F475B00BB893D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D877FEDE199F475B00BB893D /* Foundation.framework */; };
 		D877FEE1199F475B00BB893D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D877FEE0199F475B00BB893D /* CoreGraphics.framework */; };
 		D877FEE3199F475B00BB893D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D877FEE2199F475B00BB893D /* UIKit.framework */; };
@@ -68,6 +69,7 @@
 		D806DADB19AB6CD9008B8B77 /* libmp3lame.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libmp3lame.a; sourceTree = "<group>"; };
 		D82BF65C19A9902F00FB646A /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		D82BF65E19A9904900FB646A /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
+		D83861E819AC0C4700D7BF99 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		D877FEDB199F475B00BB893D /* PropertyManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PropertyManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D877FEDE199F475B00BB893D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D877FEE0199F475B00BB893D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -158,6 +160,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D83861E919AC0C4700D7BF99 /* CoreLocation.framework in Frameworks */,
 				D82BF65D19A9902F00FB646A /* MobileCoreServices.framework in Frameworks */,
 				D877FF46199F855500BB893D /* CFNetwork.framework in Frameworks */,
 				D877FF44199F851400BB893D /* libc++.dylib in Frameworks */,
@@ -210,6 +213,7 @@
 		D877FEDD199F475B00BB893D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D83861E819AC0C4700D7BF99 /* CoreLocation.framework */,
 				D82BF65E19A9904900FB646A /* libz.1.2.5.dylib */,
 				D82BF65C19A9902F00FB646A /* MobileCoreServices.framework */,
 				D877FF45199F855500BB893D /* CFNetwork.framework */,
