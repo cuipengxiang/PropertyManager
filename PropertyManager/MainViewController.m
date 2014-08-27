@@ -86,6 +86,7 @@
             self.userid = [params objectAtIndex:0];
             NSString *jsFunction = [NSString stringWithFormat:@"upUserChannelId('%@','%@')", [[NSUserDefaults standardUserDefaults] objectForKey:@"channelid"], [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceid"]];
             [self.mainWebView stringByEvaluatingJavaScriptFromString:jsFunction];
+            [self sendDeviceInfo];
         }
         
         return NO;   
@@ -215,7 +216,8 @@
             UIImage *img = [UIImage imageWithCGImage:alAsset.defaultRepresentation.fullResolutionImage
                                                scale:alAsset.defaultRepresentation.scale
                                          orientation:(UIImageOrientation)alAsset.defaultRepresentation.orientation];
-            NSData *imageData = UIImageJPEGRepresentation(img, 0.1);
+            UIImage *newimage = [self imageWithImage:img scaledToSize:CGSizeMake(408, 311)];
+            NSData *imageData = UIImageJPEGRepresentation(newimage, 0.01);
             [self.imagesDataToUpLoad addObject:imageData];
         }
         NSString *xmlString;
@@ -274,6 +276,14 @@
             [self.mainWebView stringByEvaluatingJavaScriptFromString:jsFunction];
         } else {
             [SVProgressHUD dismiss];
+        }
+    } else if (request.tag == 4000) {
+        NSData *responseData = [request responseData];
+        NSString *resultCode = [Util xmlDataToResultCode:responseData];
+        if ([resultCode isEqualToString:@"0001"]) {
+            [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"phoneInfo"];
+        } else {
+            
         }
     }
 }
@@ -356,7 +366,7 @@
         fclose(pcm);
     }
     @catch (NSException *exception) {
-        NSLog(@"%@",[exception description]);
+        NSLog(@"Mp3 Exception：%@",[exception description]);
     }
     @finally {
         [self performSelectorOnMainThread:@selector(convertMp3Finish)
@@ -387,6 +397,52 @@
         [request buildPostBody];
         [request startAsynchronous];
     }
+}
+
+- (void)sendDeviceInfo
+{
+    NSString *phone = [[NSUserDefaults standardUserDefaults] objectForKey:@"phoneInfo"];
+    if ((phone)&&([phone isEqualToString:@"1"])) {
+        return;
+    }
+    Util *util = [[Util alloc] initWithAddress:self.address lat:self.lat lon:self.lon channelid:self.channelid deviceid:self.deviceid];
+    util.userid = self.userid;
+    NSString *xmlString = [util deviceInfoToXMLString];
+    
+    if (xmlString) {
+        NSURL *url = [NSURL URLWithString:@"http://219.146.138.106:8888/ourally/android/AndroidServlet"];
+        
+        ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+        [request setDelegate:self];
+        [request setTag:4000];
+        [request setPostValue:@"commBaseServiceAction" forKey:@"service"];
+        [request setPostValue:@"com.ht.mobile.android.comm.web.action.CommBaseServiceAction" forKey:@"classname"];
+        [request setPostValue:@"updatePhoneParameterService" forKey:@"method"];
+        [request setPostValue:@"com.ht.mobile.android.entity" forKey:@"entityPageName"];
+        [request setPostValue:xmlString forKey:@"data"];
+        [request buildPostBody];
+        [request startAsynchronous];
+    }
+}
+
+//对图片尺寸进行压缩--
+- (UIImage*)imageWithImage:(UIImage*)image scaledToSize:(CGSize)newSize
+{
+    // Create a graphics image context
+    UIGraphicsBeginImageContext(newSize);
+    
+    // Tell the old image to draw in this new context, with the desired
+    // new size
+    [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+    
+    // Get the new image from the context
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    // End the context
+    UIGraphicsEndImageContext();
+    
+    // Return the new image.
+    return newImage;
 }
 
 - (void)didReceiveMemoryWarning

@@ -8,6 +8,8 @@
 
 #import "Util.h"
 #import "TFHpple.h"
+#import <CoreTelephony/CTCarrier.h>
+#import <CoreTelephony/CTTelephonyNetworkInfo.h>
 
 //extern NSString *CTSettingCopyMyPhoneNumber();
 
@@ -69,7 +71,7 @@
     for(int i = 0;i < datas.count; i++) {
         NSData *data = [datas objectAtIndex:i];
         NSString *base64String = [data base64EncodedString];
-        NSString *name = [NSString stringWithFormat:@"%@/%@/%d.jpg", companyID, [Util stringFromDateForFileName:[NSDate date]], [self getRandomNumber:0 to:INT32_MAX] + [self getRandomNumber:0 to:INT32_MAX]];
+        NSString *name = [NSString stringWithFormat:@"%@/%@/%d.jpg", companyID, [Util stringFromDateForFileName:[NSDate date]], [self getRandomNumber:0 to:500000000] + [self getRandomNumber:0 to:500000000]];
         [filenames appendString:name];
         if (i < datas.count - 1) {
             [filenames appendString:@","];
@@ -125,12 +127,11 @@
     NSString *mp3FilePath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/MySound.mp3"];
     
     NSFileManager* fileManager=[NSFileManager defaultManager];
-    if([fileManager removeItemAtPath:mp3FilePath error:nil])
-    {
-        NSLog(@"删除mp3");
+    if([fileManager removeItemAtPath:mp3FilePath error:nil]) {
+        
     }
     if ([fileManager removeItemAtPath:cafFilePath error:nil]) {
-        NSLog(@"删除caf");
+        
     }
 }
 
@@ -200,9 +201,64 @@
     return xmlString;
 }
 
--(int)getRandomNumber:(int)from to:(int)to
+- (NSString *)deviceInfoToXMLString
+{
+    NSMutableString *xmlString = [NSMutableString stringWithString:@""];
+    UIDevice *device = [[UIDevice alloc] init];
+    [xmlString appendString:@"<root>"];
+    [xmlString appendString:@"<Serializable_Value_Object>"];
+    [xmlString appendString:[NSString stringWithFormat:@"<address><![CDATA[%@]]></address>", self.address]];
+    [xmlString appendString:[NSString stringWithFormat:@"<latitude>%f</latitude>", self.lat]];
+    [xmlString appendString:[NSString stringWithFormat:@"<longitude>%f</longitude>", self.lon]];
+    [xmlString appendString:@"<device_id>1</device_id>"];
+    [xmlString appendString:@"<serial_object>"];
+    [xmlString appendString:@"<Base_Phone_Parameter>"];
+    [xmlString appendString:@"<board><![CDATA[]]></board>"];
+    [xmlString appendString:@"<brand><![CDATA[]]></brand>"];
+    [xmlString appendString:@"<cpu_abi><![CDATA[]]></cpu_abi>"];
+    [xmlString appendString:@"<device_id><![CDATA[]]></device_id>"];
+    [xmlString appendString:@"<display><![CDATA[]]></display>"];
+    [xmlString appendString:@"<fingerprint><![CDATA[]]></fingerprint>"];
+    [xmlString appendString:@"<host><![CDATA[]]></host>"];
+    [xmlString appendString:@"<manufacturer><![CDATA[]]></manufacturer>"];
+    [xmlString appendString:@"<id><![CDATA[]]></id>"];
+    [xmlString appendString:@"<model><![CDATA[]]></model>"];
+    
+    [xmlString appendString:[NSString stringWithFormat:@"<sdk><![CDATA[%@ %@]]></sdk>", device.systemName, device.systemVersion]];
+    [xmlString appendString:[NSString stringWithFormat:@"<network_operator><![CDATA[%@%@]]></network_operator>", [[self getCarrierInfo] mobileCountryCode], [[self getCarrierInfo] mobileNetworkCode]]];
+    [xmlString appendString:[NSString stringWithFormat:@"<network_operator_name><![CDATA[%@]]></network_operator_name>", [[self getCarrierInfo] carrierName]]];
+    [xmlString appendString:@"<phone_device_id><![CDATA[]]></phone_device_id>"];
+    [xmlString appendString:@"<phone_id><![CDATA[]]></phone_id>"];
+    [xmlString appendString:@"<imsi><![CDATA[]]></imsi>"];
+    [xmlString appendString:@"<line_num><![CDATA[]]></line_num>"];
+    [xmlString appendString:[NSString stringWithFormat:@"<device><![CDATA[%@]]></device>", device.platformString]];
+    if (self.channelid) {
+        [xmlString appendString:[NSString stringWithFormat:@"<channel_id><![CDATA[%@]]></channel_id>", self.channelid]];
+    } else {
+        [xmlString appendString:@"<channel_id><![CDATA[]]></channel_id>"];
+    }
+    if (self.userid) {
+        [xmlString appendString:[NSString stringWithFormat:@"<user_id><![CDATA[%@]]></user_id>", self.userid]];
+    } else {
+        [xmlString appendString:@"<user_id><![CDATA[]]></user_id>"];
+    }
+    [xmlString appendString:@"</Base_Phone_Parameter>"];
+    [xmlString appendString:@"</serial_object>"];
+    [xmlString appendString:@"</Serializable_Value_Object>"];
+    [xmlString appendString:@"</root>"];
+    return xmlString;
+}
+
+- (int)getRandomNumber:(int)from to:(int)to
 {
     return (int)(from + (arc4random() % (to - from + 1))); //+1,result is [from to]; else is [from, to)!!!!!!!
+}
+
+- (CTCarrier *)getCarrierInfo
+{
+    CTTelephonyNetworkInfo *networkInfo = [[CTTelephonyNetworkInfo alloc] init];
+    CTCarrier *carrier = [networkInfo subscriberCellularProvider];
+    return carrier;
 }
 
 /*

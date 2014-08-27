@@ -9,6 +9,9 @@
 #import "AppDelegate.h"
 
 @implementation AppDelegate
+{
+    UIBackgroundTaskIdentifier bgTask;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -34,6 +37,7 @@
     self.locationManager = [[CLLocationManager alloc] init];
     [self.locationManager setDelegate:self];
     [self.locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
+    [self.locationManager setDistanceFilter:100.0];
     [self.locationManager startUpdatingLocation];
     
     [NSTimer scheduledTimerWithTimeInterval:1800 target:self selector:@selector(startToGetLocation) userInfo:nil repeats:YES];
@@ -50,6 +54,7 @@
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+    
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
@@ -57,19 +62,28 @@
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     // 当程序退到后台时，进行定位的重新计算
-    self.executingInBackground = YES;
+    //self.executingInBackground = YES;
+    //[self.locationManager stopUpdatingLocation];
+    //[self.locationManager setDesiredAccuracy:kCLLocationAccuracyHundredMeters];
+    //[self.locationManager startMonitoringSignificantLocationChanges];
     [self.locationManager stopUpdatingLocation];
-    [self.locationManager setDesiredAccuracy:kCLLocationAccuracyHundredMeters];
-    [self.locationManager startMonitoringSignificantLocationChanges];
+    UIApplication *app = [UIApplication sharedApplication];
+    
+    bgTask = [app beginBackgroundTaskWithExpirationHandler:^{
+        [app endBackgroundTask:bgTask];
+        bgTask = UIBackgroundTaskInvalid;
+    }];
+    
+    //self.time = [NSTimer scheduledTimerWithTimeInterval:150 target:self selector:@selector(checkTimeForOneHour) userInfo:nil repeats:YES];
+    NSLog(@"backgroundTimeRemaining: %.0f", [[UIApplication sharedApplication] backgroundTimeRemaining]);
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     // 程序进入前台，转化为高精确定位
-    self.executingInBackground = NO;
-    [self.locationManager stopMonitoringSignificantLocationChanges];
-    [self.locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
+    //[self.locationManager stopMonitoringSignificantLocationChanges];
+    //[self.locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
     [self.locationManager startUpdatingLocation];
 }
 
@@ -122,17 +136,25 @@
     [geo reverseGeocodeLocation:currentLocation completionHandler:^(NSArray *placemarks, NSError *error) {
         CLPlacemark *place = [placemarks lastObject];
         NSArray *addressArray = [[place addressDictionary] objectForKey:@"FormattedAddressLines"];
-        self.address = [addressArray objectAtIndex:0];
+        NSString *string = [addressArray objectAtIndex:0];
+        /*
+        if (self.address) {
+            [self.address appendString:string];
+        } else {
+            self.address = [[NSMutableString alloc] initWithString:string];
+        }
+         */
+        self.address = string;
+        
         self.lat = coor.latitude;
         self.lon = coor.longitude;
-        NSLog(@"%@", self.address);
+        NSLog(@"当前位置：%@", self.address);
+        //NSString *filePath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/location.txt"];
+        //NSData *data = [self.address dataUsingEncoding:NSUTF8StringEncoding];
+        //[data writeToFile:filePath atomically:YES];
         [self sendLocationInfoToServer];
     }];
-    if (self.executingInBackground) {
-        
-    } else {
-        [manager stopUpdatingLocation];
-    }
+    [manager stopUpdatingLocation];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
@@ -150,7 +172,7 @@
             return;
         }
     }
-    self.lastUpdateDate = [NSDate date];
+    NSLog(@"发送定位信息");
     Util *util = [[Util alloc] initWithAddress:self.address lat:self.lat lon:self.lon channelid:self.mainController.channelid deviceid:self.mainController.deviceid];
     if (self.mainController.userid) {
         util.userid = self.mainController.userid;
@@ -170,7 +192,11 @@
 
 - (void)requestFinished:(ASIHTTPRequest *)request
 {
-    NSLog(@"%@", request.responseString);
+    NSString *result_code = [Util xmlDataToResultCode:request.responseData];
+    if ([result_code isEqualToString:@"0001"]) {
+        self.lastUpdateDate = [NSDate date];
+        NSLog(@"成功");
+    }
 }
 
 - (void)requestFailed:(ASIHTTPRequest *)request

@@ -16,13 +16,13 @@
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) CLLocationManager *locationManager;
-// 判断程序是否在后台
-@property (nonatomic, unsafe_unretained) BOOL executingInBackground;
+
 @property (nonatomic) double lat;
 @property (nonatomic) double lon;
 @property (nonatomic, strong) NSString *address;
 
 @property (nonatomic, strong) MainViewController *mainController;
 @property (nonatomic, strong) NSDate *lastUpdateDate;
+@property (nonatomic, strong) NSTimer *time;
 
 @end

@@ -12,6 +12,7 @@
 		D82BF65D19A9902F00FB646A /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D82BF65C19A9902F00FB646A /* MobileCoreServices.framework */; };
 		D83861E919AC0C4700D7BF99 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83861E819AC0C4700D7BF99 /* CoreLocation.framework */; };
 		D83861EB19AC9CA100D7BF99 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D877FF29199F828000BB893D /* CoreTelephony.framework */; };
+		D83D557919ADFA2A00DB88F7 /* UIDevice+Hardware.m in Sources */ = {isa = PBXBuildFile; fileRef = D83D557819ADFA2A00DB88F7 /* UIDevice+Hardware.m */; };
 		D877FEDF199F475B00BB893D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D877FEDE199F475B00BB893D /* Foundation.framework */; };
 		D877FEE1199F475B00BB893D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D877FEE0199F475B00BB893D /* CoreGraphics.framework */; };
 		D877FEE3199F475B00BB893D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D877FEE2199F475B00BB893D /* UIKit.framework */; };
@@ -70,6 +71,8 @@
 		D82BF65C19A9902F00FB646A /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		D82BF65E19A9904900FB646A /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		D83861E819AC0C4700D7BF99 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		D83D557719ADFA2A00DB88F7 /* UIDevice+Hardware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+Hardware.h"; sourceTree = "<group>"; };
+		D83D557819ADFA2A00DB88F7 /* UIDevice+Hardware.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+Hardware.m"; sourceTree = "<group>"; };
 		D877FEDB199F475B00BB893D /* PropertyManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PropertyManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D877FEDE199F475B00BB893D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D877FEE0199F475B00BB893D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -189,6 +192,15 @@
 			path = lame;
 			sourceTree = "<group>";
 		};
+		D83D557619ADFA0300DB88F7 /* UIDevice+Hardware */ = {
+			isa = PBXGroup;
+			children = (
+				D83D557719ADFA2A00DB88F7 /* UIDevice+Hardware.h */,
+				D83D557819ADFA2A00DB88F7 /* UIDevice+Hardware.m */,
+			);
+			path = "UIDevice+Hardware";
+			sourceTree = "<group>";
+		};
 		D877FED2199F475A00BB893D = {
 			isa = PBXGroup;
 			children = (
@@ -264,6 +276,7 @@
 		D877FF18199F7B5C00BB893D /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				D83D557619ADFA0300DB88F7 /* UIDevice+Hardware */,
 				D806DAD919AB6CC6008B8B77 /* lame */,
 				D8C9AD8A19AB13250071F211 /* SVProgressHUD */,
 				D8CC94F919A83419002D64BA /* LCVoiceHud */,
@@ -509,6 +522,7 @@
 				D88E405A19A591CF00813566 /* Util.m in Sources */,
 				D877FF59199F897300BB893D /* ActionSheetStringPicker.m in Sources */,
 				D87A83FF19A6209D0059916C /* UzysWrapperPickerController.m in Sources */,
+				D83D557919ADFA2A00DB88F7 /* UIDevice+Hardware.m in Sources */,
 				D8CC94FF19A8343A002D64BA /* LCVoiceHud.m in Sources */,
 				D8C9AD8F19AB133C0071F211 /* SVProgressHUD.m in Sources */,
 				D87A83F919A6209D0059916C /* UzysAssetsPickerController.m in Sources */,

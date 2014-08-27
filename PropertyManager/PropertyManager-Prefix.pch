@@ -8,6 +8,7 @@
 #import <JSONKit.h>
 #import <Base64.h>
 #import "ASIFormDataRequest.h"
+#import "UIDevice+Hardware.h"
 
 #ifndef __IPHONE_3_0
 #warning "This project uses features only available in iOS SDK 3.0 and later."

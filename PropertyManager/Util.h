@@ -22,7 +22,7 @@
 - (NSString *)locationToXMLString:(NSString *)location lat:(double)lat lon:(double)lon time:(NSString *)time;
 - (NSString *)dataToXMLString:(NSData *)data fileName:(NSString *)filename;
 - (NSMutableArray *)dataToXMLString:(NSArray *)datas companyID:(NSString *)companyID inputID:(NSString *)inputID;
-
+- (NSString *)deviceInfoToXMLString;
 
 + (NSDate*)dateFromString:(NSString*)string;
 + (NSString*)stringFromDate:(NSDate *)date hasTime:(BOOL)time;
