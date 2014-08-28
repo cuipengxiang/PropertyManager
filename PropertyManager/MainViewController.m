@@ -216,8 +216,8 @@
             UIImage *img = [UIImage imageWithCGImage:alAsset.defaultRepresentation.fullResolutionImage
                                                scale:alAsset.defaultRepresentation.scale
                                          orientation:(UIImageOrientation)alAsset.defaultRepresentation.orientation];
-            UIImage *newimage = [self imageWithImage:img scaledToSize:CGSizeMake(408, 311)];
-            NSData *imageData = UIImageJPEGRepresentation(newimage, 0.01);
+            UIImage *newimage = [self imageWithImage:img scaledToSize:CGSizeMake(816, 622)];
+            NSData *imageData = UIImageJPEGRepresentation(newimage, 0.1);
             [self.imagesDataToUpLoad addObject:imageData];
         }
         NSString *xmlString;
