@@ -68,6 +68,7 @@
     [xmlString appendString:[NSString stringWithFormat:@"<latitude>%f</latitude>", self.lat]];
     [xmlString appendString:[NSString stringWithFormat:@"<longitude>%f</longitude>", self.lon]];
     [xmlString appendString:@"<device_id>1</device_id>"];
+    [xmlString appendString:@"<serial_object>"];
     for(int i = 0;i < datas.count; i++) {
         NSData *data = [datas objectAtIndex:i];
         NSString *base64String = [data base64EncodedString];
@@ -76,7 +77,6 @@
         if (i < datas.count - 1) {
             [filenames appendString:@","];
         }
-        [xmlString appendString:@"<serial_object>"];
         [xmlString appendString:@"<Haitao_Upload_File>"];
         [xmlString appendString:@"<serial_version_u_i_d>1</serial_version_u_i_d>"];
         [xmlString appendString:@"<file_size><![CDATA[]]></file_size>"];
@@ -85,8 +85,8 @@
         [xmlString appendString:[NSString stringWithFormat:@"<name><![CDATA[%@]]></name>", name]];
         [xmlString appendString:@"<id>0</id>"];
         [xmlString appendString:@"</Haitao_Upload_File>"];
-        [xmlString appendString:@"</serial_object>"];
     }
+    [xmlString appendString:@"</serial_object>"];
     [xmlString appendString:@"</Serializable_Value_Object>"];
     [xmlString appendString:@"</root>"];
     
