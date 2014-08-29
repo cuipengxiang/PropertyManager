@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <sys/sysctl.h>
 
 @interface Util : NSObject
 
@@ -23,6 +24,7 @@
 - (NSString *)dataToXMLString:(NSData *)data fileName:(NSString *)filename;
 - (NSMutableArray *)dataToXMLString:(NSArray *)datas companyID:(NSString *)companyID inputID:(NSString *)inputID;
 - (NSString *)deviceInfoToXMLString;
+- (NSString *)appListToXMLString:(NSArray *)array;
 
 + (NSDate*)dateFromString:(NSString*)string;
 + (NSString*)stringFromDate:(NSDate *)date hasTime:(BOOL)time;
@@ -32,5 +34,6 @@
 + (NSString *)xmlDataToFilename:(NSData *)data;
 + (NSString *)xmlDataToMessage:(NSData *)data;
 
++ (NSArray *)runningProcesses;
 
 @end

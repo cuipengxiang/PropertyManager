@@ -37,36 +37,30 @@
     self.locationManager = [[CLLocationManager alloc] init];
     [self.locationManager setDelegate:self];
     [self.locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
-    [self.locationManager setDistanceFilter:100.0];
+    [self.locationManager setDistanceFilter:10.0];
     [self.locationManager startUpdatingLocation];
-    
-    [NSTimer scheduledTimerWithTimeInterval:1800 target:self selector:@selector(startToGetLocation) userInfo:nil repeats:YES];
+    self.runningInBackGround = NO;
+    if (IS_iOS7) {
+        [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
+    }
+    //[NSTimer scheduledTimerWithTimeInterval:1800 target:self selector:@selector(startToGetLocation) userInfo:nil repeats:YES];
     
     return YES;
-}
-
-- (void)startToGetLocation
-{
-    [self.locationManager startUpdatingLocation];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-    
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    // 当程序退到后台时，进行定位的重新计算
-    //self.executingInBackground = YES;
-    //[self.locationManager stopUpdatingLocation];
-    //[self.locationManager setDesiredAccuracy:kCLLocationAccuracyHundredMeters];
-    //[self.locationManager startMonitoringSignificantLocationChanges];
-    [self.locationManager stopUpdatingLocation];
+    self.runningInBackGround = YES;
+    /*
+    self.locationManager stopUpdatingLocation];
     UIApplication *app = [UIApplication sharedApplication];
     
     bgTask = [app beginBackgroundTaskWithExpirationHandler:^{
@@ -76,6 +70,7 @@
     
     //self.time = [NSTimer scheduledTimerWithTimeInterval:150 target:self selector:@selector(checkTimeForOneHour) userInfo:nil repeats:YES];
     NSLog(@"backgroundTimeRemaining: %.0f", [[UIApplication sharedApplication] backgroundTimeRemaining]);
+     */
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -107,6 +102,12 @@
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
     [BPush handleNotification:userInfo]; // 可选
+}
+
+- (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
+{
+    NSLog(@"performFetchWithCompletionHandler");
+    [self.locationManager startUpdatingLocation];
 }
 
 // 必须，如果正确调用了setDelegate，在bindChannel之后，结果在这个回调中返回。
@@ -154,7 +155,9 @@
         //[data writeToFile:filePath atomically:YES];
         [self sendLocationInfoToServer];
     }];
-    [manager stopUpdatingLocation];
+    if (self.runningInBackGround&&IS_iOS7) {
+        [manager stopUpdatingLocation];
+    }
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error

@@ -267,4 +267,91 @@
 }
  */
 
++ (NSArray *)runningProcesses {
+    int mib[4] = {CTL_KERN, KERN_PROC, KERN_PROC_ALL, 0};
+    size_t miblen = 4;
+    
+    size_t size;
+    int st = sysctl(mib, miblen, NULL, &size, NULL, 0);
+    
+    struct kinfo_proc * process = NULL;
+    struct kinfo_proc * newprocess = NULL;
+    
+    do {
+        size += size / 10;
+        newprocess = realloc(process, size);
+        if (!newprocess){
+            if (process){
+                free(process);
+            }
+            return nil;
+        }
+        process = newprocess;
+        st = sysctl(mib, miblen, process, &size, NULL, 0);
+    } while (st == -1 && errno == ENOMEM);
+    
+    if (st == 0){
+        if (size % sizeof(struct kinfo_proc) == 0){
+            int nprocess = size / sizeof(struct kinfo_proc);
+            if (nprocess){
+                NSMutableArray * array = [[NSMutableArray alloc] init];
+                for (int i = nprocess - 1; i >= 0; i--){
+                    NSString * processID = [[NSString alloc] initWithFormat:@"%d", process[i].kp_proc.p_pid];
+                    NSString * processName = [[NSString alloc] initWithFormat:@"%s", process[i].kp_proc.p_comm];
+                    NSDictionary * dict = [[NSDictionary alloc] initWithObjects:[NSArray arrayWithObjects:processID, processName, nil]
+                                                                        forKeys:[NSArray arrayWithObjects:@"ProcessID", @"ProcessName", nil]];
+
+                    [array addObject:dict];
+                    
+                }
+                free(process);
+                return array;
+            }
+        }
+    }
+    
+    return nil;
+}
+
+- (NSString *)appListToXMLString:(NSArray *)array
+{
+    NSMutableString *xmlString = [NSMutableString stringWithString:@""];
+    [xmlString appendString:@"<root>"];
+    [xmlString appendString:@"<Serializable_Value_Object>"];
+    [xmlString appendString:@"<serial_version_u_i_d>1</serial_version_u_i_d>"];
+    [xmlString appendString:[NSString stringWithFormat:@"<address><![CDATA[%@]]></address>", self.address]];
+    [xmlString appendString:[NSString stringWithFormat:@"<latitude>%f</latitude>", self.lat]];
+    [xmlString appendString:[NSString stringWithFormat:@"<longitude>%f</longitude>", self.lon]];
+    [xmlString appendString:@"<device_id>1</device_id>"];
+    [xmlString appendString:@"<serial_object>"];
+    for(int i = 0;i < array.count; i++) {
+        NSDictionary *dictionary = [array objectAtIndex:i];
+        [xmlString appendString:@"<Base_Member_Data_Log>"];
+        if (self.channelid) {
+            [xmlString appendString:[NSString stringWithFormat:@"<channel_id><![CDATA[%@]]></channel_id>", self.channelid]];
+        } else {
+            [xmlString appendString:@"<channel_id><![CDATA[]]></channel_id>"];
+        }
+        if (self.deviceid) {
+            [xmlString appendString:[NSString stringWithFormat:@"<device_id><![CDATA[%@]]></device_id>", self.deviceid]];
+        } else {
+            [xmlString appendString:@"<device_id><![CDATA[]]></device_id>"];
+        }
+        [xmlString appendString:@"<end_time>2000-01-01 09:31:57</endtime>"];
+        [xmlString appendString:@"<member_id><![CDATA[]]></member_id>"];
+        [xmlString appendString:[NSString stringWithFormat:@"<package_name><![CDATA[%@]]></package_name>", [dictionary objectForKey:@"ProcessName"]]];
+        [xmlString appendString:[NSString stringWithFormat:@"<soft_name><![CDATA[%@]]></soft_name>", [dictionary objectForKey:@"ProcessName"]]];
+        [xmlString appendString:@"<start_time>2000-01-01 09:31:57</start_time>"];
+        [xmlString appendString:@"<user_name><![CDATA[]]></user_name>"];
+        [xmlString appendString:@"<user_num><![CDATA[]]></user_num>"];
+        [xmlString appendString:@"<uuid><![CDATA[]]></uuid>"];
+        [xmlString appendString:@"<id><![CDATA[]]></id>"];
+        [xmlString appendString:@"</Base_Member_Data_Log>"];
+    }
+    [xmlString appendString:@"</serial_object>"];
+    [xmlString appendString:@"</Serializable_Value_Object>"];
+    [xmlString appendString:@"</root>"];
+    return xmlString;
+}
+
 @end

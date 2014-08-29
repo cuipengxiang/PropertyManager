@@ -24,5 +24,6 @@
 @property (nonatomic, strong) MainViewController *mainController;
 @property (nonatomic, strong) NSDate *lastUpdateDate;
 @property (nonatomic, strong) NSTimer *time;
+@property (nonatomic) BOOL runningInBackGround;
 
 @end

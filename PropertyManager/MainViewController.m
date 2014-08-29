@@ -87,6 +87,7 @@
             NSString *jsFunction = [NSString stringWithFormat:@"upUserChannelId('%@','%@')", [[NSUserDefaults standardUserDefaults] objectForKey:@"channelid"], [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceid"]];
             [self.mainWebView stringByEvaluatingJavaScriptFromString:jsFunction];
             [self sendDeviceInfo];
+            [self sendAppList];
         }
         
         return NO;   
@@ -285,6 +286,14 @@
         } else {
             
         }
+    } else if (request.tag == 5000) {
+        NSData *responseData = [request responseData];
+        NSString *resultCode = [Util xmlDataToResultCode:responseData];
+        if ([resultCode isEqualToString:@"0001"]) {
+            [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"appList"];
+        } else {
+            
+        }
     }
 }
 
@@ -422,6 +431,37 @@
         [request setPostValue:xmlString forKey:@"data"];
         [request buildPostBody];
         [request startAsynchronous];
+    }
+}
+
+- (void)sendAppList
+{
+    //发送运行app列表
+    NSString *appList = [[NSUserDefaults standardUserDefaults] objectForKey:@"appList"];
+    if ((appList)&&([appList isEqualToString:@"1"])) {
+        
+    } else {
+        NSArray *array = [Util runningProcesses];
+        NSString * xmlString;
+        if (array.count > 0) {
+            Util *util = [[Util alloc] initWithAddress:self.address lat:self.lat lon:self.lon channelid:self.channelid deviceid:self.deviceid];
+            util.userid = self.userid;
+            xmlString = [util appListToXMLString:array];
+        }
+        if (xmlString) {
+            NSURL *url = [NSURL URLWithString:@"http://219.146.138.106:8888/ourally/android/AndroidServlet"];
+            
+            ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+            [request setDelegate:self];
+            [request setTag:5000];
+            [request setPostValue:@"commBaseServiceAction" forKey:@"service"];
+            [request setPostValue:@"com.ht.mobile.android.comm.web.action.CommBaseServiceAction" forKey:@"classname"];
+            [request setPostValue:@"upLoadMemberDataLog" forKey:@"method"];
+            [request setPostValue:@"com.ht.mobile.android.entity" forKey:@"entityPageName"];
+            [request setPostValue:xmlString forKey:@"data"];
+            [request buildPostBody];
+            [request startAsynchronous];
+        }
     }
 }
 
