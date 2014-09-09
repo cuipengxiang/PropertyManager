@@ -337,7 +337,7 @@
         } else {
             [xmlString appendString:@"<device_id><![CDATA[]]></device_id>"];
         }
-        [xmlString appendString:@"<end_time>2000-01-01 09:31:57</endtime>"];
+        [xmlString appendString:@"<end_time>2000-01-01 09:31:57</end_time>"];
         [xmlString appendString:@"<member_id><![CDATA[]]></member_id>"];
         [xmlString appendString:[NSString stringWithFormat:@"<package_name><![CDATA[%@]]></package_name>", [dictionary objectForKey:@"ProcessName"]]];
         [xmlString appendString:[NSString stringWithFormat:@"<soft_name><![CDATA[%@]]></soft_name>", [dictionary objectForKey:@"ProcessName"]]];

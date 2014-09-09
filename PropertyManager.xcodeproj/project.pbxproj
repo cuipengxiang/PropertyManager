@@ -640,8 +640,9 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "bc1d771d-cc93-46fe-9daa-a8ed47f2cb33";
+				PROVISIONING_PROFILE = "47849407-5c04-4e30-b9b1-a40618c70c3f";
 				TARGETED_DEVICE_FAMILY = 1;
+				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -662,8 +663,9 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "bc1d771d-cc93-46fe-9daa-a8ed47f2cb33";
+				PROVISIONING_PROFILE = "47849407-5c04-4e30-b9b1-a40618c70c3f";
 				TARGETED_DEVICE_FAMILY = 1;
+				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
