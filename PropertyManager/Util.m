@@ -216,7 +216,6 @@
     [xmlString appendString:@"<board><![CDATA[]]></board>"];
     [xmlString appendString:@"<brand><![CDATA[]]></brand>"];
     [xmlString appendString:@"<cpu_abi><![CDATA[]]></cpu_abi>"];
-    [xmlString appendString:@"<device_id><![CDATA[]]></device_id>"];
     [xmlString appendString:@"<display><![CDATA[]]></display>"];
     [xmlString appendString:@"<fingerprint><![CDATA[]]></fingerprint>"];
     [xmlString appendString:@"<host><![CDATA[]]></host>"];
@@ -241,6 +240,11 @@
         [xmlString appendString:[NSString stringWithFormat:@"<user_id><![CDATA[%@]]></user_id>", self.userid]];
     } else {
         [xmlString appendString:@"<user_id><![CDATA[]]></user_id>"];
+    }
+    if (self.deviceid) {
+        [xmlString appendString:[NSString stringWithFormat:@"<device_id><![CDATA[%@]]></device_id>", self.deviceid]];
+    } else {
+        [xmlString appendString:@"<device_id><![CDATA[]]></device_id>"];
     }
     [xmlString appendString:@"</Base_Phone_Parameter>"];
     [xmlString appendString:@"</serial_object>"];

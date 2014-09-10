@@ -50,7 +50,8 @@
     NSError * err = nil;
     
 	AVAudioSession *audioSession = [AVAudioSession sharedInstance];
-	[audioSession setCategory :AVAudioSessionCategoryPlayAndRecord error:&err];
+	//[audioSession setCategory :AVAudioSessionCategoryPlayAndRecord error:&err];
+    [audioSession setCategory:AVAudioSessionCategoryPlayAndRecord withOptions:AVAudioSessionCategoryOptionDefaultToSpeaker error:&err];
     
 	if(err){
         NSLog(@"audioSession: %@ %d %@", [err domain], [err code], [[err userInfo] description]);

@@ -19,8 +19,8 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
-    self.mainController = [[MainViewController alloc] initWithNibName:nil bundle:nil];
-    self.window.rootViewController = self.mainController;
+    MainViewController *mainController = [[MainViewController alloc] initWithNibName:nil bundle:nil];
+    self.window.rootViewController = mainController;
     
     [BPush setupChannel:launchOptions]; // 必须
     
@@ -124,8 +124,8 @@
         int returnCode = [[res valueForKey:BPushRequestErrorCodeKey] intValue];
         NSString *requestid = [res valueForKey:BPushRequestRequestIdKey];
         
-        self.mainController.channelid = channelid;
-        self.mainController.deviceid = userid;
+        [[NSUserDefaults standardUserDefaults] setObject:channelid forKey:@"channelid"];
+        [[NSUserDefaults standardUserDefaults] setObject:userid forKey:@"deviceid"];
     }
 }
 
@@ -176,9 +176,9 @@
         }
     }
     NSLog(@"发送定位信息");
-    Util *util = [[Util alloc] initWithAddress:self.address lat:self.lat lon:self.lon channelid:self.mainController.channelid deviceid:self.mainController.deviceid];
-    if (self.mainController.userid) {
-        util.userid = self.mainController.userid;
+    Util *util = [[Util alloc] initWithAddress:self.address lat:self.lat lon:self.lon channelid:[[NSUserDefaults standardUserDefaults] objectForKey:@"channelid"] deviceid:[[NSUserDefaults standardUserDefaults] objectForKey:@"deviceid"]];
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"userid"]) {
+        util.userid = [[NSUserDefaults standardUserDefaults] objectForKey:@"userid"];
     }
     NSURL *url = [NSURL URLWithString:@"http://219.146.138.106:8888/ourally/android/AndroidServlet"];
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];

@@ -21,7 +21,6 @@
 @property (nonatomic) double lon;
 @property (nonatomic, strong) NSString *address;
 
-@property (nonatomic, strong) MainViewController *mainController;
 @property (nonatomic, strong) NSDate *lastUpdateDate;
 @property (nonatomic, strong) NSTimer *time;
 @property (nonatomic) BOOL runningInBackGround;

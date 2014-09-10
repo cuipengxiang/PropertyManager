@@ -66,7 +66,7 @@
             self.timeInputID = [params objectAtIndex:0];
             self.hasTime = YES;
         }
-        if ([funcStr isEqualToString:@"getDateNOTime"]) {
+        if ([funcStr isEqualToString:@"getDateNoTime"]) {
             [self showDatePicker:NO];
             self.timeInputID = [params objectAtIndex:0];
             self.hasTime = NO;
@@ -83,7 +83,6 @@
         }
         if ([funcStr isEqualToString:@"SendUserId"]) {
             [[NSUserDefaults standardUserDefaults] setObject:[params objectAtIndex:0] forKey:@"userid"];
-            self.userid = [params objectAtIndex:0];
             NSString *jsFunction = [NSString stringWithFormat:@"upUserChannelId('%@','%@')", [[NSUserDefaults standardUserDefaults] objectForKey:@"channelid"], [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceid"]];
             [self.mainWebView stringByEvaluatingJavaScriptFromString:jsFunction];
             [self sendDeviceInfo];
@@ -217,14 +216,14 @@
             UIImage *img = [UIImage imageWithCGImage:alAsset.defaultRepresentation.fullResolutionImage
                                                scale:alAsset.defaultRepresentation.scale
                                          orientation:(UIImageOrientation)alAsset.defaultRepresentation.orientation];
-            UIImage *newimage = [self imageWithImage:img scaledToSize:CGSizeMake(816, 622)];
+            UIImage *newimage = [self imageCompressForWidth:img targetWidth:640.0];
             NSData *imageData = UIImageJPEGRepresentation(newimage, 0.1);
             [self.imagesDataToUpLoad addObject:imageData];
         }
         NSString *xmlString;
         NSString *filenames;
         if (self.imagesDataToUpLoad.count > 0) {
-            Util *util = [[Util alloc] initWithAddress:self.address lat:self.lat lon:self.lon channelid:self.channelid deviceid:self.deviceid];
+            Util *util = [[Util alloc] initWithAddress:self.address lat:self.lat lon:self.lon channelid:[[NSUserDefaults standardUserDefaults] objectForKey:@"channelid"] deviceid:[[NSUserDefaults standardUserDefaults] objectForKey:@"deviceid"]];
             NSArray *array = [util dataToXMLString:self.imagesDataToUpLoad companyID:self.imageCompanyID inputID:self.imageInputID];
             xmlString = [array objectAtIndex:0];
             filenames = [array objectAtIndex:1];
@@ -389,7 +388,10 @@
     NSString *mp3FilePath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/MySound.mp3"];
     NSData *data = [[NSData alloc] initWithContentsOfFile:mp3FilePath];
     
-    Util *util = [[Util alloc] initWithAddress:self.address lat:self.lat lon:self.lon channelid:self.channelid deviceid:self.deviceid];
+    Util *util = [[Util alloc] initWithAddress:self.address lat:self.lat lon:self.lon channelid:[[NSUserDefaults standardUserDefaults] objectForKey:@"channelid"] deviceid:[[NSUserDefaults standardUserDefaults] objectForKey:@"deviceid"]];
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"userid"]) {
+        util.userid = [[NSUserDefaults standardUserDefaults] objectForKey:@"userid"];
+    }
     NSString *xmlString = [util dataToXMLString:data fileName:self.voiceCompanyID];
     
     if (xmlString) {
@@ -414,8 +416,10 @@
     if ((phone)&&([phone isEqualToString:@"1"])) {
         return;
     }
-    Util *util = [[Util alloc] initWithAddress:self.address lat:self.lat lon:self.lon channelid:self.channelid deviceid:self.deviceid];
-    util.userid = self.userid;
+    Util *util = [[Util alloc] initWithAddress:self.address lat:self.lat lon:self.lon channelid:[[NSUserDefaults standardUserDefaults] objectForKey:@"channelid"] deviceid:[[NSUserDefaults standardUserDefaults] objectForKey:@"deviceid"]];
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"userid"]) {
+        util.userid = [[NSUserDefaults standardUserDefaults] objectForKey:@"userid"];
+    }
     NSString *xmlString = [util deviceInfoToXMLString];
     
     if (xmlString) {
@@ -444,8 +448,10 @@
         NSArray *array = [Util runningProcesses];
         NSString * xmlString;
         if (array.count > 0) {
-            Util *util = [[Util alloc] initWithAddress:self.address lat:self.lat lon:self.lon channelid:self.channelid deviceid:self.deviceid];
-            util.userid = self.userid;
+            Util *util = [[Util alloc] initWithAddress:self.address lat:self.lat lon:self.lon channelid:[[NSUserDefaults standardUserDefaults] objectForKey:@"channelid"] deviceid:[[NSUserDefaults standardUserDefaults] objectForKey:@"deviceid"]];
+            if ([[NSUserDefaults standardUserDefaults] objectForKey:@"userid"]) {
+                util.userid = [[NSUserDefaults standardUserDefaults] objectForKey:@"userid"];
+            }
             xmlString = [util appListToXMLString:array];
         }
         if (xmlString) {
@@ -464,6 +470,54 @@
         }
     }
 }
+
+//依照宽度，等比例压缩图片
+- (UIImage *)imageCompressForWidth:(UIImage *)sourceImage targetWidth:(CGFloat)defineWidth{
+    UIImage *newImage = nil;
+    CGSize imageSize = sourceImage.size;
+    CGFloat width = imageSize.width;
+    CGFloat height = imageSize.height;
+    CGFloat targetWidth = defineWidth;
+    CGFloat targetHeight = height / (width / targetWidth);
+    CGSize size = CGSizeMake(targetWidth, targetHeight);
+    CGFloat scaleFactor = 0.0;
+    CGFloat scaledWidth = targetWidth;
+    CGFloat scaledHeight = targetHeight;
+    CGPoint thumbnailPoint = CGPointMake(0.0, 0.0);
+    if(CGSizeEqualToSize(imageSize, size) == NO){
+        CGFloat widthFactor = targetWidth / width;
+        CGFloat heightFactor = targetHeight / height;
+        if(widthFactor > heightFactor){
+            scaleFactor = widthFactor;
+        }
+        else{
+            scaleFactor = heightFactor;
+        }
+        scaledWidth = width * scaleFactor;
+        scaledHeight = height * scaleFactor;
+        if(widthFactor > heightFactor){
+            thumbnailPoint.y = (targetHeight - scaledHeight) * 0.5;
+        }else if(widthFactor < heightFactor){
+            thumbnailPoint.x = (targetWidth - scaledWidth) * 0.5;
+        }
+    }
+    UIGraphicsBeginImageContext(size);
+    CGRect thumbnailRect = CGRectZero;
+    thumbnailRect.origin = thumbnailPoint;
+    thumbnailRect.size.width = scaledWidth;
+    thumbnailRect.size.height = scaledHeight;
+    
+    [sourceImage drawInRect:thumbnailRect];
+    
+    newImage = UIGraphicsGetImageFromCurrentImageContext();
+    if(newImage == nil){
+        NSLog(@"scale image fail");
+    }
+    
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+
 
 //对图片尺寸进行压缩--
 - (UIImage*)imageWithImage:(UIImage*)image scaledToSize:(CGSize)newSize
