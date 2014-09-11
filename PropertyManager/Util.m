@@ -67,7 +67,7 @@
     [xmlString appendString:[NSString stringWithFormat:@"<address><![CDATA[%@]]></address>", self.address]];
     [xmlString appendString:[NSString stringWithFormat:@"<latitude>%f</latitude>", self.lat]];
     [xmlString appendString:[NSString stringWithFormat:@"<longitude>%f</longitude>", self.lon]];
-    [xmlString appendString:@"<device_id>1</device_id>"];
+    [xmlString appendString:@"<device_id>4</device_id>"];
     [xmlString appendString:@"<serial_object>"];
     for(int i = 0;i < datas.count; i++) {
         NSData *data = [datas objectAtIndex:i];
@@ -103,7 +103,7 @@
     [xmlString appendString:[NSString stringWithFormat:@"<address><![CDATA[%@]]></address>", self.address]];
     [xmlString appendString:[NSString stringWithFormat:@"<latitude>%f</latitude>", self.lat]];
     [xmlString appendString:[NSString stringWithFormat:@"<longitude>%f</longitude>", self.lon]];
-    [xmlString appendString:@"<device_id>1</device_id>"];
+    [xmlString appendString:@"<device_id>4</device_id>"];
     NSString *base64String = [data base64EncodedString];
     [xmlString appendString:@"<serial_object>"];
     [xmlString appendString:@"<Haitao_Upload_File>"];
@@ -162,6 +162,11 @@
     return nameString;
 }
 
++ (NSDictionary *)xmlDataToPushMessage:(NSData *)data
+{
+    return nil;
+}
+
 - (NSString *)locationToXMLString:(NSString *)location lat:(double)lat lon:(double)lon time:(NSString *)time
 {
     NSMutableString *xmlString = [NSMutableString stringWithString:@""];
@@ -170,7 +175,7 @@
     [xmlString appendString:[NSString stringWithFormat:@"<address><![CDATA[%@]]></address>", location]];
     [xmlString appendString:[NSString stringWithFormat:@"<latitude>%f</latitude>", lat]];
     [xmlString appendString:[NSString stringWithFormat:@"<longitude>%f</longitude>", lon]];
-    [xmlString appendString:@"<device_id>1</device_id>"];
+    [xmlString appendString:@"<device_id>4</device_id>"];
     [xmlString appendString:@"<serial_object>"];
     [xmlString appendString:@"<Base_G_P_S_Location>"];
     [xmlString appendString:[NSString stringWithFormat:@"<address><![CDATA[%@]]></address>", location]];
@@ -210,7 +215,7 @@
     [xmlString appendString:[NSString stringWithFormat:@"<address><![CDATA[%@]]></address>", self.address]];
     [xmlString appendString:[NSString stringWithFormat:@"<latitude>%f</latitude>", self.lat]];
     [xmlString appendString:[NSString stringWithFormat:@"<longitude>%f</longitude>", self.lon]];
-    [xmlString appendString:@"<device_id>1</device_id>"];
+    [xmlString appendString:@"<device_id>4</device_id>"];
     [xmlString appendString:@"<serial_object>"];
     [xmlString appendString:@"<Base_Phone_Parameter>"];
     [xmlString appendString:@"<board><![CDATA[]]></board>"];
@@ -326,7 +331,7 @@
     [xmlString appendString:[NSString stringWithFormat:@"<address><![CDATA[%@]]></address>", self.address]];
     [xmlString appendString:[NSString stringWithFormat:@"<latitude>%f</latitude>", self.lat]];
     [xmlString appendString:[NSString stringWithFormat:@"<longitude>%f</longitude>", self.lon]];
-    [xmlString appendString:@"<device_id>1</device_id>"];
+    [xmlString appendString:@"<device_id>4</device_id>"];
     [xmlString appendString:@"<serial_object>"];
     for(int i = 0;i < array.count; i++) {
         NSDictionary *dictionary = [array objectAtIndex:i];

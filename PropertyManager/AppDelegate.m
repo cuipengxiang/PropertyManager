@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "SVProgressHUD.h"
 
 @implementation AppDelegate
 {
@@ -102,6 +103,7 @@
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
     [BPush handleNotification:userInfo]; // 可选
+    [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"收到推送：%@",userInfo]];
 }
 
 - (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
@@ -126,6 +128,8 @@
         
         [[NSUserDefaults standardUserDefaults] setObject:channelid forKey:@"channelid"];
         [[NSUserDefaults standardUserDefaults] setObject:userid forKey:@"deviceid"];
+        
+        [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"百度推送绑定成功，channelid：%@，userid：%@", channelid, userid]];
     }
 }
 
