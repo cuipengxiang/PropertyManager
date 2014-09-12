@@ -427,7 +427,7 @@
 				ORGANIZATIONNAME = Roc;
 				TargetAttributes = {
 					D877FEDA199F475A00BB893D = {
-						DevelopmentTeam = KX9NH6X8K8;
+						DevelopmentTeam = 8DQZYKZ4P2;
 					};
 				};
 			};
@@ -628,7 +628,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DC982AF6381A4000B78F0770 /* Pods.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: 鹏翔 崔 (JHNFAUPQQ2)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: 鹏翔 崔 (HFKT7FBRSA)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 鹏翔 崔 (HFKT7FBRSA)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PropertyManager/PropertyManager-Prefix.pch";
 				INFOPLIST_FILE = "PropertyManager/PropertyManager-Info.plist";
@@ -640,7 +641,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "47849407-5c04-4e30-b9b1-a40618c70c3f";
+				PROVISIONING_PROFILE = "f49731b6-33ae-4ab5-8a80-6eedf8a6efea";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
@@ -651,7 +652,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DC982AF6381A4000B78F0770 /* Pods.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: 鹏翔 崔 (JHNFAUPQQ2)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: 鹏翔 崔 (HFKT7FBRSA)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 鹏翔 崔 (HFKT7FBRSA)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PropertyManager/PropertyManager-Prefix.pch";
 				INFOPLIST_FILE = "PropertyManager/PropertyManager-Info.plist";
@@ -663,7 +665,7 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "47849407-5c04-4e30-b9b1-a40618c70c3f";
+				PROVISIONING_PROFILE = "f49731b6-33ae-4ab5-8a80-6eedf8a6efea";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
