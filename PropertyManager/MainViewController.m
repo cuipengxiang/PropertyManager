@@ -121,6 +121,7 @@
         }
         if ([funcStr isEqualToString:@"SendUserId"]) {
             [[NSUserDefaults standardUserDefaults] setObject:[params objectAtIndex:0] forKey:@"userid"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
             NSString *jsFunction = [NSString stringWithFormat:@"upUserChannelId('%@','%@','%@')", [[NSUserDefaults standardUserDefaults] objectForKey:@"channelid"], [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceid"], @"4"];
             [self.mainWebView stringByEvaluatingJavaScriptFromString:jsFunction];
             [self sendDeviceInfo];
@@ -320,6 +321,7 @@
         NSString *resultCode = [Util xmlDataToResultCode:responseData];
         if ([resultCode isEqualToString:@"0001"]) {
             [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"phoneInfo"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
         } else {
             
         }
@@ -328,6 +330,7 @@
         NSString *resultCode = [Util xmlDataToResultCode:responseData];
         if ([resultCode isEqualToString:@"0001"]) {
             [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"appList"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
         } else {
             
         }
@@ -583,14 +586,26 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)showNotify:(NSString *)message duration:(float)duration
+- (void)showNotify:(NSString *)message
 {
-    BDKNotifyHUD *hud = [BDKNotifyHUD notifyHUDWithImage:nil text:message];
-    hud.center = CGPointMake(self.view.center.x, self.view.center.y - 20);
-    [self.view addSubview:hud];
-    [hud presentWithDuration:duration speed:0.5f inView:self.view completion:^{
-        [hud removeFromSuperview];
-    }];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"新消息" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"查看", nil];
+    [alert show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0) {
+    } else {
+        [self showUserMessageView];
+    }
+}
+
+- (void)showUserMessageView
+{
+    NSString *urlString = [NSString stringWithFormat:@"http://219.146.138.106:8888/ourally/app/owner/message/getMessageList.do?userId=%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"userid"]];
+    NSURL *url=[NSURL URLWithString:urlString];
+	NSURLRequest *request=[NSURLRequest requestWithURL:url];
+	[self.mainWebView loadRequest:request];
 }
 
 @end

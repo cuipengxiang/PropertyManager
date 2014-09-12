@@ -130,8 +130,10 @@
                                         detail:[[userInfo objectForKey:@"aps"] objectForKey:@"alert"]
                                          image:[UIImage imageNamed:@"mopedDog.jpeg"]
                                    andDuration:3.0];
-            [self.mainController showNotify:[NSString stringWithFormat:@"收到新消息：\n%@", [[userInfo objectForKey:@"aps"] objectForKey:@"alert"]] duration:4.0];
+            [self.mainController showNotify:[NSString stringWithFormat:@"收到新消息：%@", [[userInfo objectForKey:@"aps"] objectForKey:@"alert"]]];
         }
+    } else {
+        [self.mainController showUserMessageView];
     }
     [BPush handleNotification:userInfo]; // 可选
     
@@ -159,6 +161,7 @@
         
         [[NSUserDefaults standardUserDefaults] setObject:channelid forKey:@"channelid"];
         [[NSUserDefaults standardUserDefaults] setObject:userid forKey:@"deviceid"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
 
@@ -243,7 +246,8 @@
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
 {
     NSDictionary* dict = [notification userInfo];
-    AudioServicesPlaySystemSound(1106);
+    //AudioServicesPlaySystemSound(1106);
+    [self.mainController showUserMessageView];
 }
 
 @end

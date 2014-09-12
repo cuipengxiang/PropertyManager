@@ -13,7 +13,7 @@
 #import "LCVoice.h"
 #import "MPNotificationView.h"
 
-@interface MainViewController : UIViewController<UIWebViewDelegate, UzysAssetsPickerControllerDelegate, LXActivityDelegate, LXVoiceActivityDelegate, ASIHTTPRequestDelegate>
+@interface MainViewController : UIViewController<UIWebViewDelegate, UzysAssetsPickerControllerDelegate, LXActivityDelegate, LXVoiceActivityDelegate, ASIHTTPRequestDelegate, UIAlertViewDelegate>
 
 @property (nonatomic, strong) UIWebView *mainWebView;
 @property (nonatomic, strong) NSMutableArray *imagesShowedInSheet;
@@ -32,6 +32,7 @@
 @property (nonatomic) double lat;
 @property (nonatomic) double lon;
 
-- (void)showNotify:(NSString *)message duration:(float)duration;
+- (void)showNotify:(NSString *)message;
+- (void)showUserMessageView;
 
 @end
