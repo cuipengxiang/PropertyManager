@@ -11,6 +11,7 @@
 #import "LXActivity.h"
 #import "LXVoiceActivity.h"
 #import "LCVoice.h"
+#import "MPNotificationView.h"
 
 @interface MainViewController : UIViewController<UIWebViewDelegate, UzysAssetsPickerControllerDelegate, LXActivityDelegate, LXVoiceActivityDelegate, ASIHTTPRequestDelegate>
 
@@ -30,5 +31,7 @@
 @property (nonatomic, strong) NSString *address;
 @property (nonatomic) double lat;
 @property (nonatomic) double lon;
+
+- (void)showNotify:(NSString *)message duration:(float)duration;
 
 @end

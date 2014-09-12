@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		812EA51ABFDA425C815E5D29 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0B7678C99424030AC633148 /* libPods.a */; };
 		D806DADC19AB6CD9008B8B77 /* libmp3lame.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D806DADB19AB6CD9008B8B77 /* libmp3lame.a */; };
+		D81B94C119C29C9B0069BB43 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D81B94C019C29C9B0069BB43 /* AudioToolbox.framework */; };
+		D826299019C2CF2B00F7AA4E /* BDKNotifyHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = D826298F19C2CF2B00F7AA4E /* BDKNotifyHUD.m */; };
 		D82BF65D19A9902F00FB646A /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D82BF65C19A9902F00FB646A /* MobileCoreServices.framework */; };
 		D83861E919AC0C4700D7BF99 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83861E819AC0C4700D7BF99 /* CoreLocation.framework */; };
 		D83861EB19AC9CA100D7BF99 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D877FF29199F828000BB893D /* CoreTelephony.framework */; };
@@ -68,6 +70,9 @@
 		D0B7678C99424030AC633148 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D806DADA19AB6CD9008B8B77 /* lame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lame.h; sourceTree = "<group>"; };
 		D806DADB19AB6CD9008B8B77 /* libmp3lame.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libmp3lame.a; sourceTree = "<group>"; };
+		D81B94C019C29C9B0069BB43 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		D826298E19C2CF2B00F7AA4E /* BDKNotifyHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDKNotifyHUD.h; sourceTree = "<group>"; };
+		D826298F19C2CF2B00F7AA4E /* BDKNotifyHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDKNotifyHUD.m; sourceTree = "<group>"; };
 		D82BF65C19A9902F00FB646A /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		D82BF65E19A9904900FB646A /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		D83861E819AC0C4700D7BF99 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -163,6 +168,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D81B94C119C29C9B0069BB43 /* AudioToolbox.framework in Frameworks */,
 				D83861EB19AC9CA100D7BF99 /* CoreTelephony.framework in Frameworks */,
 				D83861E919AC0C4700D7BF99 /* CoreLocation.framework in Frameworks */,
 				D82BF65D19A9902F00FB646A /* MobileCoreServices.framework in Frameworks */,
@@ -190,6 +196,15 @@
 				D806DADB19AB6CD9008B8B77 /* libmp3lame.a */,
 			);
 			path = lame;
+			sourceTree = "<group>";
+		};
+		D826298D19C2CF1000F7AA4E /* BDKNotifyHUD */ = {
+			isa = PBXGroup;
+			children = (
+				D826298E19C2CF2B00F7AA4E /* BDKNotifyHUD.h */,
+				D826298F19C2CF2B00F7AA4E /* BDKNotifyHUD.m */,
+			);
+			path = BDKNotifyHUD;
 			sourceTree = "<group>";
 		};
 		D83D557619ADFA0300DB88F7 /* UIDevice+Hardware */ = {
@@ -225,6 +240,7 @@
 		D877FEDD199F475B00BB893D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D81B94C019C29C9B0069BB43 /* AudioToolbox.framework */,
 				D83861E819AC0C4700D7BF99 /* CoreLocation.framework */,
 				D82BF65E19A9904900FB646A /* libz.1.2.5.dylib */,
 				D82BF65C19A9902F00FB646A /* MobileCoreServices.framework */,
@@ -276,6 +292,7 @@
 		D877FF18199F7B5C00BB893D /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				D826298D19C2CF1000F7AA4E /* BDKNotifyHUD */,
 				D83D557619ADFA0300DB88F7 /* UIDevice+Hardware */,
 				D806DAD919AB6CC6008B8B77 /* lame */,
 				D8C9AD8A19AB13250071F211 /* SVProgressHUD */,
@@ -533,6 +550,7 @@
 				D87A83FE19A6209D0059916C /* UzysGroupViewCell.m in Sources */,
 				D877FF3F199F84BB00BB893D /* OpenUDID.m in Sources */,
 				D877FF56199F897300BB893D /* ActionSheetCustomPicker.m in Sources */,
+				D826299019C2CF2B00F7AA4E /* BDKNotifyHUD.m in Sources */,
 				D877FEEF199F475B00BB893D /* AppDelegate.m in Sources */,
 				D877FF15199F484B00BB893D /* MainViewController.m in Sources */,
 				D877FEEB199F475B00BB893D /* main.m in Sources */,
@@ -641,7 +659,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f49731b6-33ae-4ab5-8a80-6eedf8a6efea";
+				PROVISIONING_PROFILE = "dd69c3f4-bff5-433d-b062-2983df524c66";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
@@ -665,7 +683,7 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f49731b6-33ae-4ab5-8a80-6eedf8a6efea";
+				PROVISIONING_PROFILE = "dd69c3f4-bff5-433d-b062-2983df524c66";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;

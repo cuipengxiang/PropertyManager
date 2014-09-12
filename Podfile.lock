@@ -15,6 +15,7 @@ PODS:
   - Base64nl (1.2)
   - hpple (0.2.0)
   - JSONKit (1.5pre)
+  - MPNotificationView (1.1.1)
   - Reachability (3.1.1)
   - RegexKitLite (4.0)
 
@@ -23,6 +24,7 @@ DEPENDENCIES:
   - Base64nl
   - hpple
   - JSONKit
+  - MPNotificationView
   - Reachability
   - RegexKitLite
 
@@ -31,6 +33,7 @@ SPEC CHECKSUMS:
   Base64nl: 98b890ea8e2131561ea6aa0f2039ef82c35d47bf
   hpple: f4eb7c21a8db83ec264e5d614ec7509e10e5adec
   JSONKit: efef3bbd3372ff33f96b9c6f34cf4fe18e74ab69
+  MPNotificationView: dbe980f62d5221e8dbcfa0953ed6c256c0361ba1
   Reachability: 8e9635e3cb4f98e7f825e51147f677ecc694d0e7
   RegexKitLite: 761b4944f23cb8fe20697b2e47be0689fd832c09
 

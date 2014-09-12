@@ -11,6 +11,8 @@
 #import <CoreLocation/CoreLocation.h>
 #import "Util.h"
 #import "MainViewController.h"
+#import "BDKNotifyHUD.h"
+#import <AudioToolbox/AudioToolbox.h>
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, BPushDelegate, CLLocationManagerDelegate, ASIHTTPRequestDelegate>
 
@@ -24,5 +26,7 @@
 @property (nonatomic, strong) NSDate *lastUpdateDate;
 @property (nonatomic, strong) NSTimer *time;
 @property (nonatomic) BOOL runningInBackGround;
+
+@property (nonatomic, strong)MainViewController *mainController;
 
 @end

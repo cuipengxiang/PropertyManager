@@ -11,6 +11,7 @@
 #import "Util.h"
 #import "SVProgressHUD.h"
 #import "lame.h"
+#import "BDKNotifyHUD.h"
 
 @interface MainViewController ()
 
@@ -53,6 +54,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(tapReceivedNotificationHandler:)
+                                                 name:kMPNotificationViewTapReceivedNotification
+                                               object:nil];
+    
     self.mainWebView = [[UIWebView alloc] initWithFrame:CGRectMake(0.0, IS_iOS7? 20.0:0.0, App_Width, IS_iOS7? self.view.frame.size.height - 20.0:self.view.frame.size.height)];
     [self.mainWebView setDelegate:self];
     [self.view addSubview:self.mainWebView];
@@ -68,6 +74,15 @@
 	NSURL *url=[NSURL URLWithString:urlString];
 	NSURLRequest *request=[NSURLRequest requestWithURL:url];
 	[self.mainWebView loadRequest:request];
+}
+
+- (void)tapReceivedNotificationHandler:(NSNotification *)notice
+{
+    MPNotificationView *notificationView = (MPNotificationView *)notice.object;
+    if ([notificationView isKindOfClass:[MPNotificationView class]])
+    {
+        
+    }
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
@@ -566,6 +581,16 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)showNotify:(NSString *)message duration:(float)duration
+{
+    BDKNotifyHUD *hud = [BDKNotifyHUD notifyHUDWithImage:nil text:message];
+    hud.center = CGPointMake(self.view.center.x, self.view.center.y - 20);
+    [self.view addSubview:hud];
+    [hud presentWithDuration:duration speed:0.5f inView:self.view completion:^{
+        [hud removeFromSuperview];
+    }];
 }
 
 @end

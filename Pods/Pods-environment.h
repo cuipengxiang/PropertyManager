@@ -49,6 +49,12 @@
 // Please contact the author.
 // Version: 1.5pre.
 
+// MPNotificationView
+#define COCOAPODS_POD_AVAILABLE_MPNotificationView
+#define COCOAPODS_VERSION_MAJOR_MPNotificationView 1
+#define COCOAPODS_VERSION_MINOR_MPNotificationView 1
+#define COCOAPODS_VERSION_PATCH_MPNotificationView 1
+
 // Reachability
 #define COCOAPODS_POD_AVAILABLE_Reachability
 #define COCOAPODS_VERSION_MAJOR_Reachability 3
