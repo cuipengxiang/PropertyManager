@@ -216,6 +216,9 @@
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"userid"]) {
         util.userid = [[NSUserDefaults standardUserDefaults] objectForKey:@"userid"];
     }
+    if ((!util.userid)&&(!util.channelid)&&(!util.deviceid)) {
+        return;
+    }
     NSURL *url = [NSURL URLWithString:@"http://219.146.138.106:8888/ourally/android/AndroidServlet"];
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setDelegate:self];
