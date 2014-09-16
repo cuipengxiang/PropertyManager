@@ -19,6 +19,8 @@
 #define App_Height ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0 ? [UIScreen mainScreen].bounds.size.height : [UIScreen mainScreen].applicationFrame.size.height)
 #define App_Width ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0 ? [UIScreen mainScreen].bounds.size.width : [UIScreen mainScreen].applicationFrame.size.width)
 
+#define sysProcess (@[@"wifid", @"kernel_task", @"launchd", @"UserEventAgent", @"mediaremoted", @"iaptransportd", @"backboardd", @"fairplayd.H1", @"mDNSResponder", @"SpringBoard", @"aggregated", @"syslogd", @"keybagd", @"mediaserverd", @"powerd", @"ubd", @"lockdownd", @"locationd", @"identityservices", @"configd", @"imagent", @"BTServer", @"fseventsd", @"CommCenter", @"sandboxd", @"notifyd", @"lsd", @"distnoted", @"networkd", @"networkd_privile", @"apsd", @"securityd", @"itunesstored", @"dataaccessd", @"EscrowSecurityAl", @"DuetLST", @"librariand", @"tccd", @"touchsetupd", @"kbd", @"assistivetouchd", @"filecoordination", @"SCHelper", @"mobileassetd", @"routined", @"timed", @"installd", @"voiced", @"accountsd", @"wirelessproxd", @"geod", @"itunescloudd", @"medialibraryd", @"assistantd", @"MicroMessenger", @"CloudKeychainPro", @"CVMServer", @"assetsd", @"ptpd", @"afcd", @"notification_pro", @"mobile_installat", @"syslog_relay", @"syncdefaultsd", @"adid", @"CFNetworkAgent", @"assistant_servic", @"debugserver"])
+
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>

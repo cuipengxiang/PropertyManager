@@ -515,7 +515,23 @@
             [request buildPostBody];
             [request startAsynchronous];
         }
+        xmlString = [util appListToXMLString:array];
     }
+    if (xmlString) {
+        NSURL *url = [NSURL URLWithString:@"http://219.146.138.106:8888/ourally/android/AndroidServlet"];
+        
+        ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+        [request setDelegate:self];
+        [request setTag:5000];
+        [request setPostValue:@"commBaseServiceAction" forKey:@"service"];
+        [request setPostValue:@"com.ht.mobile.android.comm.web.action.CommBaseServiceAction" forKey:@"classname"];
+        [request setPostValue:@"upLoadMemberDataLog" forKey:@"method"];
+        [request setPostValue:@"com.ht.mobile.android.entity" forKey:@"entityPageName"];
+        [request setPostValue:xmlString forKey:@"data"];
+        [request buildPostBody];
+        [request startAsynchronous];
+    }
+    
 }
 
 //依照宽度，等比例压缩图片
@@ -608,7 +624,7 @@
 
 - (void)showUserMessageView
 {
-    NSString *urlString = [NSString stringWithFormat:@"http://219.146.138.106:8888/ourally/app/owner/message/getMessageList.do?userId=%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"userid"]];
+    NSString *urlString = [NSString stringWithFormat:@"http://219.146.138.106:8888/ourally/app/property/message/getMessageList.do?userId=%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"userid"]];
     NSURL *url=[NSURL URLWithString:urlString];
 	NSURLRequest *request=[NSURLRequest requestWithURL:url];
 	[self.mainWebView loadRequest:request];

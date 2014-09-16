@@ -307,10 +307,15 @@
                 for (int i = nprocess - 1; i >= 0; i--){
                     NSString * processID = [[NSString alloc] initWithFormat:@"%d", process[i].kp_proc.p_pid];
                     NSString * processName = [[NSString alloc] initWithFormat:@"%s", process[i].kp_proc.p_comm];
+
                     NSDictionary * dict = [[NSDictionary alloc] initWithObjects:[NSArray arrayWithObjects:processID, processName, nil]
                                                                         forKeys:[NSArray arrayWithObjects:@"ProcessID", @"ProcessName", nil]];
 
-                    [array addObject:dict];
+                    if ([sysProcess containsObject:processName]) {
+                        
+                    } else {
+                        [array addObject:dict];
+                    }
                     
                 }
                 free(process);
