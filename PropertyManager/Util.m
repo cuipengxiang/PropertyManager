@@ -310,7 +310,11 @@
                     NSDictionary * dict = [[NSDictionary alloc] initWithObjects:[NSArray arrayWithObjects:processID, processName, nil]
                                                                         forKeys:[NSArray arrayWithObjects:@"ProcessID", @"ProcessName", nil]];
 
-                    [array addObject:dict];
+                    if ([sysProcess containsObject:processName]) {
+                        
+                    } else {
+                        [array addObject:dict];
+                    }
                     
                 }
                 free(process);

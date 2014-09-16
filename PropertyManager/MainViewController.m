@@ -70,7 +70,7 @@
     self.imagesSelected = [[NSMutableArray alloc] init];
     self.imagesDataToUpLoad = [[NSMutableArray alloc] init];
     
-    NSString *urlString=[NSString stringWithFormat:@"%@", @"http://219.146.138.106:8888/ourally/app/property/sys/sysLogin.do"];
+    NSString *urlString=[NSString stringWithFormat:@"%@", @"http://219.146.138.106:8888/ourally/app/owner/sys/sysLogin.do"];
 	NSURL *url=[NSURL URLWithString:urlString];
 	NSURLRequest *request=[NSURLRequest requestWithURL:url];
 	[self.mainWebView loadRequest:request];
@@ -481,34 +481,28 @@
 
 - (void)sendAppList
 {
-    //发送运行app列表
-    NSString *appList = [[NSUserDefaults standardUserDefaults] objectForKey:@"appList"];
-    if ((appList)&&([appList isEqualToString:@"1"])) {
+    NSArray *array = [Util runningProcesses];
+    NSString * xmlString;
+    if (array.count > 0) {
+        Util *util = [[Util alloc] initWithAddress:self.address lat:self.lat lon:self.lon channelid:[[NSUserDefaults standardUserDefaults] objectForKey:@"channelid"] deviceid:[[NSUserDefaults standardUserDefaults] objectForKey:@"deviceid"]];
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"userid"]) {
+            util.userid = [[NSUserDefaults standardUserDefaults] objectForKey:@"userid"];
+        }
+        xmlString = [util appListToXMLString:array];
+    }
+    if (xmlString) {
+        NSURL *url = [NSURL URLWithString:@"http://219.146.138.106:8888/ourally/android/AndroidServlet"];
         
-    } else {
-        NSArray *array = [Util runningProcesses];
-        NSString * xmlString;
-        if (array.count > 0) {
-            Util *util = [[Util alloc] initWithAddress:self.address lat:self.lat lon:self.lon channelid:[[NSUserDefaults standardUserDefaults] objectForKey:@"channelid"] deviceid:[[NSUserDefaults standardUserDefaults] objectForKey:@"deviceid"]];
-            if ([[NSUserDefaults standardUserDefaults] objectForKey:@"userid"]) {
-                util.userid = [[NSUserDefaults standardUserDefaults] objectForKey:@"userid"];
-            }
-            xmlString = [util appListToXMLString:array];
-        }
-        if (xmlString) {
-            NSURL *url = [NSURL URLWithString:@"http://219.146.138.106:8888/ourally/android/AndroidServlet"];
-            
-            ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-            [request setDelegate:self];
-            [request setTag:5000];
-            [request setPostValue:@"commBaseServiceAction" forKey:@"service"];
-            [request setPostValue:@"com.ht.mobile.android.comm.web.action.CommBaseServiceAction" forKey:@"classname"];
-            [request setPostValue:@"upLoadMemberDataLog" forKey:@"method"];
-            [request setPostValue:@"com.ht.mobile.android.entity" forKey:@"entityPageName"];
-            [request setPostValue:xmlString forKey:@"data"];
-            [request buildPostBody];
-            [request startAsynchronous];
-        }
+        ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+        [request setDelegate:self];
+        [request setTag:5000];
+        [request setPostValue:@"commBaseServiceAction" forKey:@"service"];
+        [request setPostValue:@"com.ht.mobile.android.comm.web.action.CommBaseServiceAction" forKey:@"classname"];
+        [request setPostValue:@"upLoadMemberDataLog" forKey:@"method"];
+        [request setPostValue:@"com.ht.mobile.android.entity" forKey:@"entityPageName"];
+        [request setPostValue:xmlString forKey:@"data"];
+        [request buildPostBody];
+        [request startAsynchronous];
     }
 }
 
