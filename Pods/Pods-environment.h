@@ -42,6 +42,12 @@
 #define COCOAPODS_VERSION_MINOR_Base64nl 2
 #define COCOAPODS_VERSION_PATCH_Base64nl 0
 
+// HZMobileInstallation
+#define COCOAPODS_POD_AVAILABLE_HZMobileInstallation
+#define COCOAPODS_VERSION_MAJOR_HZMobileInstallation 0
+#define COCOAPODS_VERSION_MINOR_HZMobileInstallation 1
+#define COCOAPODS_VERSION_PATCH_HZMobileInstallation 0
+
 // JSONKit
 #define COCOAPODS_POD_AVAILABLE_JSONKit
 // This library does not follow semantic-versioning,

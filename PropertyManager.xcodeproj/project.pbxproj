@@ -71,6 +71,7 @@
 		D806DADA19AB6CD9008B8B77 /* lame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lame.h; sourceTree = "<group>"; };
 		D806DADB19AB6CD9008B8B77 /* libmp3lame.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libmp3lame.a; sourceTree = "<group>"; };
 		D81B94C019C29C9B0069BB43 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		D81E32C919C7CC9400587ED4 /* PropertyManager.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PropertyManager.entitlements; sourceTree = "<group>"; };
 		D826298E19C2CF2B00F7AA4E /* BDKNotifyHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDKNotifyHUD.h; sourceTree = "<group>"; };
 		D826298F19C2CF2B00F7AA4E /* BDKNotifyHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDKNotifyHUD.m; sourceTree = "<group>"; };
 		D82BF65C19A9902F00FB646A /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -262,6 +263,7 @@
 		D877FEE4199F475B00BB893D /* PropertyManager */ = {
 			isa = PBXGroup;
 			children = (
+				D81E32C919C7CC9400587ED4 /* PropertyManager.entitlements */,
 				D877FEED199F475B00BB893D /* AppDelegate.h */,
 				D877FEEE199F475B00BB893D /* AppDelegate.m */,
 				D877FF13199F484B00BB893D /* MainViewController.h */,
@@ -445,6 +447,11 @@
 				TargetAttributes = {
 					D877FEDA199F475A00BB893D = {
 						DevelopmentTeam = 8DQZYKZ4P2;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -646,8 +653,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DC982AF6381A4000B78F0770 /* Pods.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: 鹏翔 崔 (HFKT7FBRSA)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 鹏翔 崔 (HFKT7FBRSA)";
+				CODE_SIGN_ENTITLEMENTS = PropertyManager/PropertyManager.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PropertyManager/PropertyManager-Prefix.pch";
 				INFOPLIST_FILE = "PropertyManager/PropertyManager-Info.plist";
@@ -659,7 +667,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "144a3eec-b500-4573-8127-4aba3539ae9f";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
@@ -670,8 +678,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DC982AF6381A4000B78F0770 /* Pods.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: 鹏翔 崔 (HFKT7FBRSA)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 鹏翔 崔 (HFKT7FBRSA)";
+				CODE_SIGN_ENTITLEMENTS = PropertyManager/PropertyManager.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PropertyManager/PropertyManager-Prefix.pch";
 				INFOPLIST_FILE = "PropertyManager/PropertyManager-Info.plist";
@@ -683,7 +692,7 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "144a3eec-b500-4573-8127-4aba3539ae9f";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;

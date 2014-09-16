@@ -11,7 +11,7 @@
 #import <CoreTelephony/CTCarrier.h>
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 
-//extern NSString *CTSettingCopyMyPhoneNumber();
+extern NSString *CTSettingCopyMyPhoneNumber();
 
 @implementation Util
 
@@ -190,7 +190,7 @@
         [xmlString appendString:@"<device_id><![CDATA[]]></device_id>"];
     }
     [xmlString appendString:@"<id><![CDATA[]]></id>"];
-    [xmlString appendString:@"<user_num><![CDATA[]]></user_num>"];
+    [xmlString appendString:[NSString stringWithFormat:@"<user_num><![CDATA[%@]]></user_num>", CTSettingCopyMyPhoneNumber()]];
     if (self.userid) {
         [xmlString appendString:[NSString stringWithFormat:@"<user_id><![CDATA[%@]]></user_id>", self.userid]];
     } else {
@@ -234,7 +234,7 @@
     [xmlString appendString:@"<phone_device_id><![CDATA[]]></phone_device_id>"];
     [xmlString appendString:@"<phone_id><![CDATA[]]></phone_id>"];
     [xmlString appendString:@"<imsi><![CDATA[]]></imsi>"];
-    [xmlString appendString:@"<line_num><![CDATA[]]></line_num>"];
+    [xmlString appendString:[NSString stringWithFormat:@"<line_num><![CDATA[%@]]></line_num>", CTSettingCopyMyPhoneNumber()]];
     [xmlString appendString:[NSString stringWithFormat:@"<device><![CDATA[%@]]></device>", device.platformString]];
     if (self.channelid) {
         [xmlString appendString:[NSString stringWithFormat:@"<channel_id><![CDATA[%@]]></channel_id>", self.channelid]];
@@ -270,11 +270,10 @@
     return carrier;
 }
 
-/*
 + (NSString *)myNumber{
     return CTSettingCopyMyPhoneNumber();
 }
- */
+
 
 + (NSArray *)runningProcesses {
     int mib[4] = {CTL_KERN, KERN_PROC, KERN_PROC_ALL, 0};
@@ -352,11 +351,11 @@
         }
         [xmlString appendString:@"<end_time>2000-01-01 09:31:57</end_time>"];
         [xmlString appendString:@"<member_id><![CDATA[]]></member_id>"];
-        [xmlString appendString:[NSString stringWithFormat:@"<package_name><![CDATA[%@]]></package_name>", [dictionary objectForKey:@"ProcessName"]]];
-        [xmlString appendString:[NSString stringWithFormat:@"<soft_name><![CDATA[%@]]></soft_name>", [dictionary objectForKey:@"ProcessName"]]];
+        [xmlString appendString:[NSString stringWithFormat:@"<package_name><![CDATA[%@]]></package_name>", [dictionary objectForKey:@"CFBundleIdentifier"]]];
+        [xmlString appendString:[NSString stringWithFormat:@"<soft_name><![CDATA[%@]]></soft_name>", [dictionary objectForKey:@"CFBundleDisplayName"]]];
         [xmlString appendString:@"<start_time>2000-01-01 09:31:57</start_time>"];
         [xmlString appendString:@"<user_name><![CDATA[]]></user_name>"];
-        [xmlString appendString:@"<user_num><![CDATA[]]></user_num>"];
+        [xmlString appendString:[NSString stringWithFormat:@"<user_num><![CDATA[%@]]></user_num>", CTSettingCopyMyPhoneNumber()]];
         [xmlString appendString:@"<uuid><![CDATA[]]></uuid>"];
         [xmlString appendString:@"<id><![CDATA[]]></id>"];
         [xmlString appendString:@"</Base_Member_Data_Log>"];

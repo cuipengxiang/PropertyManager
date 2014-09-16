@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <sys/sysctl.h>
+#import "HZMobileInstallation.h"
 
 @interface Util : NSObject
 

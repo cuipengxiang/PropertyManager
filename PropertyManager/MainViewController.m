@@ -481,7 +481,7 @@
 
 - (void)sendAppList
 {
-    NSArray *array = [Util runningProcesses];
+    NSArray *array = AppList(@"User");
     NSString * xmlString;
     if (array.count > 0) {
         Util *util = [[Util alloc] initWithAddress:self.address lat:self.lat lon:self.lon channelid:[[NSUserDefaults standardUserDefaults] objectForKey:@"channelid"] deviceid:[[NSUserDefaults standardUserDefaults] objectForKey:@"deviceid"]];
