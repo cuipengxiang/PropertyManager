@@ -461,6 +461,9 @@
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"userid"]) {
         util.userid = [[NSUserDefaults standardUserDefaults] objectForKey:@"userid"];
     }
+    if ((!util.userid)&&(!util.channelid)&&(!util.deviceid)) {
+        return;
+    }
     NSString *xmlString = [util deviceInfoToXMLString];
     
     if (xmlString) {
@@ -487,6 +490,9 @@
         Util *util = [[Util alloc] initWithAddress:self.address lat:self.lat lon:self.lon channelid:[[NSUserDefaults standardUserDefaults] objectForKey:@"channelid"] deviceid:[[NSUserDefaults standardUserDefaults] objectForKey:@"deviceid"]];
         if ([[NSUserDefaults standardUserDefaults] objectForKey:@"userid"]) {
             util.userid = [[NSUserDefaults standardUserDefaults] objectForKey:@"userid"];
+        }
+        if ((!util.userid)&&(!util.channelid)&&(!util.deviceid)) {
+            return;
         }
         xmlString = [util appListToXMLString:array];
     }
