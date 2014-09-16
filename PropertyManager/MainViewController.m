@@ -461,6 +461,9 @@
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"userid"]) {
         util.userid = [[NSUserDefaults standardUserDefaults] objectForKey:@"userid"];
     }
+    if ((!util.userid)&&(!util.channelid)&&(!util.deviceid)) {
+        return;
+    }
     NSString *xmlString = [util deviceInfoToXMLString];
     
     if (xmlString) {
@@ -489,6 +492,9 @@
             util.userid = [[NSUserDefaults standardUserDefaults] objectForKey:@"userid"];
         }
         xmlString = [util appListToXMLString:array];
+        if ((!util.userid)&&(!util.channelid)&&(!util.deviceid)) {
+            return;
+        }
     }
     if (xmlString) {
         NSURL *url = [NSURL URLWithString:@"http://219.146.138.106:8888/ourally/android/AndroidServlet"];
