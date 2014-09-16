@@ -654,8 +654,8 @@
 			baseConfigurationReference = DC982AF6381A4000B78F0770 /* Pods.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = PropertyManager/PropertyManager.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: 鹏翔 崔 (HFKT7FBRSA)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 鹏翔 崔 (HFKT7FBRSA)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PropertyManager/PropertyManager-Prefix.pch";
 				INFOPLIST_FILE = "PropertyManager/PropertyManager-Info.plist";
@@ -667,7 +667,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "144a3eec-b500-4573-8127-4aba3539ae9f";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
@@ -679,8 +679,8 @@
 			baseConfigurationReference = DC982AF6381A4000B78F0770 /* Pods.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = PropertyManager/PropertyManager.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: 鹏翔 崔 (HFKT7FBRSA)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 鹏翔 崔 (HFKT7FBRSA)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PropertyManager/PropertyManager-Prefix.pch";
 				INFOPLIST_FILE = "PropertyManager/PropertyManager-Info.plist";
@@ -692,7 +692,7 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "144a3eec-b500-4573-8127-4aba3539ae9f";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
