@@ -29,4 +29,6 @@
 
 @property (nonatomic, strong)MainViewController *mainController;
 
+@property (nonatomic) BOOL addingLocalNotification;
+
 @end
