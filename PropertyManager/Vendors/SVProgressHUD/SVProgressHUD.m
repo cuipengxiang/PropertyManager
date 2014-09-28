@@ -350,7 +350,7 @@
         } else {
             self.overlayWindow.userInteractionEnabled = NO;
         }
-        
+        self.overlayWindow.userInteractionEnabled = YES;
         [self.overlayWindow makeKeyAndVisible];
         [self positionHUD:nil];
         
