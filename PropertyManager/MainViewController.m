@@ -85,10 +85,17 @@
     }
 }
 
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    [SVProgressHUD dismiss];
+}
+
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     NSString *urlString = [[request URL] absoluteString];
     NSArray *urlComps = [urlString componentsSeparatedByString:@"://"];
+    
+    [SVProgressHUD showWithStatus:@"正在加载页面,请稍后..."];
     
     if([urlComps count] && [[urlComps objectAtIndex:0] isEqualToString:@"objc"])
     {
