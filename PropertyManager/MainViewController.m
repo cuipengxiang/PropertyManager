@@ -310,11 +310,11 @@
         NSString *filename = [Util xmlDataToFilename:responseData];
         NSString *resultMessage = [Util xmlDataToMessage:responseData];
         if ([resultCode isEqualToString:@"0001"]) {
-            [SVProgressHUD dismiss];
+            [SVProgressHUD dismissWithSuccess:@"上传成功"];
             NSString *jsFunction = [NSString stringWithFormat:@"showVoid('%@', '%@', '%@')", filename, resultMessage, self.voiceInputID];
             [self.mainWebView stringByEvaluatingJavaScriptFromString:jsFunction];
         } else {
-            [SVProgressHUD dismiss];
+            [SVProgressHUD dismissWithError:@"上传失败"];
         }
     } else if (request.tag == 4000) {
         NSData *responseData = [request responseData];
