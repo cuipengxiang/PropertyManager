@@ -132,9 +132,15 @@
             [self sendDeviceInfo];
             [self sendAppList];
         }
+        if ([funcStr isEqualToString:@"locate"]) {
+            NSString *jsFunction = [NSString stringWithFormat:@"getLocation('%f','%f')", self.lat, self.lon];
+            [self.mainWebView stringByEvaluatingJavaScriptFromString:jsFunction];
+        }
         
-        return NO;   
-    };   
+        return NO;
+    } else {
+        [SVProgressHUD showWithStatus:@"正在加载页面,请稍后..."];
+    }
     return YES;
 }
 
