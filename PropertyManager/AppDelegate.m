@@ -190,6 +190,8 @@
         
         self.lat = coor.latitude;
         self.lon = coor.longitude;
+        self.mainController.lat = coor.latitude;
+        self.mainController.lon = coor.longitude;
         NSLog(@"当前位置：%@", self.address);
         //NSString *filePath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/location.txt"];
         //NSData *data = [self.address dataUsingEncoding:NSUTF8StringEncoding];

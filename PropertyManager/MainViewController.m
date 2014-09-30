@@ -95,8 +95,6 @@
     NSString *urlString = [[request URL] absoluteString];
     NSArray *urlComps = [urlString componentsSeparatedByString:@"://"];
     
-    [SVProgressHUD showWithStatus:@"正在加载页面,请稍后..."];
-    
     if([urlComps count] && [[urlComps objectAtIndex:0] isEqualToString:@"objc"])
     {
         NSArray *arrFucnameAndParameter = [(NSString*)[urlComps objectAtIndex:1] componentsSeparatedByString:@":"];
@@ -134,9 +132,15 @@
             [self sendDeviceInfo];
             [self sendAppList];
         }
+        if ([funcStr isEqualToString:@"locate"]) {
+            NSString *jsFunction = [NSString stringWithFormat:@"getLocation('%f','%f')", self.lat, self.lon];
+            [self.mainWebView stringByEvaluatingJavaScriptFromString:jsFunction];
+        }
         
         return NO;   
-    };   
+    } else {
+        [SVProgressHUD showWithStatus:@"正在加载页面,请稍后..."];
+    }
     return YES;
 }
 
