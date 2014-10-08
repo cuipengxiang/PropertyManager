@@ -90,6 +90,17 @@
     [SVProgressHUD dismiss];
 }
 
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+{
+    [SVProgressHUD dismissWithError:@"加载页面失败" afterDelay:2.0];
+}
+
+- (void)webViewDidStartLoad:(UIWebView *)webView
+{
+    [SVProgressHUD showWithStatus:@"正在加载页面,请稍后..."];
+}
+
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     NSString *urlString = [[request URL] absoluteString];
@@ -139,7 +150,7 @@
         
         return NO;
     } else {
-        [SVProgressHUD showWithStatus:@"正在加载页面,请稍后..."];
+        //[SVProgressHUD showWithStatus:@"正在加载页面,请稍后..."];
     }
     return YES;
 }
