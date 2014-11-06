@@ -338,8 +338,8 @@
 {
     if (self.delegate) {
         if (button.tag != self.postionIndexNumber-1) {
-            if ([self.delegate respondsToSelector:@selector(didClickOnImageIndex:)] == YES) {
-                [self.delegate didClickOnImageIndex:(NSInteger *)button.tag];
+            if ([self.delegate respondsToSelector:@selector(didClickOnImageIndex:onActivity:)] == YES) {
+                [self.delegate didClickOnImageIndex:(NSInteger *)button.tag onActivity:self];
             }
         }
         else{

@@ -130,6 +130,11 @@
             self.imageInputID = [params objectAtIndex:1];
             [self showPicAlertView];
         }
+        if ([funcStr isEqualToString:@"addPic4DDXD"]) {
+            self.imageCompanyID = [params objectAtIndex:0];
+            self.imageInputID = [params objectAtIndex:1];
+            [self showPic4DDXDAlertView];
+        }
         if ([funcStr isEqualToString:@"showVoid"]) {
             self.voiceCompanyID = [params objectAtIndex:0];
             self.voiceInputID = [params objectAtIndex:1];
@@ -171,6 +176,14 @@
 - (void)showPicAlertView
 {
     LXActivity *lxActivity = [[LXActivity alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitle:@"上传" ShareButtonTitles:nil withShareButtonImagesName:self.imagesShowedInSheet];
+    lxActivity.maxCount = 5;
+    [lxActivity showInView:self.view];
+}
+
+- (void)showPic4DDXDAlertView
+{
+    LXActivity *lxActivity = [[LXActivity alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitle:@"上传" ShareButtonTitles:nil withShareButtonImagesName:self.imagesShowedInSheet];
+    lxActivity.maxCount = 6;
     [lxActivity showInView:self.view];
 }
 
@@ -249,19 +262,19 @@
         [self.imagesSelected addObject:alAsset];
     }
     
-    if (self.imagesShowedInSheet.count < 5) {
+    if (self.imagesShowedInSheet.count < picker.maximumNumberOfSelectionPhoto) {
         [self.imagesShowedInSheet addObject:[UIImage imageNamed:@"addPic.jpg"]];
     }
     
     [self showPicAlertView];
 }
 
-- (void)didClickOnImageIndex:(NSInteger *)imageIndex
+- (void)didClickOnImageIndex:(NSInteger *)imageIndex onActivity:(LXActivity *)activity
 {
     UzysAssetsPickerController *picker = [[UzysAssetsPickerController alloc] init];
     picker.delegate = self;
     picker.maximumNumberOfSelectionVideo = 0;
-    picker.maximumNumberOfSelectionPhoto = 5;
+    picker.maximumNumberOfSelectionPhoto = activity.maxCount;
     picker.imagesHasSelected = self.imagesSelected;
     [self presentViewController:picker animated:YES completion:^{
         
@@ -289,26 +302,50 @@
             xmlString = [array objectAtIndex:0];
             filenames = [array objectAtIndex:1];
         }
-        if (xmlString) {
-            NSURL *url = [NSURL URLWithString:@"http://219.146.138.106:8888/ourally/android/AndroidServlet"];
-            NSMutableDictionary *contain = [[NSMutableDictionary alloc] init];
-            [contain setObject:filenames forKey:@"filenames"];
-            
-            ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-            [request setDelegate:self];
-            [request setTag:1000];
-            request.contain = contain;
-            [request setPostValue:@"uploadFileAction" forKey:@"service"];
-            [request setPostValue:@"com.ht.ourally.common.action.UploadFileAction" forKey:@"classname"];
-            [request setPostValue:@"uploadFilePic" forKey:@"method"];
-            [request setPostValue:@"com.ht.mobile.android.entity" forKey:@"entityPageName"];
-            [request setPostValue:xmlString forKey:@"data"];
-            [request buildPostBody];
-            [request startAsynchronous];
-            
-            [SVProgressHUD showWithStatus:@"正在上传,请稍后..."];
-            
-            [activity tappedCancel];
+        if (activity.maxCount == 6) {
+            if (xmlString) {
+                NSURL *url = [NSURL URLWithString:@"http://219.146.138.106:8888/ddxd/android/AndroidServlet"];
+                NSMutableDictionary *contain = [[NSMutableDictionary alloc] init];
+                [contain setObject:filenames forKey:@"filenames"];
+                
+                ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+                [request setDelegate:self];
+                [request setTag:1000];
+                request.contain = contain;
+                [request setPostValue:@"uploadFileAction" forKey:@"service"];
+                [request setPostValue:@"com.ht.utils.upload.UploadFileAction" forKey:@"classname"];
+                [request setPostValue:@"uploadFilePic" forKey:@"method"];
+                [request setPostValue:@"com.ht.utils.android.entity" forKey:@"entityPageName"];
+                [request setPostValue:xmlString forKey:@"data"];
+                [request buildPostBody];
+                [request startAsynchronous];
+                
+                [SVProgressHUD showWithStatus:@"正在上传,请稍后..."];
+                
+                [activity tappedCancel];
+            }
+        } else if (activity.maxCount == 5) {
+            if (xmlString) {
+                NSURL *url = [NSURL URLWithString:@"http://219.146.138.106:8888/ourally/android/AndroidServlet"];
+                NSMutableDictionary *contain = [[NSMutableDictionary alloc] init];
+                [contain setObject:filenames forKey:@"filenames"];
+                
+                ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+                [request setDelegate:self];
+                [request setTag:1000];
+                request.contain = contain;
+                [request setPostValue:@"uploadFileAction" forKey:@"service"];
+                [request setPostValue:@"com.ht.ourally.common.action.UploadFileAction" forKey:@"classname"];
+                [request setPostValue:@"uploadFilePic" forKey:@"method"];
+                [request setPostValue:@"com.ht.mobile.android.entity" forKey:@"entityPageName"];
+                [request setPostValue:xmlString forKey:@"data"];
+                [request buildPostBody];
+                [request startAsynchronous];
+                
+                [SVProgressHUD showWithStatus:@"正在上传,请稍后..."];
+                
+                [activity tappedCancel];
+            }
         }
     }
 }
