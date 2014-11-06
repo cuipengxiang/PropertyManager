@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 @class LXActivity;
 @protocol LXActivityDelegate <NSObject>
-- (void)didClickOnImageIndex:(NSInteger *)imageIndex;
+- (void)didClickOnImageIndex:(NSInteger *)imageIndex onActivity:(LXActivity *)activity;
 @optional
 - (void)didClickOnCancelButton;
 - (void)didClickOnOtherButton:(LXActivity *)activity;
@@ -20,5 +20,7 @@
 - (id)initWithTitle:(NSString *)title delegate:(id<LXActivityDelegate>)delegate cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitle:(NSString *)otherButtonTitle ShareButtonTitles:(NSArray *)shareButtonTitlesArray withShareButtonImagesName:(NSArray *)shareButtonImagesNameArray;
 - (void)showInView:(UIView *)view;
 - (void)tappedCancel;
+
+@property (nonatomic) int maxCount;
 
 @end
