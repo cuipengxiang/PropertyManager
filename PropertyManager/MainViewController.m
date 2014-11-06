@@ -71,7 +71,10 @@
     self.imagesDataToUpLoad = [[NSMutableArray alloc] init];
     
     NSString *urlString=[NSString stringWithFormat:@"%@", @"http://219.146.138.106:8888/ourally/app/owner/sys/sysLogin.do"];
-	NSURL *url=[NSURL URLWithString:urlString];
+    NSURL *url=[NSURL URLWithString:urlString];
+    //NSString *filePath = [[NSBundle mainBundle] pathForResource:@"file" ofType:@"html"];
+    //NSURL *url = [NSURL fileURLWithPath:filePath];
+	
 	NSURLRequest *request=[NSURLRequest requestWithURL:url];
 	[self.mainWebView loadRequest:request];
 }
