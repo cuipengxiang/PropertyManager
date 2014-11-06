@@ -130,8 +130,8 @@
             [self showPicAlertView];
         }
         if ([funcStr isEqualToString:@"addPic4DDXD"]) {
-            self.imageDDXDCompanyID = [params objectAtIndex:0];
-            self.imageDDXDInputID = [params objectAtIndex:1];
+            self.imageCompanyID = [params objectAtIndex:0];
+            self.imageInputID = [params objectAtIndex:1];
             [self showPic4DDXDAlertView];
         }
         if ([funcStr isEqualToString:@"showVoid"]) {
