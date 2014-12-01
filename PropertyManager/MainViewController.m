@@ -154,6 +154,10 @@
             NSString *jsFunction = [NSString stringWithFormat:@"getLocation('%f','%f')", self.lat, self.lon];
             [self.mainWebView stringByEvaluatingJavaScriptFromString:jsFunction];
         }
+        if ([funcStr isEqualToString:@"getUserChannelId"]) {
+            NSString *jsFunction = [NSString stringWithFormat:@"setUserChannelId('%@','%@')", [[NSUserDefaults standardUserDefaults] objectForKey:@"channelid"], [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceid"]];
+            [self.mainWebView stringByEvaluatingJavaScriptFromString:jsFunction];
+        }
         
         return NO;
     } else {
