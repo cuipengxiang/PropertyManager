@@ -152,6 +152,7 @@
             [self.mainWebView stringByEvaluatingJavaScriptFromString:jsFunction];
         }
         
+        
         return NO;
     } else {
         //[SVProgressHUD showWithStatus:@"正在加载页面,请稍后..."];
