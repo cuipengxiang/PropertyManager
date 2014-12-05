@@ -663,7 +663,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 832CDBE8E68B026A4B7BE42C /* Pods.debug.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_ENTITLEMENTS = PropertyManager/PropertyManager.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: 鹏翔 崔 (HFKT7FBRSA)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 鹏翔 崔 (HFKT7FBRSA)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -688,7 +688,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B74BD025803F080C41C59D3C /* Pods.release.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_ENTITLEMENTS = PropertyManager/PropertyManager.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: 鹏翔 崔 (HFKT7FBRSA)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 鹏翔 崔 (HFKT7FBRSA)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
