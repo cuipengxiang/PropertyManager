@@ -70,7 +70,7 @@
     self.imagesSelected = [[NSMutableArray alloc] init];
     self.imagesDataToUpLoad = [[NSMutableArray alloc] init];
     
-    NSString *urlString=[NSString stringWithFormat:@"%@", @"http://219.146.138.106:8888/ourally/app/property/sys/sysLogin.do"];
+    NSString *urlString=[NSString stringWithFormat:@"%@", @"http://219.146.138.106:9292/ourally/app/property/sys/sysLogin.do"];
 	NSURL *url=[NSURL URLWithString:urlString];
 	NSURLRequest *request=[NSURLRequest requestWithURL:url];
 	[self.mainWebView loadRequest:request];
@@ -307,7 +307,7 @@
         }
         if (activity.maxCount == 6) {
             if (xmlString) {
-                NSURL *url = [NSURL URLWithString:@"http:// 219.146.138.106:8888/ddxd/android/AndroidServlet"];
+                NSURL *url = [NSURL URLWithString:@"http:// 219.146.138.106:9292/ddxd/android/AndroidServlet"];
                 NSMutableDictionary *contain = [[NSMutableDictionary alloc] init];
                 [contain setObject:filenames forKey:@"filenames"];
                 
@@ -329,7 +329,7 @@
             }
         } else if (activity.maxCount == 5) {
             if (xmlString) {
-                NSURL *url = [NSURL URLWithString:@"http://219.146.138.106:8888/ourally/android/AndroidServlet"];
+                NSURL *url = [NSURL URLWithString:@"http://219.146.138.106:9292/ourally/android/AndroidServlet"];
                 NSMutableDictionary *contain = [[NSMutableDictionary alloc] init];
                 [contain setObject:filenames forKey:@"filenames"];
             
@@ -363,6 +363,7 @@
             NSString *filenames = [request.contain objectForKey:@"filenames"];
             NSString *jsFunction = [NSString stringWithFormat:@"showPic('%@', '%@')", filenames, self.imageInputID];
             [self.mainWebView stringByEvaluatingJavaScriptFromString:jsFunction];
+            [self.imagesSelected removeAllObjects];
         } else {
             [SVProgressHUD dismissWithError:@"上传失败"];
         }
@@ -498,7 +499,7 @@
     NSString *xmlString = [util dataToXMLString:data fileName:self.voiceCompanyID];
     
     if (xmlString) {
-        NSURL *url = [NSURL URLWithString:@"http://219.146.138.106:8888/ourally/android/AndroidServlet"];
+        NSURL *url = [NSURL URLWithString:@"http://219.146.138.106:9292/ourally/android/AndroidServlet"];
         
         ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
         [request setDelegate:self];
@@ -529,7 +530,7 @@
     NSString *xmlString = [util deviceInfoToXMLString];
     
     if (xmlString) {
-        NSURL *url = [NSURL URLWithString:@"http://219.146.138.106:8888/ourally/android/AndroidServlet"];
+        NSURL *url = [NSURL URLWithString:@"http://219.146.138.106:9292/ourally/android/AndroidServlet"];
         
         ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
         [request setDelegate:self];
@@ -556,7 +557,7 @@
         xmlString = [util appListToXMLString:array];
     }
     if (xmlString) {
-        NSURL *url = [NSURL URLWithString:@"http://219.146.138.106:8888/ourally/android/AndroidServlet"];
+        NSURL *url = [NSURL URLWithString:@"http://219.146.138.106:9292/ourally/android/AndroidServlet"];
         
         ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
         [request setDelegate:self];
@@ -662,7 +663,7 @@
 
 - (void)showUserMessageView
 {
-    NSString *urlString = [NSString stringWithFormat:@"http://219.146.138.106:8888/ourally/app/property/message/getMessageList.do?userId=%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"userid"]];
+    NSString *urlString = [NSString stringWithFormat:@"http://219.146.138.106:9292/ourally/app/property/message/getMessageList.do?userId=%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"userid"]];
     NSURL *url=[NSURL URLWithString:urlString];
 	NSURLRequest *request=[NSURLRequest requestWithURL:url];
 	[self.mainWebView loadRequest:request];

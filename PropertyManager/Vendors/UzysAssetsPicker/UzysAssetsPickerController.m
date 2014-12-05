@@ -224,9 +224,9 @@
             self.segmentedControl.hidden = YES;
             self.labelSelectedMedia.hidden = NO;
             if(_maximumNumberOfSelection >1)
-                self.labelSelectedMedia.text = @"Choose photos";
+                self.labelSelectedMedia.text = [NSString stringWithFormat:@"选择照片(最多%d张)", self.maximumNumberOfSelection];
             else
-                self.labelSelectedMedia.text = @"Choose a photo";
+                self.labelSelectedMedia.text = @"选择照片";
         }
         else
         {
@@ -558,11 +558,17 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     [self setAssetsCountWithSelectedIndexPaths:collectionView.indexPathsForSelectedItems];
+    if ([collectionView indexPathsForSelectedItems].count >= self.maximumNumberOfSelection) {
+        [self.btnCamera setHidden:YES];
+    }
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     [self setAssetsCountWithSelectedIndexPaths:collectionView.indexPathsForSelectedItems];
+    if ([collectionView indexPathsForSelectedItems].count < self.maximumNumberOfSelection) {
+        [self.btnCamera setHidden:NO];
+    }
 }
 
 
@@ -702,27 +708,36 @@
     switch (btn.tag) {
         case kTagButtonCamera:
         {
-            if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-                
-                UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                                      message:@"Device has no camera"
+            if (self.collectionView.indexPathsForSelectedItems.count >= self.maximumNumberOfSelection) {
+                UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"提醒"
+                                                                      message:[NSString stringWithFormat:@"最多上传%d张图片", self.maximumNumberOfSelection]
                                                                      delegate:nil
                                                             cancelButtonTitle:@"OK"
                                                             otherButtonTitles: nil];
                 [myAlertView show];
-            }
-            else
-            {
-//                [self initImagePicker];
-                __weak typeof(self) weakSelf = self;
-                [self presentViewController:self.picker animated:YES completion:^{
-                    //카메라 화면으로 가면 강제로 가메라 롤로 변경.
-                    if(![weakSelf.assetsGroup isEqual:weakSelf.groups[0]] )
-                    {
-                        weakSelf.assetsGroup = weakSelf.groups[0];
-                        [weakSelf changeGroup:0 filter:weakSelf.assetsFilter];
-                    }
-                }];
+            } else {
+            
+                if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+                
+                    UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"错误"
+                                                                          message:@"无法获取本设备的摄像头数据"
+                                                                         delegate:nil
+                                                                cancelButtonTitle:@"OK"
+                                                                otherButtonTitles: nil];
+                    [myAlertView show];
+                } else {
+                    //[self initImagePicker];
+                    __weak typeof(self) weakSelf = self;
+                    self.picker.mediaTypes = [[NSArray alloc] initWithObjects:(NSString*)kUTTypeImage, nil];
+                    [self presentViewController:self.picker animated:YES completion:^{
+                        //카메라 화면으로 가면 강제로 가메라 롤로 변경.
+                        if(![weakSelf.assetsGroup isEqual:weakSelf.groups[0]] )
+                        {
+                            weakSelf.assetsGroup = weakSelf.groups[0];
+                            [weakSelf changeGroup:0 filter:weakSelf.assetsFilter];
+                        }
+                    }];
+                }
             }
         }
             break;
