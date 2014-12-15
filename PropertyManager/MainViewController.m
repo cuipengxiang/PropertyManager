@@ -270,7 +270,11 @@
         [self.imagesShowedInSheet addObject:[UIImage imageNamed:@"addPic.jpg"]];
     }
     
-    [self showPicAlertView];
+    if (picker.maximumNumberOfSelectionPhoto == 5) {
+        [self showPicAlertView];
+    } else if (picker.maximumNumberOfSelectionPhoto == 6) {
+        [self showPic4DDXDAlertView];
+    }
 }
 
 - (void)didClickOnImageIndex:(NSInteger *)imageIndex onActivity:(LXActivity *)activity
