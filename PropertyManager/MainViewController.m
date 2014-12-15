@@ -271,8 +271,12 @@
     if (self.imagesShowedInSheet.count < picker.maximumNumberOfSelectionPhoto) {
         [self.imagesShowedInSheet addObject:[UIImage imageNamed:@"addPic.jpg"]];
     }
+    if (picker.maximumNumberOfSelectionPhoto == 5) {
+        [self showPicAlertView];
+    } else if (picker.maximumNumberOfSelectionPhoto == 6) {
+        [self showPic4DDXDAlertView];
+    }
     
-    [self showPicAlertView];
 }
 
 - (void)didClickOnImageIndex:(NSInteger *)imageIndex onActivity:(LXActivity *)activity

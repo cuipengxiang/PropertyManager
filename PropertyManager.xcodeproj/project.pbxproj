@@ -659,7 +659,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "144a3eec-b500-4573-8127-4aba3539ae9f";
+				PROVISIONING_PROFILE = "04000589-2dfb-463a-a94c-fab745636bb3";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
@@ -681,9 +681,9 @@
 					"$(PROJECT_DIR)/PropertyManager/Vendors/BPush",
 					"$(PROJECT_DIR)/PropertyManager/Vendors/lame",
 				);
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "144a3eec-b500-4573-8127-4aba3539ae9f";
+				PROVISIONING_PROFILE = "04000589-2dfb-463a-a94c-fab745636bb3";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
