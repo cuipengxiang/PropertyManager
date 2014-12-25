@@ -12,6 +12,7 @@
 #import "SVProgressHUD.h"
 #import "lame.h"
 #import "BDKNotifyHUD.h"
+#import "ShareSDKJSBridge.h"
 
 @interface MainViewController ()
 
@@ -70,7 +71,7 @@
     self.imagesSelected = [[NSMutableArray alloc] init];
     self.imagesDataToUpLoad = [[NSMutableArray alloc] init];
     
-    NSString *urlString=[NSString stringWithFormat:@"%@", @"http://219.146.138.106:9292/ourally/app/owner/sys/sysLogin.do"];
+    NSString *urlString=[NSString stringWithFormat:@"%@", @"http://219.146.138.106:9292/ourally/app/owner/sys/index.jsp"];
     NSURL *url=[NSURL URLWithString:urlString];
     //NSString *filePath = [[NSBundle mainBundle] pathForResource:@"file" ofType:@"html"];
     //NSURL *url = [NSURL fileURLWithPath:filePath];
@@ -155,13 +156,21 @@
             [self.mainWebView stringByEvaluatingJavaScriptFromString:jsFunction];
         }
         if ([funcStr isEqualToString:@"getUserChannelId"]) {
-            NSString *jsFunction = [NSString stringWithFormat:@"setUserChannelId('%@','%@')", [[NSUserDefaults standardUserDefaults] objectForKey:@"channelid"], [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceid"]];
+            NSString *channelid = [[NSUserDefaults standardUserDefaults] objectForKey:@"channelid"];
+            NSString *deviceid = [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceid"];
+            if (channelid == nil||channelid.length == 0) {
+                channelid = @"111";
+            }
+            if (deviceid == nil||deviceid.length == 0) {
+                deviceid = @"111";
+            }
+            NSString *jsFunction = [NSString stringWithFormat:@"setUserChannelId('%@','%@')", channelid, deviceid];
             [self.mainWebView stringByEvaluatingJavaScriptFromString:jsFunction];
         }
         
         return NO;
     } else {
-        //[SVProgressHUD showWithStatus:@"正在加载页面,请稍后..."];
+        return ![[ShareSDKJSBridge sharedBridge] captureRequest:request webView:webView];
     }
     return YES;
 }
