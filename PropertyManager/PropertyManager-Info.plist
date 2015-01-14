@@ -4,18 +4,18 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>zh_CN</string>
-	<key>CFBundleLocalizations</key>
-	<array>
-		<string>zh_CN</string>
-	</array>
 	<key>CFBundleDisplayName</key>
-	<string>海涛物业管理系统</string>
+	<string>5i社区物业管理系统</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.haitao.${PRODUCT_NAME:rfc1034identifier}</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>zh_CN</string>
+	</array>
 	<key>CFBundleName</key>
 	<string>${PRODUCT_NAME}</string>
 	<key>CFBundlePackageType</key>
