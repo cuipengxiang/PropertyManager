@@ -656,8 +656,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F1D43E170F3ACF4E9AA9AFF3 /* Pods.debug.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: 鹏翔 崔 (HFKT7FBRSA)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 鹏翔 崔 (HFKT7FBRSA)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution:  Yantai Haitao Network Technology Co.,Ltd (8DQZYKZ4P2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution:  Yantai Haitao Network Technology Co.,Ltd (8DQZYKZ4P2)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PropertyManager/PropertyManager-Prefix.pch";
 				INFOPLIST_FILE = "PropertyManager/PropertyManager-Info.plist";
@@ -669,7 +669,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "dd69c3f4-bff5-433d-b062-2983df524c66";
+				PROVISIONING_PROFILE = "59227585-df3a-4136-ac9b-8397f094284a";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
@@ -680,8 +680,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EB25D98876E3AAE6A0ADC57A /* Pods.release.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: 鹏翔 崔 (HFKT7FBRSA)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 鹏翔 崔 (HFKT7FBRSA)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution:  Yantai Haitao Network Technology Co.,Ltd (8DQZYKZ4P2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution:  Yantai Haitao Network Technology Co.,Ltd (8DQZYKZ4P2)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PropertyManager/PropertyManager-Prefix.pch";
 				INFOPLIST_FILE = "PropertyManager/PropertyManager-Info.plist";
@@ -693,7 +693,7 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "dd69c3f4-bff5-433d-b062-2983df524c66";
+				PROVISIONING_PROFILE = "59227585-df3a-4136-ac9b-8397f094284a";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
