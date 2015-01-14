@@ -656,8 +656,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F1D43E170F3ACF4E9AA9AFF3 /* Pods.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
 				CODE_SIGN_IDENTITY = "iPhone Distribution:  Yantai Haitao Network Technology Co.,Ltd (8DQZYKZ4P2)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution:  Yantai Haitao Network Technology Co.,Ltd (8DQZYKZ4P2)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -682,8 +682,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EB25D98876E3AAE6A0ADC57A /* Pods.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
 				CODE_SIGN_IDENTITY = "iPhone Distribution:  Yantai Haitao Network Technology Co.,Ltd (8DQZYKZ4P2)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution:  Yantai Haitao Network Technology Co.,Ltd (8DQZYKZ4P2)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
