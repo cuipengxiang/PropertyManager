@@ -1,53 +1,313 @@
+
+
+
+
+
+
 <!DOCTYPE html>
-<html>
+<html lang="zh-cmn-Hans">
     <head>
-        <title>ShareSDK for JS Sample</title>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-        <script language="javascript" type="text/javascript" src="ShareSDK.js"></script>
-        <script language="javascript" type="text/javascript">
-            
-            function init()
-            {
-                $sharesdk.open("iosv1101", true);
+        <meta charset="UTF-8">
+            <meta name="format-detection" content="telephone=no" />
+            <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+                <title>我要发布</title>
+                <link rel="stylesheet" href="/css/bootstrap.min.css" />
+                <link rel="stylesheet" href="/css/owner.css" />
+                <link rel="stylesheet" href="/css/simpleplayer.css" />
                 
-                var sinaConf = {};
-                sinaConf["app_key"] = "568898243";
-                sinaConf["app_secret"] = "38a4f8204cc784f81f9f0daaf31e02e3";
-                sinaConf["redirect_uri"] = "http://www.sharesdk.cn";
-                $sharesdk.setPlatformConfig($sharesdk.platformID.SinaWeibo, sinaConf);
-            }
-        
-        function toRelative(id){
-            
-             var params = {
-             "text" : "刘琪的小店,这是我在我爱社区的小店，大家帮忙多多宣传呦~",
-             "imageUrl" : "http://img0.bdstatic.com/img/image/shouye/tangwei.jpg",
-             "title" : "刘琪的小店",
-             "titleUrl" : "http://219.146.138.106:8888/ddxd/"+"app/consumer/store/enterStore.do?id=4028804a4a049851014a04c788cd0009&isShare=1",
-             "description" : "刘琪的小店,这是我在我爱社区的小店，大家帮忙多多宣传呦~",
-             "site" : "刘琪的小店",
-             "siteUrl" : "http://219.146.138.106:8888/ddxd/"+"app/consumer/store/enterStore.do?id=4028804a4a049851014a04c788cd0009&isShare=1",
-             "url" : "http://219.146.138.106:8888/ddxd/"+"app/consumer/store/enterStore.do?id=4028804a4a049851014a04c788cd0009&isShare=1",
-             "type" : 1
-             };
-            
-            $sharesdk.shareContent($sharesdk.platformID.SinaWeibo, params, function (platform, state, shareInfo, error) {alert("state = " + state + "\nshareInfo = " + shareInfo + "\nerror = " + error);});
-  
-            /*
-            $sharesdk.showShareMenu(null, params, 100, 100, $sharesdk.shareMenuArrowDirection.Any, function (platform, state, shareInfo, error) {
-                                    });
-             */
-        }
-        </script>
-        
+                <!--  本地缓存后退需要引用的js-->
+                <script src="/js/locache.js"></script>
+                <script src="/js/storage.js"></script>
+                <script type="text/javascript">
+                    //调用原生照片控件，判读是ios还是Android；进行不同调用
+                    function sendPicObjcCommand(params1, params2) {
+                        if(navigator.userAgent.toLowerCase().match(/MicroMessenger/i) == 'micromessenger')
+                        {
+                            $.alert("请先下载APP，才能使用该功能");
+                        }else{
+                            if (/android/i.test(navigator.userAgent)) {
+                                window.JsInterFace.addPic(params1, params2);
+                            } else if (/ipad|iphone|mac/i.test(navigator.userAgent)) {
+                                document.activeElement.blur();
+                                document.location = "objc://addPic:" + params1 + "/" + params2;//params1：company_id,params2 ：picInput_id
+                                //window.location.assign("objc://aaaaaaa:11111");
+                                //window.location.assign("objc://addPic:" + params1 + "," + params2);
+                            }
+                        }
+                    }
+                //原生添加图片后调用
+                function showPic(picString, _id) {
+                    $("#" + _id).val(picString);
+                    var imgs = picString.split(",");
+                    if (imgs.length > 0) {
+                        $(".preview").html(null);
+                        var _content = "";
+                        for ( var i = 0; i < imgs.length; i++) {
+                            if (imgs[i] != null && imgs[i] != "") {
+                                _content += '<div class="img-delete"><img  src="/upload/images/'+imgs[i]+'" /><i onclick="delPic(this,\''+ _id+'\');"></i></div>';
+                            }
+                        }
+                        $(".preview").html(_content);
+                        $("#preview-tr").show();
+                    } else {
+                    }
+                }
+                </script>
+                <style>
+                    .upload li.fixed{
+                        padding:0 10px;
+                    }
+                .upload li.fixed button{
+                    width:100%;
+                }
+                .preview{
+                    border-bottom: none;
+                }
+                </style>
     </head>
-    <body onload="init()" style="text-align: center">
-        <div id="rel" >
-            <div class='rel_title'>相关新闻</div>
-            <div class="rel_content" id="{{relate.id}}">
-                <a href="javascript:toRelative('{{relate.id}}')" >{{relate.title}}</a>
-            </div>
-        </div>
+    <body>
+        <form method="post" action="doTradeInfoAdd.do" id="form">
+            <header id="header" class="navbar-fixed-top">
+                <a id="header-back" href="javascript:back();">创建我的供求信息</a>
+                <a id="header-font" class="header-r" href="javascript:$('#form').submit();">保存</a>
+            </header>
+            <section class="top-section">
+                <div class="top-tab" id="fleamark">
+                    <a class="current-tab" id="sell" value="1"> <span class="tab-l">供</span></a>
+                    <a id="buy" value="2"><span>求</span></a>
+                    <input type="text" name="kind" id="kind" mark="flea">
+                        </div>
+            </section>
+            <section class="section-bottom">
+                <table class="ht-table table table-bordered">
+                    <tr>
+                        <td class="title "><label class="title-hint" id="fleahint">供</label></td>
+                        <td>
+                            <div class="inline">
+                                <input type="text" name="infoTitle" id="infoTitle">
+                                    <div></div>
+                                    </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="title"><label>一级分类<b class="bt">*</b></label></td>
+                        <td><input type="hidden" name="firstType" id="firstType">
+                        <div class="select" id="selectFirstType">请选择一级分类</div></td>
+                    </tr>
+                    <tr>
+                        <td class="title"><label>二级分类<b class="bt">*</b></label></td>
+                        <td><input type="hidden" name="typeId" id="typeId">
+                        <div class="select" id="selectSecondType">请选择二级分类</div></td>
+                    </tr>
+                    <tr>
+                        <td class="title"><label>详细描述<b class="bt">*</b></label></td>
+                        <td><textarea placeholder="详细描述..." name="infoDesc" id="infoDesc"></textarea>
+                            <div></div></td>
+                    </tr>
+                    <tr>
+                        <td class="title"><label>价格<b class="bt">*</b></label></td>
+                        <td><input name="priceDesc" id="priceDesc">
+                        <div></div></td>
+                    </tr>
+                    <tr>
+                        <td class="title"><label>联系人<b class="bt">*</b></label></td>
+                        <td><input name="contactName" id="contactName" value="liuqi">
+                        <div></div></td>
+                    </tr>
+                    <tr>
+                        <td class="title"><label>联系电话<b class="bt">*</b></label></td>
+                        <td><input type="tel" name="contactPhone" id="contactPhone" value="18666726167">
+                        <div></div></td>
+                    </tr>
+                    <tr>
+                        <td class="title"><label>地址</label></td>
+                        <td><input name="contactAddr" id="contactAddr"></td>
+                    </tr>
+                    <tr id="preview-tr" hidden="hidden" >
+                        <td colspan="2">
+                            <div class="preview">
+                            </div>
+                        </td>
+                        <input type="hidden" name="infoImgs" id="pic">
+                            </tr>
+                </table>
+                <div class="hidden select-content" id="select-content1">
+                    <h5 class="select-title">一级分类</h5>
+                    <ul class="ht-select">
+                        
+                        <li><a onclick="selFirstType('100000','数码3C')"><i class="no-select"></i>
+                            <span flag="100000">数码3C</span></a></li>
+                        
+                        <li><a onclick="selFirstType('110000','家用电器')"><i class="no-select"></i>
+                            <span flag="110000">家用电器</span></a></li>
+                        
+                        <li><a onclick="selFirstType('120000','车辆服务')"><i class="no-select"></i>
+                            <span flag="120000">车辆服务</span></a></li>
+                        
+                        <li><a onclick="selFirstType('130000','衣帽鞋包')"><i class="no-select"></i>
+                            <span flag="130000">衣帽鞋包</span></a></li>
+                        
+                        <li><a onclick="selFirstType('140000','商用办公')"><i class="no-select"></i>
+                            <span flag="140000">商用办公</span></a></li>
+                        
+                        <li><a onclick="selFirstType('150000','食品特产')"><i class="no-select"></i>
+                            <span flag="150000">食品特产</span></a></li>
+                        
+                        <li><a onclick="selFirstType('160000','文体用品')"><i class="no-select"></i>
+                            <span flag="160000">文体用品</span></a></li>
+                        
+                        <li><a onclick="selFirstType('170000','书刊音像')"><i class="no-select"></i>
+                            <span flag="170000">书刊音像</span></a></li>
+                        
+                        <li><a onclick="selFirstType('180000','卡券票务')"><i class="no-select"></i>
+                            <span flag="180000">卡券票务</span></a></li>
+                        
+                        <li><a onclick="selFirstType('190000','母婴用品')"><i class="no-select"></i>
+                            <span flag="190000">母婴用品</span></a></li>
+                        
+                        <li><a onclick="selFirstType('200000','租房买房')"><i class="no-select"></i>
+                            <span flag="200000">租房买房</span></a></li>
+                        
+                        <li><a onclick="selFirstType('300000','教育培训')"><i class="no-select"></i>
+                            <span flag="300000">教育培训</span></a></li>
+                        
+                        <li><a onclick="selFirstType('400000','宠物相关')"><i class="no-select"></i>
+                            <span flag="400000">宠物相关</span></a></li>
+                        
+                        <li><a onclick="selFirstType('990000','其他服务')"><i class="no-select"></i>
+                            <span flag="990000">其他服务</span></a></li>
+                        
+                    </ul>
+                </div>
+                
+                <div class="hidden select-content" id="select-content2">
+                    <h5 class="select-title">二级分类</h5>
+                    <ul class="ht-select" id="select_seconde_type">
+                    </ul>
+                </div>
+                
+            </section>
+        </form>
+        <footer class="upload navbar-fixed-bottom">
+            <ul>
+                <li class="fixed">
+                    <button onclick="sendPicObjcCommand('10000000021000110110017','pic')">上传图片</button>
+                </li>
+            </ul>
+        </footer>
+        <script src="/js/jquery-1.11.1.min.js"></script>
+        <script src="/js/jquery.simpleplayer.min.js"></script>
+        <script src="/js/quo.js"></script>
+        <script src="/js/validate/jquery.validate.js"></script>
+        <script src="/js/jquery.metadata.js"></script>
+        <script>
+            $$(function(){
+               greyLighten($$(".top-tab a"));
+               })
+               
+               $(function() {
+                 $("#fleamark").find("#sell").addClass("current-tab").siblings()
+                 .removeClass("current-tab");
+                 $("#fleamark").find("input").val(
+                                                  $("#fleamark").find("#sell").attr("value"));
+                 $("#fleahint").html("供");
+                 $("#fleamark").find("a")
+                 .click(
+                        function() {
+                        $(this).addClass("current-tab").siblings()
+                        .removeClass("current-tab");
+                        $("#fleamark").find("input").val(
+                                                         $(this).attr("value"));
+                        var id = $(this).attr("id");
+                        if (id == "sell") {
+                        $("#fleahint").html("供");
+                        }
+                        if (id == "buy") {
+                        $("#fleahint").html("求");
+                        }
+                        
+                        });
+                 
+                 
+                 $("#form").validate({
+                                     errorElement : 'p',
+                                     errorClass : 'bt',
+                                     rules : {
+                                     infoTitle : {
+                                     required : true,
+                                     maxlength : 10
+                                     },
+                                     infoDesc : {
+                                     required : true,
+                                     maxlength : 200
+                                     },
+                                     priceDesc : {
+                                     required : true,
+                                     maxlength : 10
+                                     },
+                                     contactName : {
+                                     required : true,
+                                     maxlength : 10
+                                     },
+                                     contactPhone:{
+                                     required : true,
+                                     phone:true
+                                     },
+                                     firstType: {
+                                     required : true
+                                     },
+                                     typeId: {
+                                     required : true
+                                     }
+                                     },
+                                     messages : {
+                                     },
+                                     highlight : function(element) {
+                                     $(element).next("div").addClass('has-error');
+                                     },
+                                     success : function(label) {
+                                     label.next("div").removeClass('has-error');
+                                     label.remove();
+                                     },
+                                     errorPlacement : function(error, element) {
+                                     element.next('div').append(error);
+                                     }
+                                     });
+                 });
+                 
+                 $("#selectFirstType").click(function() {
+                                             $("#select-content1").selectBottom($("#selectFirstType"),$("#firstType"));
+                                             });
+                                             $("#selectSecondType").click(function() {
+                                                                          $("#select-content2").selectBottom($("#selectSecondType"),$("#typeId"));
+                                                                          });
+                                                                          //缓存后退页
+                                                                          var pathname = 'form';
+                                                                          storage(pathname);
+                                                                          //一级分类选择
+                                                                          function selFirstType(_pType, _pName) {
+                                                                              if (_pType == null || _pType == "") {
+                                                                                  return;
+                                                                              }
+                                                                              $.ajax({
+                                                                                     url : "showSecondType.do",
+                                                                                     data : {
+                                                                                     "pType" : _pType
+                                                                                     },
+                                                                                     dataType : "JSON",
+                                                                                     success : function(data) {
+                                                                                     $("#select_seconde_type").html(null);
+                                                                                     for ( var i in data) {
+                                                                                     $("#select_seconde_type").append(
+                                                                                                                      '<li><a><i class="no-select"></i><span flag="'+data[i].typeId+'">'+data[i].typeName+'</span></a></li>');
+                                                                                     }
+                                                                                     }
+                                                                                     });
+                                                                          }
+        headDarken($$("#header-font"));
+        greyLighten($$("#sell,#buy"));
+        buttonDarkenClick($$(".fixed button"),"rgb(251,177,2)");
+            </script>
     </body>
+    
 </html>

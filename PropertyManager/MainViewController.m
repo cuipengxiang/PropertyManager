@@ -115,7 +115,7 @@
         NSString *funcStr = [arrFucnameAndParameter objectAtIndex:0];
         NSArray *params;
         if (arrFucnameAndParameter.count > 1) {
-            params = [[arrFucnameAndParameter objectAtIndex:1] componentsSeparatedByString:@","];
+            params = [[arrFucnameAndParameter objectAtIndex:1] componentsSeparatedByString:@"/"];
         }
         
         if ([funcStr isEqualToString:@"getDateTime"]) {
