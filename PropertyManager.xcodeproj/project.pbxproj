@@ -658,8 +658,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: 鹏翔 崔 (HFKT7FBRSA)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 鹏翔 崔 (HFKT7FBRSA)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution:  Yantai Haitao Network Technology Co.,Ltd (8DQZYKZ4P2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution:  Yantai Haitao Network Technology Co.,Ltd (8DQZYKZ4P2)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PropertyManager/PropertyManager-Prefix.pch";
 				INFOPLIST_FILE = "PropertyManager/PropertyManager-Info.plist";
@@ -671,7 +671,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a4cf0071-fdfd-4816-964c-b0ebeff76d20";
+				PROVISIONING_PROFILE = "c7e0d1ed-8aba-4948-84f3-dd8ab8b543c1";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
@@ -684,8 +684,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: 鹏翔 崔 (HFKT7FBRSA)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 鹏翔 崔 (HFKT7FBRSA)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution:  Yantai Haitao Network Technology Co.,Ltd (8DQZYKZ4P2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution:  Yantai Haitao Network Technology Co.,Ltd (8DQZYKZ4P2)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PropertyManager/PropertyManager-Prefix.pch";
 				INFOPLIST_FILE = "PropertyManager/PropertyManager-Info.plist";
@@ -697,7 +697,7 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a4cf0071-fdfd-4816-964c-b0ebeff76d20";
+				PROVISIONING_PROFILE = "c7e0d1ed-8aba-4948-84f3-dd8ab8b543c1";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;

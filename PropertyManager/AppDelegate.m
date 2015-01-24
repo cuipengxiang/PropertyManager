@@ -29,10 +29,21 @@
     
     // [BPush setAccessToken:@"3.ad0c16fa2c6aa378f450f54adb08039.2592000.1367133742.282335-602025"];  // 可选。api key绑定时不需要，也可在其它时机调用
     
-    [application registerForRemoteNotificationTypes:
-     UIRemoteNotificationTypeAlert
-     | UIRemoteNotificationTypeBadge
-     | UIRemoteNotificationTypeSound];
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+    {
+        [application registerUserNotificationSettings:[UIUserNotificationSettings
+                                                       settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge)
+                                                       categories:nil]];
+        
+        [application registerForRemoteNotifications];
+    }
+    else
+    {
+        [application registerForRemoteNotificationTypes:
+         UIRemoteNotificationTypeAlert
+         | UIRemoteNotificationTypeBadge
+         | UIRemoteNotificationTypeSound];
+    }
     
     //定位服务初始化
     self.locationManager = [[CLLocationManager alloc] init];
