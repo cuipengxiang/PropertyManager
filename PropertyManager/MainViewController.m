@@ -70,7 +70,7 @@
     self.imagesSelected = [[NSMutableArray alloc] init];
     self.imagesDataToUpLoad = [[NSMutableArray alloc] init];
     
-    NSString *urlString=[NSString stringWithFormat:@"%@", @"http://wx.mshop.net.cn:9292/ourally/app/property/sys/sysLogin.do"];
+    NSString *urlString=[NSString stringWithFormat:@"%@", @"http://wy.5ishequ.com.cn/app/property/sys/sysLogin.do"];
 	NSURL *url=[NSURL URLWithString:urlString];
 	NSURLRequest *request=[NSURLRequest requestWithURL:url];
 	[self.mainWebView loadRequest:request];
@@ -311,7 +311,7 @@
         }
         if (activity.maxCount == 6) {
             if (xmlString) {
-                NSURL *url = [NSURL URLWithString:@"http:// 219.146.138.106:9292/ddxd/android/AndroidServlet"];
+                NSURL *url = [NSURL URLWithString:@"http://yz.5ishequ.com.cn/android/AndroidServlet"];
                 NSMutableDictionary *contain = [[NSMutableDictionary alloc] init];
                 [contain setObject:filenames forKey:@"filenames"];
                 
@@ -333,7 +333,7 @@
             }
         } else if (activity.maxCount == 5) {
             if (xmlString) {
-                NSURL *url = [NSURL URLWithString:@"http://wx.mshop.net.cn:9292/ourally/android/AndroidServlet"];
+                NSURL *url = [NSURL URLWithString:@"http://wy.5ishequ.com.cn/android/AndroidServlet"];
                 NSMutableDictionary *contain = [[NSMutableDictionary alloc] init];
                 [contain setObject:filenames forKey:@"filenames"];
             
@@ -503,7 +503,7 @@
     NSString *xmlString = [util dataToXMLString:data fileName:self.voiceCompanyID];
     
     if (xmlString) {
-        NSURL *url = [NSURL URLWithString:@"http://wx.mshop.net.cn:9292/ourally/android/AndroidServlet"];
+        NSURL *url = [NSURL URLWithString:@"http://wy.5ishequ.com.cn/android/AndroidServlet"];
         
         ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
         [request setDelegate:self];
@@ -534,7 +534,7 @@
     NSString *xmlString = [util deviceInfoToXMLString];
     
     if (xmlString) {
-        NSURL *url = [NSURL URLWithString:@"http://wx.mshop.net.cn:9292/ourally/android/AndroidServlet"];
+        NSURL *url = [NSURL URLWithString:@"http://wy.5ishequ.com.cn/android/AndroidServlet"];
         
         ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
         [request setDelegate:self];
@@ -561,7 +561,7 @@
         xmlString = [util appListToXMLString:array];
     }
     if (xmlString) {
-        NSURL *url = [NSURL URLWithString:@"http://wx.mshop.net.cn:9292/ourally/android/AndroidServlet"];
+        NSURL *url = [NSURL URLWithString:@"http://wy.5ishequ.com.cn/android/AndroidServlet"];
         
         ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
         [request setDelegate:self];
@@ -667,7 +667,7 @@
 
 - (void)showUserMessageView
 {
-    NSString *urlString = [NSString stringWithFormat:@"http://wx.mshop.net.cn:9292/ourally/app/property/message/getMessageList.do?userId=%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"userid"]];
+    NSString *urlString = [NSString stringWithFormat:@"http://wy.5ishequ.com.cn/app/property/message/getMessageList.do?userId=%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"userid"]];
     NSURL *url=[NSURL URLWithString:urlString];
 	NSURLRequest *request=[NSURLRequest requestWithURL:url];
 	[self.mainWebView loadRequest:request];
