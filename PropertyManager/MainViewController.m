@@ -111,7 +111,7 @@
     
     if([urlComps count] && [[urlComps objectAtIndex:0] isEqualToString:@"objc"])
     {
-        NSArray *arrFucnameAndParameter = [(NSString*)[urlComps objectAtIndex:1] componentsSeparatedByString:@":"];
+        NSArray *arrFucnameAndParameter = [(NSString*)[urlComps objectAtIndex:1] componentsSeparatedByString:@"_"];
         NSString *funcStr = [arrFucnameAndParameter objectAtIndex:0];
         NSArray *params;
         if (arrFucnameAndParameter.count > 1) {
