@@ -89,6 +89,8 @@
 		D88E405A19A591CF00813566 /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = D88E405919A591CF00813566 /* Util.m */; };
 		D8C9AD8E19AB133C0071F211 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D8C9AD8B19AB133C0071F211 /* SVProgressHUD.bundle */; };
 		D8C9AD8F19AB133C0071F211 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C9AD8D19AB133C0071F211 /* SVProgressHUD.m */; };
+		D8CB64901A822F7A0086E4C5 /* ActionSheetLocalePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = D8CB648C1A822F7A0086E4C5 /* ActionSheetLocalePicker.m */; };
+		D8CB64911A822F7A0086E4C5 /* SWActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = D8CB648F1A822F7A0086E4C5 /* SWActionSheet.m */; };
 		D8CC94F619A82A70002D64BA /* LXVoiceActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = D8CC94F519A82A70002D64BA /* LXVoiceActivity.m */; };
 		D8CC94FE19A8343A002D64BA /* LCVoice.m in Sources */ = {isa = PBXBuildFile; fileRef = D8CC94FB19A8343A002D64BA /* LCVoice.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D8CC94FF19A8343A002D64BA /* LCVoiceHud.m in Sources */ = {isa = PBXBuildFile; fileRef = D8CC94FD19A8343A002D64BA /* LCVoiceHud.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -227,6 +229,11 @@
 		D8C9AD8B19AB133C0071F211 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
 		D8C9AD8C19AB133C0071F211 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
 		D8C9AD8D19AB133C0071F211 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
+		D8CB648B1A822F7A0086E4C5 /* ActionSheetLocalePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetLocalePicker.h; sourceTree = "<group>"; };
+		D8CB648C1A822F7A0086E4C5 /* ActionSheetLocalePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetLocalePicker.m; sourceTree = "<group>"; };
+		D8CB648D1A822F7A0086E4C5 /* ActionSheetPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetPicker.h; sourceTree = "<group>"; };
+		D8CB648E1A822F7A0086E4C5 /* SWActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWActionSheet.h; sourceTree = "<group>"; };
+		D8CB648F1A822F7A0086E4C5 /* SWActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWActionSheet.m; sourceTree = "<group>"; };
 		D8CC94F419A82A70002D64BA /* LXVoiceActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXVoiceActivity.h; sourceTree = "<group>"; };
 		D8CC94F519A82A70002D64BA /* LXVoiceActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXVoiceActivity.m; sourceTree = "<group>"; };
 		D8CC94FA19A8343A002D64BA /* LCVoice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCVoice.h; sourceTree = "<group>"; };
@@ -561,6 +568,11 @@
 		D877FF47199F896200BB893D /* ActionSheetPicker */ = {
 			isa = PBXGroup;
 			children = (
+				D8CB648B1A822F7A0086E4C5 /* ActionSheetLocalePicker.h */,
+				D8CB648C1A822F7A0086E4C5 /* ActionSheetLocalePicker.m */,
+				D8CB648D1A822F7A0086E4C5 /* ActionSheetPicker.h */,
+				D8CB648E1A822F7A0086E4C5 /* SWActionSheet.h */,
+				D8CB648F1A822F7A0086E4C5 /* SWActionSheet.m */,
 				D877FF48199F897300BB893D /* AbstractActionSheetPicker.h */,
 				D877FF49199F897300BB893D /* AbstractActionSheetPicker.m */,
 				D877FF4A199F897300BB893D /* ActionSheetCustomPicker.h */,
@@ -775,10 +787,12 @@
 				D877FF55199F897300BB893D /* AbstractActionSheetPicker.m in Sources */,
 				D877FF3D199F84BB00BB893D /* BPushClass.m in Sources */,
 				D877FF3C199F84BB00BB893D /* Base64.m in Sources */,
+				D8CB64901A822F7A0086E4C5 /* ActionSheetLocalePicker.m in Sources */,
 				D87A83FC19A6209D0059916C /* UzysGroupPickerView.m in Sources */,
 				D87A83FB19A6209D0059916C /* UzysAssetsViewCell.m in Sources */,
 				D877FF57199F897300BB893D /* ActionSheetDatePicker.m in Sources */,
 				D88E405A19A591CF00813566 /* Util.m in Sources */,
+				D8CB64911A822F7A0086E4C5 /* SWActionSheet.m in Sources */,
 				D877FF59199F897300BB893D /* ActionSheetStringPicker.m in Sources */,
 				D87A83FF19A6209D0059916C /* UzysWrapperPickerController.m in Sources */,
 				D83D557919ADFA2A00DB88F7 /* UIDevice+Hardware.m in Sources */,
