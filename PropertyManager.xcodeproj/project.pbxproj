@@ -38,12 +38,6 @@
 		D877FF42199F84F500BB893D /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D877FF41199F84F500BB893D /* Security.framework */; };
 		D877FF44199F851400BB893D /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D877FF43199F851400BB893D /* libc++.dylib */; };
 		D877FF46199F855500BB893D /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D877FF45199F855500BB893D /* CFNetwork.framework */; };
-		D877FF55199F897300BB893D /* AbstractActionSheetPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = D877FF49199F897300BB893D /* AbstractActionSheetPicker.m */; };
-		D877FF56199F897300BB893D /* ActionSheetCustomPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = D877FF4B199F897300BB893D /* ActionSheetCustomPicker.m */; };
-		D877FF57199F897300BB893D /* ActionSheetDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = D877FF4E199F897300BB893D /* ActionSheetDatePicker.m */; };
-		D877FF58199F897300BB893D /* ActionSheetDistancePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = D877FF50199F897300BB893D /* ActionSheetDistancePicker.m */; };
-		D877FF59199F897300BB893D /* ActionSheetStringPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = D877FF52199F897300BB893D /* ActionSheetStringPicker.m */; };
-		D877FF5A199F897300BB893D /* DistancePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = D877FF54199F897300BB893D /* DistancePickerView.m */; };
 		D87A83F819A6209D0059916C /* UzysAssetPickerController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D87A83E919A6209D0059916C /* UzysAssetPickerController.bundle */; };
 		D87A83F919A6209D0059916C /* UzysAssetsPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = D87A83EC19A6209D0059916C /* UzysAssetsPickerController.m */; };
 		D87A83FA19A6209D0059916C /* UzysAssetsPickerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D87A83ED19A6209D0059916C /* UzysAssetsPickerController.xib */; };
@@ -57,6 +51,14 @@
 		D88E405A19A591CF00813566 /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = D88E405919A591CF00813566 /* Util.m */; };
 		D8C9AD8E19AB133C0071F211 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D8C9AD8B19AB133C0071F211 /* SVProgressHUD.bundle */; };
 		D8C9AD8F19AB133C0071F211 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C9AD8D19AB133C0071F211 /* SVProgressHUD.m */; };
+		D8CB647E1A822ABE0086E4C5 /* AbstractActionSheetPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = D8CB64721A822ABE0086E4C5 /* AbstractActionSheetPicker.m */; };
+		D8CB647F1A822ABE0086E4C5 /* ActionSheetCustomPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = D8CB64741A822ABE0086E4C5 /* ActionSheetCustomPicker.m */; };
+		D8CB64801A822ABE0086E4C5 /* ActionSheetDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = D8CB64771A822ABE0086E4C5 /* ActionSheetDatePicker.m */; };
+		D8CB64811A822ABE0086E4C5 /* ActionSheetDistancePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = D8CB64791A822ABE0086E4C5 /* ActionSheetDistancePicker.m */; };
+		D8CB64821A822ABE0086E4C5 /* ActionSheetStringPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = D8CB647B1A822ABE0086E4C5 /* ActionSheetStringPicker.m */; };
+		D8CB64831A822ABE0086E4C5 /* DistancePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8CB647D1A822ABE0086E4C5 /* DistancePickerView.m */; };
+		D8CB64891A822B170086E4C5 /* ActionSheetLocalePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = D8CB64851A822B170086E4C5 /* ActionSheetLocalePicker.m */; };
+		D8CB648A1A822B170086E4C5 /* SWActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = D8CB64881A822B170086E4C5 /* SWActionSheet.m */; };
 		D8CC94F619A82A70002D64BA /* LXVoiceActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = D8CC94F519A82A70002D64BA /* LXVoiceActivity.m */; };
 		D8CC94FE19A8343A002D64BA /* LCVoice.m in Sources */ = {isa = PBXBuildFile; fileRef = D8CC94FB19A8343A002D64BA /* LCVoice.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D8CC94FF19A8343A002D64BA /* LCVoiceHud.m in Sources */ = {isa = PBXBuildFile; fileRef = D8CC94FD19A8343A002D64BA /* LCVoiceHud.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -114,19 +116,6 @@
 		D877FF41199F84F500BB893D /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		D877FF43199F851400BB893D /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		D877FF45199F855500BB893D /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
-		D877FF48199F897300BB893D /* AbstractActionSheetPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractActionSheetPicker.h; sourceTree = "<group>"; };
-		D877FF49199F897300BB893D /* AbstractActionSheetPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbstractActionSheetPicker.m; sourceTree = "<group>"; };
-		D877FF4A199F897300BB893D /* ActionSheetCustomPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetCustomPicker.h; sourceTree = "<group>"; };
-		D877FF4B199F897300BB893D /* ActionSheetCustomPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetCustomPicker.m; sourceTree = "<group>"; };
-		D877FF4C199F897300BB893D /* ActionSheetCustomPickerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetCustomPickerDelegate.h; sourceTree = "<group>"; };
-		D877FF4D199F897300BB893D /* ActionSheetDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetDatePicker.h; sourceTree = "<group>"; };
-		D877FF4E199F897300BB893D /* ActionSheetDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetDatePicker.m; sourceTree = "<group>"; };
-		D877FF4F199F897300BB893D /* ActionSheetDistancePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetDistancePicker.h; sourceTree = "<group>"; };
-		D877FF50199F897300BB893D /* ActionSheetDistancePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetDistancePicker.m; sourceTree = "<group>"; };
-		D877FF51199F897300BB893D /* ActionSheetStringPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetStringPicker.h; sourceTree = "<group>"; };
-		D877FF52199F897300BB893D /* ActionSheetStringPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetStringPicker.m; sourceTree = "<group>"; };
-		D877FF53199F897300BB893D /* DistancePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DistancePickerView.h; sourceTree = "<group>"; };
-		D877FF54199F897300BB893D /* DistancePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DistancePickerView.m; sourceTree = "<group>"; };
 		D87A83E919A6209D0059916C /* UzysAssetPickerController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = UzysAssetPickerController.bundle; sourceTree = "<group>"; };
 		D87A83EA19A6209D0059916C /* UzysAssetsPickerController_Configuration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UzysAssetsPickerController_Configuration.h; sourceTree = "<group>"; };
 		D87A83EB19A6209D0059916C /* UzysAssetsPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UzysAssetsPickerController.h; sourceTree = "<group>"; };
@@ -150,6 +139,24 @@
 		D8C9AD8B19AB133C0071F211 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
 		D8C9AD8C19AB133C0071F211 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
 		D8C9AD8D19AB133C0071F211 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
+		D8CB64711A822ABE0086E4C5 /* AbstractActionSheetPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractActionSheetPicker.h; sourceTree = "<group>"; };
+		D8CB64721A822ABE0086E4C5 /* AbstractActionSheetPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbstractActionSheetPicker.m; sourceTree = "<group>"; };
+		D8CB64731A822ABE0086E4C5 /* ActionSheetCustomPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetCustomPicker.h; sourceTree = "<group>"; };
+		D8CB64741A822ABE0086E4C5 /* ActionSheetCustomPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetCustomPicker.m; sourceTree = "<group>"; };
+		D8CB64751A822ABE0086E4C5 /* ActionSheetCustomPickerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetCustomPickerDelegate.h; sourceTree = "<group>"; };
+		D8CB64761A822ABE0086E4C5 /* ActionSheetDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetDatePicker.h; sourceTree = "<group>"; };
+		D8CB64771A822ABE0086E4C5 /* ActionSheetDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetDatePicker.m; sourceTree = "<group>"; };
+		D8CB64781A822ABE0086E4C5 /* ActionSheetDistancePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetDistancePicker.h; sourceTree = "<group>"; };
+		D8CB64791A822ABE0086E4C5 /* ActionSheetDistancePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetDistancePicker.m; sourceTree = "<group>"; };
+		D8CB647A1A822ABE0086E4C5 /* ActionSheetStringPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetStringPicker.h; sourceTree = "<group>"; };
+		D8CB647B1A822ABE0086E4C5 /* ActionSheetStringPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetStringPicker.m; sourceTree = "<group>"; };
+		D8CB647C1A822ABE0086E4C5 /* DistancePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DistancePickerView.h; sourceTree = "<group>"; };
+		D8CB647D1A822ABE0086E4C5 /* DistancePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DistancePickerView.m; sourceTree = "<group>"; };
+		D8CB64841A822B170086E4C5 /* ActionSheetLocalePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetLocalePicker.h; sourceTree = "<group>"; };
+		D8CB64851A822B170086E4C5 /* ActionSheetLocalePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetLocalePicker.m; sourceTree = "<group>"; };
+		D8CB64861A822B170086E4C5 /* ActionSheetPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetPicker.h; sourceTree = "<group>"; };
+		D8CB64871A822B170086E4C5 /* SWActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWActionSheet.h; sourceTree = "<group>"; };
+		D8CB64881A822B170086E4C5 /* SWActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWActionSheet.m; sourceTree = "<group>"; };
 		D8CC94F419A82A70002D64BA /* LXVoiceActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXVoiceActivity.h; sourceTree = "<group>"; };
 		D8CC94F519A82A70002D64BA /* LXVoiceActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXVoiceActivity.m; sourceTree = "<group>"; };
 		D8CC94FA19A8343A002D64BA /* LCVoice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCVoice.h; sourceTree = "<group>"; };
@@ -337,19 +344,24 @@
 		D877FF47199F896200BB893D /* ActionSheetPicker */ = {
 			isa = PBXGroup;
 			children = (
-				D877FF48199F897300BB893D /* AbstractActionSheetPicker.h */,
-				D877FF49199F897300BB893D /* AbstractActionSheetPicker.m */,
-				D877FF4A199F897300BB893D /* ActionSheetCustomPicker.h */,
-				D877FF4B199F897300BB893D /* ActionSheetCustomPicker.m */,
-				D877FF4C199F897300BB893D /* ActionSheetCustomPickerDelegate.h */,
-				D877FF4D199F897300BB893D /* ActionSheetDatePicker.h */,
-				D877FF4E199F897300BB893D /* ActionSheetDatePicker.m */,
-				D877FF4F199F897300BB893D /* ActionSheetDistancePicker.h */,
-				D877FF50199F897300BB893D /* ActionSheetDistancePicker.m */,
-				D877FF51199F897300BB893D /* ActionSheetStringPicker.h */,
-				D877FF52199F897300BB893D /* ActionSheetStringPicker.m */,
-				D877FF53199F897300BB893D /* DistancePickerView.h */,
-				D877FF54199F897300BB893D /* DistancePickerView.m */,
+				D8CB64841A822B170086E4C5 /* ActionSheetLocalePicker.h */,
+				D8CB64851A822B170086E4C5 /* ActionSheetLocalePicker.m */,
+				D8CB64861A822B170086E4C5 /* ActionSheetPicker.h */,
+				D8CB64871A822B170086E4C5 /* SWActionSheet.h */,
+				D8CB64881A822B170086E4C5 /* SWActionSheet.m */,
+				D8CB64711A822ABE0086E4C5 /* AbstractActionSheetPicker.h */,
+				D8CB64721A822ABE0086E4C5 /* AbstractActionSheetPicker.m */,
+				D8CB64731A822ABE0086E4C5 /* ActionSheetCustomPicker.h */,
+				D8CB64741A822ABE0086E4C5 /* ActionSheetCustomPicker.m */,
+				D8CB64751A822ABE0086E4C5 /* ActionSheetCustomPickerDelegate.h */,
+				D8CB64761A822ABE0086E4C5 /* ActionSheetDatePicker.h */,
+				D8CB64771A822ABE0086E4C5 /* ActionSheetDatePicker.m */,
+				D8CB64781A822ABE0086E4C5 /* ActionSheetDistancePicker.h */,
+				D8CB64791A822ABE0086E4C5 /* ActionSheetDistancePicker.m */,
+				D8CB647A1A822ABE0086E4C5 /* ActionSheetStringPicker.h */,
+				D8CB647B1A822ABE0086E4C5 /* ActionSheetStringPicker.m */,
+				D8CB647C1A822ABE0086E4C5 /* DistancePickerView.h */,
+				D8CB647D1A822ABE0086E4C5 /* DistancePickerView.m */,
 			);
 			path = ActionSheetPicker;
 			sourceTree = "<group>";
@@ -540,31 +552,33 @@
 			files = (
 				D87A840319A63F560059916C /* LXActivity.m in Sources */,
 				D8CC94FE19A8343A002D64BA /* LCVoice.m in Sources */,
-				D877FF55199F897300BB893D /* AbstractActionSheetPicker.m in Sources */,
 				D877FF3D199F84BB00BB893D /* BPushClass.m in Sources */,
 				D877FF3C199F84BB00BB893D /* Base64.m in Sources */,
 				D87A83FC19A6209D0059916C /* UzysGroupPickerView.m in Sources */,
+				D8CB64891A822B170086E4C5 /* ActionSheetLocalePicker.m in Sources */,
 				D87A83FB19A6209D0059916C /* UzysAssetsViewCell.m in Sources */,
-				D877FF57199F897300BB893D /* ActionSheetDatePicker.m in Sources */,
 				D88E405A19A591CF00813566 /* Util.m in Sources */,
-				D877FF59199F897300BB893D /* ActionSheetStringPicker.m in Sources */,
 				D87A83FF19A6209D0059916C /* UzysWrapperPickerController.m in Sources */,
 				D83D557919ADFA2A00DB88F7 /* UIDevice+Hardware.m in Sources */,
+				D8CB648A1A822B170086E4C5 /* SWActionSheet.m in Sources */,
 				D8CC94FF19A8343A002D64BA /* LCVoiceHud.m in Sources */,
 				D8C9AD8F19AB133C0071F211 /* SVProgressHUD.m in Sources */,
+				D8CB647E1A822ABE0086E4C5 /* AbstractActionSheetPicker.m in Sources */,
 				D87A83F919A6209D0059916C /* UzysAssetsPickerController.m in Sources */,
+				D8CB64811A822ABE0086E4C5 /* ActionSheetDistancePicker.m in Sources */,
 				D8CC94F619A82A70002D64BA /* LXVoiceActivity.m in Sources */,
+				D8CB647F1A822ABE0086E4C5 /* ActionSheetCustomPicker.m in Sources */,
 				D877FF3E199F84BB00BB893D /* GzipCompressor.m in Sources */,
 				D87A83FD19A6209D0059916C /* UzysGroupPickerViewController.m in Sources */,
-				D877FF58199F897300BB893D /* ActionSheetDistancePicker.m in Sources */,
+				D8CB64831A822ABE0086E4C5 /* DistancePickerView.m in Sources */,
+				D8CB64821A822ABE0086E4C5 /* ActionSheetStringPicker.m in Sources */,
 				D87A83FE19A6209D0059916C /* UzysGroupViewCell.m in Sources */,
 				D877FF3F199F84BB00BB893D /* OpenUDID.m in Sources */,
-				D877FF56199F897300BB893D /* ActionSheetCustomPicker.m in Sources */,
 				D826299019C2CF2B00F7AA4E /* BDKNotifyHUD.m in Sources */,
 				D877FEEF199F475B00BB893D /* AppDelegate.m in Sources */,
+				D8CB64801A822ABE0086E4C5 /* ActionSheetDatePicker.m in Sources */,
 				D877FF15199F484B00BB893D /* MainViewController.m in Sources */,
 				D877FEEB199F475B00BB893D /* main.m in Sources */,
-				D877FF5A199F897300BB893D /* DistancePickerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
