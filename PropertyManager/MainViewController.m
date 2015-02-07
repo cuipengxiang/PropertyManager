@@ -164,11 +164,11 @@
                 [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"isforst"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
             }
-            NSString *jsFunction = [NSString stringWithFormat:@"isUsed('%d','%@')", first, [NSString stringWithFormat:@"diandian%@", [[[UIDevice currentDevice] identifierForVendor] UUIDString]]];
+            NSString *jsFunction = [NSString stringWithFormat:@"isUsed('%d','%@')", first, [NSString stringWithFormat:@"property%@", [[[UIDevice currentDevice] identifierForVendor] UUIDString]]];
             [self.mainWebView stringByEvaluatingJavaScriptFromString:jsFunction];
         }
         if ([funcStr isEqualToString:@"getImeiId"]) {
-            NSString *jsFunction = [NSString stringWithFormat:@"setImeiId('%@')", [NSString stringWithFormat:@"diandian%@", [[[UIDevice currentDevice] identifierForVendor] UUIDString]]];
+            NSString *jsFunction = [NSString stringWithFormat:@"setImeiId('%@')", [NSString stringWithFormat:@"property%@", [[[UIDevice currentDevice] identifierForVendor] UUIDString]]];
             [self.mainWebView stringByEvaluatingJavaScriptFromString:jsFunction];
         }
         
