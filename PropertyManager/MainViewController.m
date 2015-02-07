@@ -70,7 +70,7 @@
     self.imagesSelected = [[NSMutableArray alloc] init];
     self.imagesDataToUpLoad = [[NSMutableArray alloc] init];
     
-    NSString *urlString=[NSString stringWithFormat:@"%@", @"http://wy.5ishequ.com.cn/app/property/sys/sysLogin.do"];
+    NSString *urlString=[NSString stringWithFormat:@"%@app/owner/sys/index.jsp", PUBLIC_ADDRESS];
 	NSURL *url=[NSURL URLWithString:urlString];
 	NSURLRequest *request=[NSURLRequest requestWithURL:url];
 	[self.mainWebView loadRequest:request];
@@ -153,6 +153,22 @@
         }
         if ([funcStr isEqualToString:@"getUserChannelId"]) {
             NSString *jsFunction = [NSString stringWithFormat:@"setUserChannelId('%@','%@')", [[NSUserDefaults standardUserDefaults] objectForKey:@"channelid"], [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceid"]];
+            [self.mainWebView stringByEvaluatingJavaScriptFromString:jsFunction];
+        }
+        if ([funcStr isEqualToString:@"isFirstIn"]) {
+            int first = 1;
+            NSString *isFirst = [[NSUserDefaults standardUserDefaults] objectForKey:@"isfirst"];
+            if (isFirst&&[isFirst isEqualToString:@"0"]) {
+                first = 0;
+            } else {
+                [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"isforst"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+            }
+            NSString *jsFunction = [NSString stringWithFormat:@"isUsed('%d','%@')", first, [NSString stringWithFormat:@"diandian%@", [[[UIDevice currentDevice] identifierForVendor] UUIDString]]];
+            [self.mainWebView stringByEvaluatingJavaScriptFromString:jsFunction];
+        }
+        if ([funcStr isEqualToString:@"getImeiId"]) {
+            NSString *jsFunction = [NSString stringWithFormat:@"setImeiId('%@')", [NSString stringWithFormat:@"diandian%@", [[[UIDevice currentDevice] identifierForVendor] UUIDString]]];
             [self.mainWebView stringByEvaluatingJavaScriptFromString:jsFunction];
         }
         
@@ -311,7 +327,7 @@
         }
         if (activity.maxCount == 6) {
             if (xmlString) {
-                NSURL *url = [NSURL URLWithString:@"http://yz.5ishequ.com.cn/android/AndroidServlet"];
+                NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@android/AndroidServlet", PUBLIC_ADDRESS_PIC6]];
                 NSMutableDictionary *contain = [[NSMutableDictionary alloc] init];
                 [contain setObject:filenames forKey:@"filenames"];
                 
@@ -333,7 +349,7 @@
             }
         } else if (activity.maxCount == 5) {
             if (xmlString) {
-                NSURL *url = [NSURL URLWithString:@"http://wy.5ishequ.com.cn/android/AndroidServlet"];
+                NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@android/AndroidServlet", PUBLIC_ADDRESS]];
                 NSMutableDictionary *contain = [[NSMutableDictionary alloc] init];
                 [contain setObject:filenames forKey:@"filenames"];
             
@@ -503,7 +519,7 @@
     NSString *xmlString = [util dataToXMLString:data fileName:self.voiceCompanyID];
     
     if (xmlString) {
-        NSURL *url = [NSURL URLWithString:@"http://wy.5ishequ.com.cn/android/AndroidServlet"];
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@android/AndroidServlet", PUBLIC_ADDRESS]];
         
         ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
         [request setDelegate:self];
@@ -534,7 +550,7 @@
     NSString *xmlString = [util deviceInfoToXMLString];
     
     if (xmlString) {
-        NSURL *url = [NSURL URLWithString:@"http://wy.5ishequ.com.cn/android/AndroidServlet"];
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@android/AndroidServlet", PUBLIC_ADDRESS]];
         
         ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
         [request setDelegate:self];
@@ -561,7 +577,7 @@
         xmlString = [util appListToXMLString:array];
     }
     if (xmlString) {
-        NSURL *url = [NSURL URLWithString:@"http://wy.5ishequ.com.cn/android/AndroidServlet"];
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@android/AndroidServlet", PUBLIC_ADDRESS]];
         
         ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
         [request setDelegate:self];
@@ -667,7 +683,7 @@
 
 - (void)showUserMessageView
 {
-    NSString *urlString = [NSString stringWithFormat:@"http://wy.5ishequ.com.cn/app/property/message/getMessageList.do?userId=%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"userid"]];
+    NSString *urlString = [NSString stringWithFormat:@"%@app/owner/message/getMessageList.do?userId=%@", PUBLIC_ADDRESS,[[NSUserDefaults standardUserDefaults] objectForKey:@"userid"]];
     NSURL *url=[NSURL URLWithString:urlString];
 	NSURLRequest *request=[NSURLRequest requestWithURL:url];
 	[self.mainWebView loadRequest:request];
