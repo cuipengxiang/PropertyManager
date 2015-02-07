@@ -167,6 +167,22 @@
             NSString *jsFunction = [NSString stringWithFormat:@"setUserChannelId('%@','%@')", channelid, deviceid];
             [self.mainWebView stringByEvaluatingJavaScriptFromString:jsFunction];
         }
+        if ([funcStr isEqualToString:@"isFirstIn"]) {
+            int first = 1;
+            NSString *isFirst = [[NSUserDefaults standardUserDefaults] objectForKey:@"isfirst"];
+            if (isFirst&&[isFirst isEqualToString:@"0"]) {
+                first = 0;
+            } else {
+                [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"isforst"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+            }
+            NSString *jsFunction = [NSString stringWithFormat:@"isUsed('%d','%@')", first, [[[UIDevice currentDevice] identifierForVendor] UUIDString]];
+            [self.mainWebView stringByEvaluatingJavaScriptFromString:jsFunction];
+        }
+        if ([funcStr isEqualToString:@"getImeiId"]) {
+            NSString *jsFunction = [NSString stringWithFormat:@"setImeiId('%@')", [[[UIDevice currentDevice] identifierForVendor] UUIDString]];
+            [self.mainWebView stringByEvaluatingJavaScriptFromString:jsFunction];
+        }
         
         return NO;
     } else {
