@@ -173,7 +173,7 @@
             if (isFirst&&[isFirst isEqualToString:@"0"]) {
                 first = 0;
             } else {
-                [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"isforst"];
+                [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"isfirst"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
             }
             NSString *jsFunction = [NSString stringWithFormat:@"isUsed('%d','%@')", first, [NSString stringWithFormat:@"diandian%@", [[[UIDevice currentDevice] identifierForVendor] UUIDString]]];
