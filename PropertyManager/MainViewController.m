@@ -70,7 +70,7 @@
     self.imagesSelected = [[NSMutableArray alloc] init];
     self.imagesDataToUpLoad = [[NSMutableArray alloc] init];
     
-    NSString *urlString=[NSString stringWithFormat:@"%@app/owner/sys/index.jsp", PUBLIC_ADDRESS];
+    NSString *urlString=[NSString stringWithFormat:@"%@app/property/sys/sysLogin.do", PUBLIC_ADDRESS];
 	NSURL *url=[NSURL URLWithString:urlString];
 	NSURLRequest *request=[NSURLRequest requestWithURL:url];
 	[self.mainWebView loadRequest:request];
@@ -683,7 +683,7 @@
 
 - (void)showUserMessageView
 {
-    NSString *urlString = [NSString stringWithFormat:@"%@app/owner/message/getMessageList.do?userId=%@", PUBLIC_ADDRESS,[[NSUserDefaults standardUserDefaults] objectForKey:@"userid"]];
+    NSString *urlString = [NSString stringWithFormat:@"%@app/property/message/getMessageList.do?userId=%@", PUBLIC_ADDRESS,[[NSUserDefaults standardUserDefaults] objectForKey:@"userid"]];
     NSURL *url=[NSURL URLWithString:urlString];
 	NSURLRequest *request=[NSURLRequest requestWithURL:url];
 	[self.mainWebView loadRequest:request];
