@@ -70,7 +70,7 @@
     self.imagesSelected = [[NSMutableArray alloc] init];
     self.imagesDataToUpLoad = [[NSMutableArray alloc] init];
     
-    NSString *urlString=[NSString stringWithFormat:@"%@app/property/sys/sysLogin.do", PUBLIC_ADDRESS];
+    NSString *urlString=[NSString stringWithFormat:@"%@app/property/sys/index.jsp", PUBLIC_ADDRESS];
 	NSURL *url=[NSURL URLWithString:urlString];
 	NSURLRequest *request=[NSURLRequest requestWithURL:url];
 	[self.mainWebView loadRequest:request];
