@@ -32,6 +32,10 @@
 	<string>1.2.3</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>请允许获取位置信息，以便我们提供更好的服务</string>
+	<key>NSLocationWhenInUseDescription</key>
+	<string>请允许获取位置信息，以便我们提供更好的服务</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
@@ -44,9 +48,5 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-	<key>NSLocationWhenInUseDescription</key>
-	<string>请允许获取位置信息</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>请允许获取位置信息</string>
 </dict>
 </plist>
