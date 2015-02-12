@@ -32,7 +32,9 @@
 	<string>1.3.0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSLocationUsageDescription</key>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>请允许获取位置信息，以便我们提供更好的服务</string>
+	<key>NSLocationWhenInUseDescription</key>
 	<string>请允许获取位置信息，以便我们提供更好的服务</string>
 	<key>UIBackgroundModes</key>
 	<array>
