@@ -44,5 +44,9 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>NSLocationWhenInUseDescription</key>
+	<string>请允许获取位置信息</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>请允许获取位置信息</string>
 </dict>
 </plist>

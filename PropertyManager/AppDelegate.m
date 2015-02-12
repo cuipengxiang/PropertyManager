@@ -55,9 +55,27 @@
     if (IS_iOS7) {
         [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
     }
+    if ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
+        [self.locationManager requestAlwaysAuthorization];
+    }
     //[NSTimer scheduledTimerWithTimeInterval:1800 target:self selector:@selector(startToGetLocation) userInfo:nil repeats:YES];
     
     return YES;
+}
+
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
+{
+    switch (status) {
+        case kCLAuthorizationStatusNotDetermined:
+            if ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)])
+            {
+                [self.locationManager requestAlwaysAuthorization];
+            }
+            break;
+        default:
+            break;
+    }
+    
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

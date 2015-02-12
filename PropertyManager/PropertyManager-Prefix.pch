@@ -22,6 +22,7 @@
 #define PUBLIC_ADDRESS RELEASE_ADDRESS
 #define PUBLIC_ADDRESS_PIC6 RELEASE_ADDRESS_PIC6
 
+#define IS_iOS8 [[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0
 #define IS_iOS7 [[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0
 #define Nav_Height ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0 ? 64.0 : 44.0)
 #define App_Height ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0 ? [UIScreen mainScreen].bounds.size.height : [UIScreen mainScreen].applicationFrame.size.height)
