@@ -382,7 +382,17 @@
                 [activity tappedCancel];
             }
         }
+        [self.imagesSelected removeAllObjects];
+        [self.imagesShowedInSheet removeAllObjects];
+        [self.imagesShowedInSheet addObject:[UIImage imageNamed:@"addPic.jpg"]];
     }
+}
+
+- (void)didClickOnCancelButton
+{
+    [self.imagesSelected removeAllObjects];
+    [self.imagesShowedInSheet removeAllObjects];
+    [self.imagesShowedInSheet addObject:[UIImage imageNamed:@"addPic.jpg"]];
 }
 
 - (void)requestFinished:(ASIHTTPRequest *)request
