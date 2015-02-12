@@ -34,11 +34,7 @@
         [application registerUserNotificationSettings:[UIUserNotificationSettings
                                                        settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge)
                                                        categories:nil]];
-        
-        [application registerForRemoteNotifications];
-    }
-    else
-    {
+    } else {
         [application registerForRemoteNotificationTypes:
          UIRemoteNotificationTypeAlert
          | UIRemoteNotificationTypeBadge
@@ -52,7 +48,7 @@
     [self.locationManager setDistanceFilter:10.0];
     [self.locationManager startUpdatingLocation];
     self.runningInBackGround = NO;
-    if (IS_iOS7) {
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
         [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
     }
     if ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
@@ -128,6 +124,11 @@
     [BPush registerDeviceToken:deviceToken]; // 必须
     
     [BPush bindChannel]; // 必须。可以在其它时机调用，只有在该方法返回（通过onMethod:response:回调）绑定成功时，app才能接收到Push消息。一个app绑定成功至少一次即可（如果access token变更请重新绑定）。
+}
+
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
+{
+    [application registerForRemoteNotifications];
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
