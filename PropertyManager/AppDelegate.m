@@ -366,8 +366,8 @@
                                    yixinCls:[YXApi class]];
     
     //添加腾讯微博应用 注册网址 http://dev.t.qq.com
-    [ShareSDK connectTencentWeiboWithAppKey:@"801307650"
-                                  appSecret:@"ae36f4ee3946e1cbb98d6965b0b2ff5c"
+    [ShareSDK connectTencentWeiboWithAppKey:@"1104175747"
+                                  appSecret:@"fRrw0uMHOGflMTFM"
                                 redirectUri:@"http://wy.5ishequ.com.cn/app/owner/index/ownerIndex.do"
                                    wbApiCls:[WeiboApi class]];
 }
