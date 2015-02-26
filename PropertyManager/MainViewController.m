@@ -12,7 +12,7 @@
 #import "SVProgressHUD.h"
 #import "lame.h"
 #import "BDKNotifyHUD.h"
-#import "ShareSDKJSBridge.h"
+//#import "ShareSDKJSBridge.h"
 
 @interface MainViewController ()
 
@@ -185,8 +185,78 @@
         }
         
         return NO;
-    } else {
-        return ![[ShareSDKJSBridge sharedBridge] captureRequest:request webView:webView];
+    }
+    
+    //ShareSDK
+    NSArray *urlComps1 = [urlString componentsSeparatedByString:@":///"];
+    if ([urlComps1 count] && [[urlComps1 objectAtIndex:0] isEqualToString:@"sharesdk"]) {
+        if ([[urlComps1 objectAtIndex:1] hasPrefix:@"showShareMenu?"]) {
+            NSString *cn_String = [[urlComps1 objectAtIndex:1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            self.shareParams = [[NSMutableDictionary alloc] init];
+            NSArray *params = [[cn_String substringFromIndex:14] componentsSeparatedByString:@"&&&"];
+            for (int i = 0; i < [params count]; i++) {
+                NSString *param = [params objectAtIndex:i];
+                if ([param hasPrefix:@"text="]) {
+                    [self.shareParams setObject:[param substringFromIndex:5] forKey:@"text"];
+                }
+                if ([param hasPrefix:@"title="]) {
+                    [self.shareParams setObject:[param substringFromIndex:6] forKey:@"title"];
+                }
+                if ([param hasPrefix:@"titleUrl="]) {
+                    [self.shareParams setObject:[param substringFromIndex:9] forKey:@"titleUrl"];
+                }
+                if ([param hasPrefix:@"description="]) {
+                    [self.shareParams setObject:[param substringFromIndex:12] forKey:@"description"];
+                }
+                if ([param hasPrefix:@"site="]) {
+                    [self.shareParams setObject:[param substringFromIndex:5] forKey:@"site"];
+                }
+                if ([param hasPrefix:@"siteUrl="]) {
+                    [self.shareParams setObject:[param substringFromIndex:8] forKey:@"siteUrl"];
+                }
+                if ([param hasPrefix:@"url="]) {
+                    [self.shareParams setObject:[param substringFromIndex:4] forKey:@"url"];
+                }
+                if ([param hasPrefix:@"imageUrl="]) {
+                    [self.shareParams setObject:[param substringFromIndex:9] forKey:@"imageUrl"];
+                }
+                if ([param hasPrefix:@"type="]) {
+                    [self.shareParams setObject:[param substringFromIndex:5] forKey:@"type"];
+                }
+            }
+            
+            //构造分享内容
+            id<ISSContent> publishContent = [ShareSDK content:[self.shareParams objectForKey:@"text"]
+                                               defaultContent:[self.shareParams objectForKey:@"text"]
+                                                        image:[ShareSDK imageWithUrl:[self.shareParams objectForKey:@"imageUrl"]]
+                                                        title:[self.shareParams objectForKey:@"title"]
+                                                          url:[self.shareParams objectForKey:@"url"]
+                                                  description:[self.shareParams objectForKey:@"description"]
+                                                    mediaType:SSPublishContentMediaTypeNews];
+            
+            //创建弹出菜单容器
+            id<ISSContainer> container = [ShareSDK container];
+            
+            //弹出分享菜单
+            [ShareSDK showShareActionSheet:container
+                                 shareList:nil
+                                   content:publishContent
+                             statusBarTips:YES
+                               authOptions:nil
+                              shareOptions:nil
+                                    result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
+                                        
+                                        if (state == SSResponseStateSuccess)
+                                        {
+                                            NSLog(NSLocalizedString(@"TEXT_ShARE_SUC", @"分享成功"));
+                                        }
+                                        else if (state == SSResponseStateFail)
+                                        {
+                                            NSLog(NSLocalizedString(@"TEXT_ShARE_FAI", @"分享失败,错误码:%d,错误描述:%@"), [error errorCode], [error errorDescription]);
+                                        }
+                                    }];
+        }
+        return NO;
     }
     return YES;
 }

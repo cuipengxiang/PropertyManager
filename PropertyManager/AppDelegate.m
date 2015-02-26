@@ -7,6 +7,14 @@
 //
 
 #import "AppDelegate.h"
+#import <ShareSDK/ShareSDK.h>
+#import <TencentOpenAPI/QQApiInterface.h>
+#import <TencentOpenAPI/TencentOAuth.h>
+#import "WXApi.h"
+#import "WeiboSDK.h"
+#import <RennSDK/RennSDK.h>
+#import "YXApi.h"
+#import "WeiboApi.h"
 
 @implementation AppDelegate
 {
@@ -58,6 +66,8 @@
     if ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
         [self.locationManager requestAlwaysAuthorization];
     }
+    
+    [self initShareSDK];
     
     return YES;
 }
@@ -303,5 +313,82 @@
     //AudioServicesPlaySystemSound(1106);
     //[self.mainController showUserMessageView];
 }
+
+
+
+- (void)initShareSDK
+{
+    [ShareSDK registerApp:@"492eb58cf450"];//字符串为您的ShareSDK的AppKey
+    
+    //添加新浪微博应用 注册网址 http://open.weibo.com
+    [ShareSDK connectSinaWeiboWithAppKey:@"846548280"
+                               appSecret:@"d88c8815d05504eae449d4f305dd94d9"
+                             redirectUri:@"http://wy.5ishequ.com.cn/app/owner/index/ownerIndex.do"];
+    
+    //当使用新浪微博客户端分享的时候需要按照下面的方法来初始化新浪的平台
+    [ShareSDK connectSinaWeiboWithAppKey:@"846548280"
+                               appSecret:@"d88c8815d05504eae449d4f305dd94d9"
+                             redirectUri:@"http://wy.5ishequ.com.cn/app/owner/index/ownerIndex.do"
+                             weiboSDKCls:[WeiboSDK class]];
+    
+    //添加QQ空间应用  注册网址  http://connect.qq.com/intro/login/
+    [ShareSDK connectQZoneWithAppKey:@"1103590524"
+                           appSecret:@"aed9b0303e3ed1e27bae87c33761161d"
+                   qqApiInterfaceCls:[QQApiInterface class]
+                     tencentOAuthCls:[TencentOAuth class]];
+    
+    //添加QQ应用  注册网址  http://open.qq.com/
+    [ShareSDK connectQQWithAppId:@"QQ41C7747C"
+                        qqApiCls:[QQApi class]];
+
+    //添加微信应用 注册网址 http://open.weixin.qq.com
+    [ShareSDK connectWeChatWithAppId:@"wx43df424194484006"   //微信APPID
+                           appSecret:@"dcba43d87d7dce7f622487f049d0a3cd"  //微信APPSecret
+                           wechatCls:[WXApi class]];
+    
+    //添加豆瓣应用  注册网址 http://developers.douban.com
+    [ShareSDK connectDoubanWithAppKey:@"02e2cbe5ca06de5908a863b15e149b0b"
+                            appSecret:@"9f1e7b4f71304f2f"
+                          redirectUri:@"http://wy.5ishequ.com.cn/app/owner/index/ownerIndex.do"];
+    
+    //添加人人网应用 注册网址  http://dev.renren.com
+    [ShareSDK connectRenRenWithAppId:@"473728"
+                              appKey:@"bee714555184477488c9c5e91c4a9f62"
+                           appSecret:@"fa46902fcab842f082165aad62c3dd20"
+                   renrenClientClass:[RennClient class]];
+    
+    //易信
+    [ShareSDK connectYiXinSessionWithAppId:@"yx5d16c5cd5ad5422b8ac37202aa075fe4"
+                                  yixinCls:[YXApi class]];
+    
+    //易信朋友圈
+    [ShareSDK connectYiXinTimelineWithAppId:@"yx5d16c5cd5ad5422b8ac37202aa075fe4"
+                                   yixinCls:[YXApi class]];
+    
+    //添加腾讯微博应用 注册网址 http://dev.t.qq.com
+    [ShareSDK connectTencentWeiboWithAppKey:@"801307650"
+                                  appSecret:@"ae36f4ee3946e1cbb98d6965b0b2ff5c"
+                                redirectUri:@"http://wy.5ishequ.com.cn/app/owner/index/ownerIndex.do"
+                                   wbApiCls:[WeiboApi class]];
+}
+
+- (BOOL)application:(UIApplication *)application
+      handleOpenURL:(NSURL *)url
+{
+    return [ShareSDK handleOpenURL:url
+                        wxDelegate:self];
+}
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation
+{
+    return [ShareSDK handleOpenURL:url
+                 sourceApplication:sourceApplication
+                        annotation:annotation
+                        wxDelegate:self];
+}
+
 
 @end

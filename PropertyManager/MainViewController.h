@@ -12,6 +12,8 @@
 #import "LXVoiceActivity.h"
 #import "LCVoice.h"
 #import "MPNotificationView.h"
+#import <ShareSDK/ShareSDK.h>
+#import "RegexKitLite.h"
 
 @interface MainViewController : UIViewController<UIWebViewDelegate, UzysAssetsPickerControllerDelegate, LXActivityDelegate, LXVoiceActivityDelegate, ASIHTTPRequestDelegate, UIAlertViewDelegate>
 
@@ -31,6 +33,8 @@
 @property (nonatomic, strong) NSString *address;
 @property (nonatomic) double lat;
 @property (nonatomic) double lon;
+
+@property (nonatomic, strong) NSMutableDictionary *shareParams;
 
 - (void)showNotify:(NSString *)message;
 - (void)showUserMessageView;

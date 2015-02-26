@@ -1,313 +1,173 @@
-
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="zh-cmn-Hans">
     <head>
+        
+        
         <meta charset="UTF-8">
             <meta name="format-detection" content="telephone=no" />
-            <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
-                <title>我要发布</title>
-                <link rel="stylesheet" href="/css/bootstrap.min.css" />
-                <link rel="stylesheet" href="/css/owner.css" />
-                <link rel="stylesheet" href="/css/simpleplayer.css" />
-                
-                <!--  本地缓存后退需要引用的js-->
-                <script src="/js/locache.js"></script>
-                <script src="/js/storage.js"></script>
-                <script type="text/javascript">
-                    //调用原生照片控件，判读是ios还是Android；进行不同调用
-                    function sendPicObjcCommand(params1, params2) {
-                        if(navigator.userAgent.toLowerCase().match(/MicroMessenger/i) == 'micromessenger')
-                        {
-                            $.alert("请先下载APP，才能使用该功能");
-                        }else{
-                            if (/android/i.test(navigator.userAgent)) {
-                                window.JsInterFace.addPic(params1, params2);
-                            } else if (/ipad|iphone|mac/i.test(navigator.userAgent)) {
-                                document.activeElement.blur();
-                                document.location = "objc://addPic:" + params1 + "/" + params2;//params1：company_id,params2 ：picInput_id
-                                //window.location.assign("objc://aaaaaaa:11111");
-                                //window.location.assign("objc://addPic:" + params1 + "," + params2);
+            <meta name="description" content="我爱社区 商铺 商铺" />
+            <meta name="keywords" content="我爱社区,O2O,商铺,商铺" />
+            <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
+            <link rel="shortcut icon" href="/ddxd/images/favicon.ico" />
+            <title>我爱社区</title>
+            <link rel="stylesheet" href="/ddxd/css/bootstrap.min.css"/>
+            <link rel="stylesheet" href="/ddxd/css/owner.css">
+                <link rel="stylesheet" href="/ddxd/css/style/storeIndex.css">
+                    <script src="/ddxd/js/jquery-1.11.1.min.js"></script>
+                    <script src="/ddxd/js/locache.js"></script>
+                    <script src="/ddxd/js/storage.js"></script>
+                    <script type="text/javascript">
+                        var pathname = window.location.href;
+                        storage(pathname);
+                        function init(){
+                            if(/ipad|iphone|mac/i.test(navigator.userAgent)){
+                                $sharesdk.open("iosv1101", true);
+                                var sinaConf = {};
+                                sinaConf["app_key"] = "846548280"
+                                sinaConf["app_secret"] = "d88c8815d05504eae449d4f305dd94d9";
+                                sinaConf["redirect_uri"] = "http://114.215.139.225:8080/ourally/app/owner/sys/index.jsp";
+                                $sharesdk.setPlatformConfig($sharesdk.platformID.SinaWeibo, sinaConf);
+                                
+                                //微信
+                                var weChatConf = {};
+                                weChatConf["app_id"] = "wx43df424194484006"
+                                weChatConf["app_secret"] = "dcba43d87d7dce7f622487f049d0a3cd";                           $sharesdk.setPlatformConfig($sharesdk.platformID.WeChatSession, weChatConf);
+                                
+                                //QQ
+                                var qqConf = {};
+                                qqConf["app_key"] = "aed9b0303e3ed1e27bae87c33761161d"
+                                qqConf["app_id"] = "100371282";
+                                $sharesdk.setPlatformConfig($sharesdk.platformID.QQ, qqConf);
                             }
                         }
-                    }
-                //原生添加图片后调用
-                function showPic(picString, _id) {
-                    $("#" + _id).val(picString);
-                    var imgs = picString.split(",");
-                    if (imgs.length > 0) {
-                        $(".preview").html(null);
-                        var _content = "";
-                        for ( var i = 0; i < imgs.length; i++) {
-                            if (imgs[i] != null && imgs[i] != "") {
-                                _content += '<div class="img-delete"><img  src="/upload/images/'+imgs[i]+'" /><i onclick="delPic(this,\''+ _id+'\');"></i></div>';
-                            }
-                        }
-                        $(".preview").html(_content);
-                        $("#preview-tr").show();
-                    } else {
-                    }
-                }
-                </script>
-                <style>
-                    .upload li.fixed{
-                        padding:0 10px;
-                    }
-                .upload li.fixed button{
-                    width:100%;
-                }
-                .preview{
-                    border-bottom: none;
-                }
-                </style>
+                    </script>
     </head>
-    <body>
-        <form method="post" action="doTradeInfoAdd.do" id="form">
-            <header id="header" class="navbar-fixed-top">
-                <a id="header-back" href="javascript:back();">创建我的供求信息</a>
-                <a id="header-font" class="header-r" href="javascript:$('#form').submit();">保存</a>
-            </header>
-            <section class="top-section">
-                <div class="top-tab" id="fleamark">
-                    <a class="current-tab" id="sell" value="1"> <span class="tab-l">供</span></a>
-                    <a id="buy" value="2"><span>求</span></a>
-                    <input type="text" name="kind" id="kind" mark="flea">
-                        </div>
-            </section>
-            <section class="section-bottom">
-                <table class="ht-table table table-bordered">
-                    <tr>
-                        <td class="title "><label class="title-hint" id="fleahint">供</label></td>
-                        <td>
-                            <div class="inline">
-                                <input type="text" name="infoTitle" id="infoTitle">
-                                    <div></div>
-                                    </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="title"><label>一级分类<b class="bt">*</b></label></td>
-                        <td><input type="hidden" name="firstType" id="firstType">
-                        <div class="select" id="selectFirstType">请选择一级分类</div></td>
-                    </tr>
-                    <tr>
-                        <td class="title"><label>二级分类<b class="bt">*</b></label></td>
-                        <td><input type="hidden" name="typeId" id="typeId">
-                        <div class="select" id="selectSecondType">请选择二级分类</div></td>
-                    </tr>
-                    <tr>
-                        <td class="title"><label>详细描述<b class="bt">*</b></label></td>
-                        <td><textarea placeholder="详细描述..." name="infoDesc" id="infoDesc"></textarea>
-                            <div></div></td>
-                    </tr>
-                    <tr>
-                        <td class="title"><label>价格<b class="bt">*</b></label></td>
-                        <td><input name="priceDesc" id="priceDesc">
-                        <div></div></td>
-                    </tr>
-                    <tr>
-                        <td class="title"><label>联系人<b class="bt">*</b></label></td>
-                        <td><input name="contactName" id="contactName" value="liuqi">
-                        <div></div></td>
-                    </tr>
-                    <tr>
-                        <td class="title"><label>联系电话<b class="bt">*</b></label></td>
-                        <td><input type="tel" name="contactPhone" id="contactPhone" value="18666726167">
-                        <div></div></td>
-                    </tr>
-                    <tr>
-                        <td class="title"><label>地址</label></td>
-                        <td><input name="contactAddr" id="contactAddr"></td>
-                    </tr>
-                    <tr id="preview-tr" hidden="hidden" >
-                        <td colspan="2">
-                            <div class="preview">
-                            </div>
-                        </td>
-                        <input type="hidden" name="infoImgs" id="pic">
-                            </tr>
-                </table>
-                <div class="hidden select-content" id="select-content1">
-                    <h5 class="select-title">一级分类</h5>
-                    <ul class="ht-select">
-                        
-                        <li><a onclick="selFirstType('100000','数码3C')"><i class="no-select"></i>
-                            <span flag="100000">数码3C</span></a></li>
-                        
-                        <li><a onclick="selFirstType('110000','家用电器')"><i class="no-select"></i>
-                            <span flag="110000">家用电器</span></a></li>
-                        
-                        <li><a onclick="selFirstType('120000','车辆服务')"><i class="no-select"></i>
-                            <span flag="120000">车辆服务</span></a></li>
-                        
-                        <li><a onclick="selFirstType('130000','衣帽鞋包')"><i class="no-select"></i>
-                            <span flag="130000">衣帽鞋包</span></a></li>
-                        
-                        <li><a onclick="selFirstType('140000','商用办公')"><i class="no-select"></i>
-                            <span flag="140000">商用办公</span></a></li>
-                        
-                        <li><a onclick="selFirstType('150000','食品特产')"><i class="no-select"></i>
-                            <span flag="150000">食品特产</span></a></li>
-                        
-                        <li><a onclick="selFirstType('160000','文体用品')"><i class="no-select"></i>
-                            <span flag="160000">文体用品</span></a></li>
-                        
-                        <li><a onclick="selFirstType('170000','书刊音像')"><i class="no-select"></i>
-                            <span flag="170000">书刊音像</span></a></li>
-                        
-                        <li><a onclick="selFirstType('180000','卡券票务')"><i class="no-select"></i>
-                            <span flag="180000">卡券票务</span></a></li>
-                        
-                        <li><a onclick="selFirstType('190000','母婴用品')"><i class="no-select"></i>
-                            <span flag="190000">母婴用品</span></a></li>
-                        
-                        <li><a onclick="selFirstType('200000','租房买房')"><i class="no-select"></i>
-                            <span flag="200000">租房买房</span></a></li>
-                        
-                        <li><a onclick="selFirstType('300000','教育培训')"><i class="no-select"></i>
-                            <span flag="300000">教育培训</span></a></li>
-                        
-                        <li><a onclick="selFirstType('400000','宠物相关')"><i class="no-select"></i>
-                            <span flag="400000">宠物相关</span></a></li>
-                        
-                        <li><a onclick="selFirstType('990000','其他服务')"><i class="no-select"></i>
-                            <span flag="990000">其他服务</span></a></li>
-                        
-                    </ul>
-                </div>
+    <body onload="init();">
+        <header id="header" class="navbar-fixed-top">
+            <a id="header-back"
                 
-                <div class="hidden select-content" id="select-content2">
-                    <h5 class="select-title">二级分类</h5>
-                    <ul class="ht-select" id="select_seconde_type">
-                    </ul>
-                </div>
                 
-            </section>
-        </form>
-        <footer class="upload navbar-fixed-bottom">
-            <ul>
-                <li class="fixed">
-                    <button onclick="sendPicObjcCommand('10000000021000110110017','pic')">上传图片</button>
-                </li>
-            </ul>
+                
+                href="javascript:back();"
+                
+                
+                >商家详情</a>
+            
+            
+            <a class="header-r2 header-chat"  href="/ddxd/app/consumer/chat.do?receiverId=8a23602c4a9b6f76014a9e5f78e9012c&receiver=糖果屋"></a>
+            
+            
+            
+            
+            <a id="header-favorite" class="header-r header-favorite" href="javascript:loveStore('4028808b4b1b0865014b1b0963770000');"></a>
+            
+            
+        </header>
+        <div class="top-section"></div>
+        <section class="store-index section-block mgt-10 ">
+            <div class="img">
+                <a id="store-pic">
+                    <img src="/ddxd/upload/images/" onerror="this.src='/ddxd/images/other/placeholder.png'"/>
+                </a>
+            </div>
+            <h4>糖果屋</h4>
+            <p class="goods-addr">中俄科技园</p>
+            <p>18053540915</p>
+            
+            <a class="phone" href="tel:18053540915"></a>
+            
+            
+        </section>
+        
+        <section class="hid-section">
+            <img alt="我爱社区" src="../../../images/store/BEE.gif">
+                <span>该店铺还没有发布商品，敬请期待呦</span>
+                </section>
+        
+        
+        <div class="last-section"></div>
+        <footer class="enter-store navbar-fixed-bottom">
+            <div>
+                <a href="javascript:showShareMenuClickHandler();">分享商铺</a>
+            </div>
         </footer>
-        <script src="/js/jquery-1.11.1.min.js"></script>
-        <script src="/js/jquery.simpleplayer.min.js"></script>
-        <script src="/js/quo.js"></script>
-        <script src="/js/validate/jquery.validate.js"></script>
-        <script src="/js/jquery.metadata.js"></script>
-        <script>
-            $$(function(){
-               greyLighten($$(".top-tab a"));
-               })
-               
-               $(function() {
-                 $("#fleamark").find("#sell").addClass("current-tab").siblings()
-                 .removeClass("current-tab");
-                 $("#fleamark").find("input").val(
-                                                  $("#fleamark").find("#sell").attr("value"));
-                 $("#fleahint").html("供");
-                 $("#fleamark").find("a")
-                 .click(
-                        function() {
-                        $(this).addClass("current-tab").siblings()
-                        .removeClass("current-tab");
-                        $("#fleamark").find("input").val(
-                                                         $(this).attr("value"));
-                        var id = $(this).attr("id");
-                        if (id == "sell") {
-                        $("#fleahint").html("供");
-                        }
-                        if (id == "buy") {
-                        $("#fleahint").html("求");
-                        }
-                        
-                        });
-                 
-                 
-                 $("#form").validate({
-                                     errorElement : 'p',
-                                     errorClass : 'bt',
-                                     rules : {
-                                     infoTitle : {
-                                     required : true,
-                                     maxlength : 10
-                                     },
-                                     infoDesc : {
-                                     required : true,
-                                     maxlength : 200
-                                     },
-                                     priceDesc : {
-                                     required : true,
-                                     maxlength : 10
-                                     },
-                                     contactName : {
-                                     required : true,
-                                     maxlength : 10
-                                     },
-                                     contactPhone:{
-                                     required : true,
-                                     phone:true
-                                     },
-                                     firstType: {
-                                     required : true
-                                     },
-                                     typeId: {
-                                     required : true
-                                     }
-                                     },
-                                     messages : {
-                                     },
-                                     highlight : function(element) {
-                                     $(element).next("div").addClass('has-error');
-                                     },
-                                     success : function(label) {
-                                     label.next("div").removeClass('has-error');
-                                     label.remove();
-                                     },
-                                     errorPlacement : function(error, element) {
-                                     element.next('div').append(error);
-                                     }
-                                     });
-                 });
-                 
-                 $("#selectFirstType").click(function() {
-                                             $("#select-content1").selectBottom($("#selectFirstType"),$("#firstType"));
-                                             });
-                                             $("#selectSecondType").click(function() {
-                                                                          $("#select-content2").selectBottom($("#selectSecondType"),$("#typeId"));
-                                                                          });
-                                                                          //缓存后退页
-                                                                          var pathname = 'form';
-                                                                          storage(pathname);
-                                                                          //一级分类选择
-                                                                          function selFirstType(_pType, _pName) {
-                                                                              if (_pType == null || _pType == "") {
-                                                                                  return;
-                                                                              }
-                                                                              $.ajax({
-                                                                                     url : "showSecondType.do",
-                                                                                     data : {
-                                                                                     "pType" : _pType
-                                                                                     },
-                                                                                     dataType : "JSON",
-                                                                                     success : function(data) {
-                                                                                     $("#select_seconde_type").html(null);
-                                                                                     for ( var i in data) {
-                                                                                     $("#select_seconde_type").append(
-                                                                                                                      '<li><a><i class="no-select"></i><span flag="'+data[i].typeId+'">'+data[i].typeName+'</span></a></li>');
-                                                                                     }
-                                                                                     }
-                                                                                     });
-                                                                          }
-        headDarken($$("#header-font"));
-        greyLighten($$("#sell,#buy"));
-        buttonDarkenClick($$(".fixed button"),"rgb(251,177,2)");
+        
+        <link rel="stylesheet" href="/ddxd/fancybox/jquery.fancybox.css"/>
+        <script src="/ddxd/fancybox/jquery.fancybox.js"></script>
+        <script type="text/javascript">
+            $(function() {
+              $('.fancybox').fancybox();
+              });
             </script>
+        <script type="text/javascript" src="/ddxd/js/consumer/consumer.js"></script>
+        <script src="/ddxd/js/quo.js"></script>
+        <script src="/ddxd/js/ShareSDK.js"></script>
+        <script type="text/javascript">
+            function showShareMenuClickHandler(){
+                if(navigator.userAgent.toLowerCase().match(/MicroMessenger/i) == 'micromessenger')
+                {
+                    $.alert("请先下载APP，才能使用该功能");
+                    
+                }else{
+                    var imageUrl = "";
+                    if(""==null||""==""){
+                        imageUrl = "http://219.146.138.106:9292/ddxd/"+"images/other/placeholder.png";
+                    }else{
+                        imageUrl = "http://219.146.138.106:9292/ddxd/"+"upload/images/";
+                    }
+                    var params = {
+                        "text" : "糖果屋,这是我在我爱社区的小店，大家帮忙多多宣传呦~",
+                        
+                        "title" : "糖果屋",
+                        "titleUrl" : "http://219.146.138.106:9292/ddxd/"+"app/consumer/store/enterStore.do?id=4028808b4b1b0865014b1b0963770000&isShare=store",
+                        "description" : "糖果屋,这是我在我爱社区的小店，大家帮忙多多宣传呦~",
+                        "site" : "糖果屋",
+                        "siteUrl" : "http://219.146.138.106:9292/ddxd/"+"app/consumer/store/enterStore.do?id=4028808b4b1b0865014b1b0963770000&isShare=store",
+                        "url" : "http://219.146.138.106:9292/ddxd/"+"app/consumer/store/enterStore.do?id=4028808b4b1b0865014b1b0963770000&isShare=store",
+                        "type" : 1
+                    };
+                    if (/ipad|iphone|mac/i.test(navigator.userAgent)) {
+                        document.location = "sharesdk:///showShareMenu?" + "text=" + "糖果屋,这是我在我爱社区的小店，大家帮忙多多宣传呦~" + "&&&" +
+                        
+                                            "title=" + "糖果屋" + "&&&" +
+                                            
+                                            "titleUrl=" + "http://219.146.138.106:9292/ddxd/"+"app/consumer/store/enterStore.do?id=4028808b4b1b0865014b1b0963770000&isShare=store" + "&&&" +
+                                            
+                                            "description=" + "糖果屋,这是我在我爱社区的小店，大家帮忙多多宣传呦~" + "&&&" +
+                                            
+                                            "site=" + "糖果屋" + "&&&" +
+                                            
+                                            "siteUrl=" + "http://219.146.138.106:9292/ddxd/"+"app/consumer/store/enterStore.do?id=4028808b4b1b0865014b1b0963770000&isShare=store" + "&&&" +
+                                            
+                                            "url=" + "http://219.146.138.106:9292/ddxd/"+"app/consumer/store/enterStore.do?id=4028808b4b1b0865014b1b0963770000&isShare=store" + "&&&" +
+                                            
+                                            "imageUrl=" + "http://219.146.138.106:9292/ddxd/"+"images/other/placeholder.png" + "&&&" +
+                                            
+                                            "type=" + "1";
+                    }
+                    $sharesdk.showShareMenu(null, params, 100, 100, $sharesdk.shareMenuArrowDirection.Any, function (platform, state, shareInfo, error) {});
+                }
+            }
+        
+        $(function(){
+          var _width = $(".re-img").width();
+          $(".re-img").css("height",_width*3/4);
+          $(".img img").resizeImg();
+          $('#store-pic').click(function(){
+                                var $this = $(this);
+                                $this.addClass('fancybox').attr('data-fancybox-group','gallery').attr('href',$this.find('img').attr('src'));
+                                });
+          });
+          
+          $$(function(){
+             subOpacity($$("#header-favorite"));
+             subOpacity($$(".phone"));
+             darken($$("ul li a"));
+             headDarken($$(".enter-store a"));
+             });
+             
+            </script>
+        <!-- -------------------各种按钮点击效果结束 ------ -->
     </body>
     
 </html>
