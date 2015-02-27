@@ -103,6 +103,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1B36B4E088487F149C7CED9B /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		D0B7678C99424030AC633148 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D806DADA19AB6CD9008B8B77 /* lame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lame.h; sourceTree = "<group>"; };
 		D806DADB19AB6CD9008B8B77 /* libmp3lame.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libmp3lame.a; sourceTree = "<group>"; };
@@ -247,7 +248,7 @@
 		D8CC950119A83489002D64BA /* mic_normal_358x358@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "mic_normal_358x358@2x.png"; path = "PropertyManager/Vendors/LCVoiceHud/mic_normal_358x358@2x.png"; sourceTree = SOURCE_ROOT; };
 		D8CC950219A83489002D64BA /* mic_talk_358x358@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "mic_talk_358x358@2x.png"; path = "PropertyManager/Vendors/LCVoiceHud/mic_talk_358x358@2x.png"; sourceTree = SOURCE_ROOT; };
 		D8CC950319A83489002D64BA /* wave70x117@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wave70x117@2x.png"; path = "PropertyManager/Vendors/LCVoiceHud/wave70x117@2x.png"; sourceTree = SOURCE_ROOT; };
-		DC982AF6381A4000B78F0770 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		ECBA9AD10DADBD463EB55BFF /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -304,6 +305,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		03013DE949BFD1EA62F8E605 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				ECBA9AD10DADBD463EB55BFF /* Pods.debug.xcconfig */,
+				1B36B4E088487F149C7CED9B /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		D806DAD919AB6CC6008B8B77 /* lame */ = {
 			isa = PBXGroup;
 			children = (
@@ -340,7 +350,7 @@
 				D877FEF0199F475B00BB893D /* Images.xcassets */,
 				D877FEDD199F475B00BB893D /* Frameworks */,
 				D877FEDC199F475B00BB893D /* Products */,
-				DC982AF6381A4000B78F0770 /* Pods.xcconfig */,
+				03013DE949BFD1EA62F8E605 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -778,7 +788,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -915,7 +925,7 @@
 		};
 		D877FF08199F475B00BB893D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DC982AF6381A4000B78F0770 /* Pods.xcconfig */;
+			baseConfigurationReference = ECBA9AD10DADBD463EB55BFF /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -964,7 +974,7 @@
 		};
 		D877FF09199F475B00BB893D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DC982AF6381A4000B78F0770 /* Pods.xcconfig */;
+			baseConfigurationReference = 1B36B4E088487F149C7CED9B /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;

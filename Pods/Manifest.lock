@@ -1,9 +1,9 @@
 PODS:
   - ASIHTTPRequest (1.8.2):
-    - ASIHTTPRequest/ASIWebPageRequest
-    - ASIHTTPRequest/CloudFiles
-    - ASIHTTPRequest/Core
-    - ASIHTTPRequest/S3
+    - ASIHTTPRequest/ASIWebPageRequest (= 1.8.2)
+    - ASIHTTPRequest/CloudFiles (= 1.8.2)
+    - ASIHTTPRequest/Core (= 1.8.2)
+    - ASIHTTPRequest/S3 (= 1.8.2)
   - ASIHTTPRequest/ASIWebPageRequest (1.8.2):
     - ASIHTTPRequest/Core
   - ASIHTTPRequest/CloudFiles (1.8.2):
@@ -23,7 +23,7 @@ DEPENDENCIES:
   - ASIHTTPRequest
   - Base64nl
   - hpple
-  - JSONKit
+  - JSONKit (= 1.5pre)
   - MPNotificationView
   - Reachability
   - RegexKitLite
@@ -37,4 +37,4 @@ SPEC CHECKSUMS:
   Reachability: 8e9635e3cb4f98e7f825e51147f677ecc694d0e7
   RegexKitLite: c0e4c12e6e7de0769f3a3ed679f0f61604170661
 
-COCOAPODS: 0.33.1
+COCOAPODS: 0.35.0
