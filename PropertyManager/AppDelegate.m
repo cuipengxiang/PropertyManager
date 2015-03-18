@@ -120,6 +120,13 @@
     //[self.locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
     self.runningInBackGround = NO;
     [self.locationManager startUpdatingLocation];
+    if (self.mainController) {
+        NSLog(@"will enter foreground");
+        NSString *urlString=[NSString stringWithFormat:@"%@app/owner/sys/index.jsp", PUBLIC_ADDRESS];
+        NSURL *url=[NSURL URLWithString:urlString];
+        NSURLRequest *request=[NSURLRequest requestWithURL:url];
+        [self.mainController.mainWebView loadRequest:request];
+    }
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
