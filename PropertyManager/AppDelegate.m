@@ -130,7 +130,7 @@
         }
         if (interval > self.mainController.refreshTime*60) {
             NSLog(@"will enter foreground");
-            NSString *urlString=[NSString stringWithFormat:@"%@app/property/sys/index.jsp", PUBLIC_ADDRESS];
+            NSString *urlString=[NSString stringWithFormat:@"%@app/owner/sys/index.jsp", PUBLIC_ADDRESS];
             NSURL *url=[NSURL URLWithString:urlString];
             NSURLRequest *request=[NSURLRequest requestWithURL:url];
             [self.mainController.mainWebView loadRequest:request];
