@@ -23,7 +23,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.refreshTime = 0;
+        self.refreshTime = 30;
         /*
         UILocalNotification *notification=[[UILocalNotification alloc] init];
         if (notification!=nil) {
