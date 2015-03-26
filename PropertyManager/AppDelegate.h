@@ -31,4 +31,7 @@
 
 @property (nonatomic) BOOL addingLocalNotification;
 
+@property (nonatomic ,strong) NSDate *backDate;
+@property (nonatomic ,strong) NSDate *returnDate;
+
 @end

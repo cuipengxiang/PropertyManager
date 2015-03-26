@@ -36,6 +36,8 @@
 
 @property (nonatomic, strong) NSMutableDictionary *shareParams;
 
+@property (nonatomic, assign) int refreshTime;
+
 - (void)showNotify:(NSString *)message;
 - (void)showUserMessageView;
 

@@ -98,6 +98,7 @@
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     self.runningInBackGround = YES;
+    self.backDate = [NSDate date];
     /*
     self.locationManager stopUpdatingLocation];
     UIApplication *app = [UIApplication sharedApplication];
@@ -120,12 +121,20 @@
     //[self.locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
     self.runningInBackGround = NO;
     [self.locationManager startUpdatingLocation];
-    if (self.mainController) {
-        NSLog(@"will enter foreground");
-        NSString *urlString=[NSString stringWithFormat:@"%@app/owner/sys/index.jsp", PUBLIC_ADDRESS];
-        NSURL *url=[NSURL URLWithString:urlString];
-        NSURLRequest *request=[NSURLRequest requestWithURL:url];
-        [self.mainController.mainWebView loadRequest:request];
+    if (self.mainController&&self.mainController.refreshTime > 0) {
+        self.returnDate = [NSDate date];
+        NSTimeInterval interval;
+        if (self.backDate) {
+            interval = [self.returnDate timeIntervalSinceDate:self.backDate];
+            self.backDate = nil;
+        }
+        if (interval > self.mainController.refreshTime*60) {
+            NSLog(@"will enter foreground");
+            NSString *urlString=[NSString stringWithFormat:@"%@app/property/sys/index.jsp", PUBLIC_ADDRESS];
+            NSURL *url=[NSURL URLWithString:urlString];
+            NSURLRequest *request=[NSURLRequest requestWithURL:url];
+            [self.mainController.mainWebView loadRequest:request];
+        }
     }
 }
 
