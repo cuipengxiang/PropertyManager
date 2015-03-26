@@ -32,6 +32,8 @@
 @property (nonatomic) double lat;
 @property (nonatomic) double lon;
 
+@property (nonatomic ,assign) int refreshTime;
+
 - (void)showNotify:(NSString *)message;
 - (void)showUserMessageView;
 

@@ -23,6 +23,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        self.refreshTime = 0;
         /*
         UILocalNotification *notification=[[UILocalNotification alloc] init];
         if (notification!=nil) {
@@ -170,6 +171,9 @@
         if ([funcStr isEqualToString:@"getImeiId"]) {
             NSString *jsFunction = [NSString stringWithFormat:@"setImeiId('%@')", [NSString stringWithFormat:@"property%@", [[[UIDevice currentDevice] identifierForVendor] UUIDString]]];
             [self.mainWebView stringByEvaluatingJavaScriptFromString:jsFunction];
+        }
+        if ([funcStr isEqualToString:@"setRefreshTime"]) {
+            self.refreshTime = [[params objectAtIndex:0] integerValue];
         }
         
         return NO;   
