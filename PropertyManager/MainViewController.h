@@ -32,6 +32,9 @@
 @property (nonatomic) double lat;
 @property (nonatomic) double lon;
 
+@property (nonatomic, strong) UIView *badnetView;
+@property (nonatomic, strong) NSURLRequest *currentUrlRequest;
+
 @property (nonatomic ,assign) int refreshTime;
 
 - (void)showNotify:(NSString *)message;

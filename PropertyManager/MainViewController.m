@@ -55,6 +55,27 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    //初始化网络不通时显示的badnetView
+    UIImageView *cryImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"CRY"]];
+    [cryImage setFrame:CGRectMake((self.view.frame.size.width-40.0f)/2, 140.0f, 40.0f, 40.0f)];
+    UILabel *badnetLabel = [[UILabel alloc] initWithFrame:CGRectMake((self.view.frame.size.width-120.0f)/2, 200.0f, 120.0f, 40.0f)];
+    [badnetLabel setText:@"噢噢~~加载失败。请检查网络或重新加载。"];
+    [badnetLabel setFont:[UIFont systemFontOfSize:12.0f]];
+    [badnetLabel setLineBreakMode:NSLineBreakByWordWrapping];
+    [badnetLabel setNumberOfLines:0];
+    UIButton *badnetButton = [[UIButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width-94.0f)/2, 260.0f, 94.0f, 29.0f)];
+    [badnetButton setTitle:@"重新加载" forState:UIControlStateNormal];
+    [[badnetButton titleLabel] setFont:[UIFont systemFontOfSize:15.0f]];
+    [badnetButton addTarget:self action:@selector(badnetTryAgain) forControlEvents:UIControlEventTouchUpInside];
+    [badnetButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [badnetButton setBackgroundImage:[UIImage imageNamed:@"start_btn_bg"] forState:UIControlStateNormal];
+    self.badnetView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.view.frame.size.width, self.view.frame.size.height)];
+    [self.badnetView addSubview:cryImage];
+    [self.badnetView addSubview:badnetButton];
+    [self.badnetView addSubview:badnetLabel];
+    
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(tapReceivedNotificationHandler:)
                                                  name:kMPNotificationViewTapReceivedNotification
@@ -74,6 +95,7 @@
     NSString *urlString=[NSString stringWithFormat:@"%@app/property/sys/index.jsp", PUBLIC_ADDRESS];
 	NSURL *url=[NSURL URLWithString:urlString];
 	NSURLRequest *request=[NSURLRequest requestWithURL:url];
+    self.currentUrlRequest = request;
 	[self.mainWebView loadRequest:request];
 }
 
@@ -86,6 +108,12 @@
     }
 }
 
+- (void)badnetTryAgain
+{
+    [self.badnetView removeFromSuperview];
+    [self.mainWebView loadRequest:self.currentUrlRequest];
+}
+
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     [SVProgressHUD dismiss];
@@ -94,6 +122,7 @@
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
     [SVProgressHUD dismissWithError:@"加载页面失败" afterDelay:2.0];
+    [self.view addSubview:self.badnetView];
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView
@@ -178,7 +207,7 @@
         
         return NO;   
     } else {
-        //[SVProgressHUD showWithStatus:@"正在加载页面,请稍后..."];
+        self.currentUrlRequest = request;
     }
     return YES;
 }

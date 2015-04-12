@@ -15,6 +15,10 @@
 		D83861E919AC0C4700D7BF99 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83861E819AC0C4700D7BF99 /* CoreLocation.framework */; };
 		D83861EB19AC9CA100D7BF99 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D877FF29199F828000BB893D /* CoreTelephony.framework */; };
 		D83D557919ADFA2A00DB88F7 /* UIDevice+Hardware.m in Sources */ = {isa = PBXBuildFile; fileRef = D83D557819ADFA2A00DB88F7 /* UIDevice+Hardware.m */; };
+		D840187C1ADA06FB0070D63C /* CRY@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D840187A1ADA06FB0070D63C /* CRY@2x.png */; };
+		D840187F1ADA0FAF0070D63C /* start_btn_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = D840187D1ADA0FAF0070D63C /* start_btn_bg.png */; };
+		D84018801ADA0FAF0070D63C /* start_btn_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D840187E1ADA0FAF0070D63C /* start_btn_bg@2x.png */; };
+		D84018821ADA12CC0070D63C /* CRY.png in Resources */ = {isa = PBXBuildFile; fileRef = D84018811ADA12CC0070D63C /* CRY.png */; };
 		D877FEDF199F475B00BB893D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D877FEDE199F475B00BB893D /* Foundation.framework */; };
 		D877FEE1199F475B00BB893D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D877FEE0199F475B00BB893D /* CoreGraphics.framework */; };
 		D877FEE3199F475B00BB893D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D877FEE2199F475B00BB893D /* UIKit.framework */; };
@@ -87,6 +91,10 @@
 		D83861E819AC0C4700D7BF99 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		D83D557719ADFA2A00DB88F7 /* UIDevice+Hardware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+Hardware.h"; sourceTree = "<group>"; };
 		D83D557819ADFA2A00DB88F7 /* UIDevice+Hardware.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+Hardware.m"; sourceTree = "<group>"; };
+		D840187A1ADA06FB0070D63C /* CRY@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CRY@2x.png"; sourceTree = "<group>"; };
+		D840187D1ADA0FAF0070D63C /* start_btn_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = start_btn_bg.png; sourceTree = "<group>"; };
+		D840187E1ADA0FAF0070D63C /* start_btn_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "start_btn_bg@2x.png"; sourceTree = "<group>"; };
+		D84018811ADA12CC0070D63C /* CRY.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CRY.png; sourceTree = "<group>"; };
 		D877FEDB199F475B00BB893D /* PropertyManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PropertyManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D877FEDE199F475B00BB893D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D877FEE0199F475B00BB893D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -417,6 +425,10 @@
 		D87A840419A642F90059916C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D840187D1ADA0FAF0070D63C /* start_btn_bg.png */,
+				D840187E1ADA0FAF0070D63C /* start_btn_bg@2x.png */,
+				D84018811ADA12CC0070D63C /* CRY.png */,
+				D840187A1ADA06FB0070D63C /* CRY@2x.png */,
 				D8CB64921A8234320086E4C5 /* icon57@2x.png */,
 				D8CB64931A8234320086E4C5 /* icon58.png */,
 				D8CB64941A8234320086E4C5 /* icon58@2x.png */,
@@ -514,11 +526,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				D877FF17199F6E1200BB893D /* file.html in Resources */,
+				D840187F1ADA0FAF0070D63C /* start_btn_bg.png in Resources */,
 				D877FF22199F7C5D00BB893D /* BPushConfig.plist in Resources */,
 				D87A83FA19A6209D0059916C /* UzysAssetsPickerController.xib in Resources */,
+				D84018821ADA12CC0070D63C /* CRY.png in Resources */,
 				D8CC950619A83489002D64BA /* mic_talk_358x358@2x.png in Resources */,
+				D840187C1ADA06FB0070D63C /* CRY@2x.png in Resources */,
 				D87A83F819A6209D0059916C /* UzysAssetPickerController.bundle in Resources */,
 				D8CB649E1A8234320086E4C5 /* icon120@2x.png in Resources */,
+				D84018801ADA0FAF0070D63C /* start_btn_bg@2x.png in Resources */,
 				D877FEE9199F475B00BB893D /* InfoPlist.strings in Resources */,
 				D877FEF1199F475B00BB893D /* Images.xcassets in Resources */,
 				D8CC950719A83489002D64BA /* wave70x117@2x.png in Resources */,
