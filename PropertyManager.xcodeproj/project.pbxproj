@@ -15,6 +15,10 @@
 		D83861E919AC0C4700D7BF99 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83861E819AC0C4700D7BF99 /* CoreLocation.framework */; };
 		D83861EB19AC9CA100D7BF99 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D877FF29199F828000BB893D /* CoreTelephony.framework */; };
 		D83D557919ADFA2A00DB88F7 /* UIDevice+Hardware.m in Sources */ = {isa = PBXBuildFile; fileRef = D83D557819ADFA2A00DB88F7 /* UIDevice+Hardware.m */; };
+		D84018871ADA153D0070D63C /* CRY.png in Resources */ = {isa = PBXBuildFile; fileRef = D84018831ADA153D0070D63C /* CRY.png */; };
+		D84018881ADA153D0070D63C /* CRY@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D84018841ADA153D0070D63C /* CRY@2x.png */; };
+		D84018891ADA153D0070D63C /* start_btn_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = D84018851ADA153D0070D63C /* start_btn_bg.png */; };
+		D840188A1ADA153D0070D63C /* start_btn_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D84018861ADA153D0070D63C /* start_btn_bg@2x.png */; };
 		D85B04A01A3EC64E007FD4D2 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D85B049F1A3EC64E007FD4D2 /* QuartzCore.framework */; };
 		D85B04A21A3EC65E007FD4D2 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D85B04A11A3EC65E007FD4D2 /* libicucore.dylib */; };
 		D85B04A31A3EC668007FD4D2 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D82BF65E19A9904900FB646A /* libz.1.2.5.dylib */; };
@@ -115,6 +119,10 @@
 		D83861E819AC0C4700D7BF99 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		D83D557719ADFA2A00DB88F7 /* UIDevice+Hardware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+Hardware.h"; sourceTree = "<group>"; };
 		D83D557819ADFA2A00DB88F7 /* UIDevice+Hardware.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+Hardware.m"; sourceTree = "<group>"; };
+		D84018831ADA153D0070D63C /* CRY.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CRY.png; sourceTree = "<group>"; };
+		D84018841ADA153D0070D63C /* CRY@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CRY@2x.png"; sourceTree = "<group>"; };
+		D84018851ADA153D0070D63C /* start_btn_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = start_btn_bg.png; sourceTree = "<group>"; };
+		D84018861ADA153D0070D63C /* start_btn_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "start_btn_bg@2x.png"; sourceTree = "<group>"; };
 		D85B049F1A3EC64E007FD4D2 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		D85B04A11A3EC65E007FD4D2 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		D85B04A41A3EC681007FD4D2 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -525,6 +533,10 @@
 		D87A840419A642F90059916C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D84018831ADA153D0070D63C /* CRY.png */,
+				D84018841ADA153D0070D63C /* CRY@2x.png */,
+				D84018851ADA153D0070D63C /* start_btn_bg.png */,
+				D84018861ADA153D0070D63C /* start_btn_bg@2x.png */,
 				D8CC950019A83489002D64BA /* black_bg_ip5@2x.png */,
 				D8CC950119A83489002D64BA /* mic_normal_358x358@2x.png */,
 				D8CC950219A83489002D64BA /* mic_talk_358x358@2x.png */,
@@ -736,14 +748,18 @@
 			files = (
 				D877FF17199F6E1200BB893D /* file.html in Resources */,
 				D877FF22199F7C5D00BB893D /* BPushConfig.plist in Resources */,
+				D84018871ADA153D0070D63C /* CRY.png in Resources */,
 				D87A83FA19A6209D0059916C /* UzysAssetsPickerController.xib in Resources */,
 				D8CC950619A83489002D64BA /* mic_talk_358x358@2x.png in Resources */,
 				D87A83F819A6209D0059916C /* UzysAssetPickerController.bundle in Resources */,
 				D877FEE9199F475B00BB893D /* InfoPlist.strings in Resources */,
+				D84018881ADA153D0070D63C /* CRY@2x.png in Resources */,
 				D87E070C1A9EBB6900CB0F39 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				D87E07101A9EBB6900CB0F39 /* WeiboSDK.bundle in Resources */,
+				D840188A1ADA153D0070D63C /* start_btn_bg@2x.png in Resources */,
 				D877FEF1199F475B00BB893D /* Images.xcassets in Resources */,
 				D8CC950719A83489002D64BA /* wave70x117@2x.png in Resources */,
+				D84018891ADA153D0070D63C /* start_btn_bg.png in Resources */,
 				D87A840619A6432E0059916C /* addPic.jpg in Resources */,
 				D877FF12199F481900BB893D /* Default@2x.png in Resources */,
 				D87E07081A9EBB6900CB0F39 /* ShareSDKLocalizable.strings in Resources */,

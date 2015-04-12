@@ -38,6 +38,9 @@
 
 @property (nonatomic, assign) int refreshTime;
 
+@property (nonatomic, strong) UIView *badnetView;
+@property (nonatomic, strong) NSURLRequest *currentUrlRequest;
+
 - (void)showNotify:(NSString *)message;
 - (void)showUserMessageView;
 
