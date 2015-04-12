@@ -72,6 +72,7 @@
     [badnetButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [badnetButton setBackgroundImage:[UIImage imageNamed:@"start_btn_bg"] forState:UIControlStateNormal];
     self.badnetView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.view.frame.size.width, self.view.frame.size.height)];
+    [self.badnetView setBackgroundColor:[UIColor whiteColor]];
     [self.badnetView addSubview:cryImage];
     [self.badnetView addSubview:badnetButton];
     [self.badnetView addSubview:badnetLabel];
