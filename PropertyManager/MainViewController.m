@@ -59,15 +59,15 @@
     
     //初始化网络不通时显示的badnetView
     UIImageView *cryImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"CRY"]];
-    [cryImage setFrame:CGRectMake((self.view.frame.size.width-40.0f)/2, 140.0f, 40.0f, 40.0f)];
-    UILabel *badnetLabel = [[UILabel alloc] initWithFrame:CGRectMake((self.view.frame.size.width-120.0f)/2, 200.0f, 120.0f, 40.0f)];
+    [cryImage setFrame:CGRectMake((self.view.frame.size.width-60.0f)/2, 140.0f, 60.0f, 60.0f)];
+    UILabel *badnetLabel = [[UILabel alloc] initWithFrame:CGRectMake((self.view.frame.size.width-150.0f)/2, 220.0f, 150.0f, 60.0f)];
     [badnetLabel setText:@"噢噢~~加载失败。请检查网络或重新加载。"];
-    [badnetLabel setFont:[UIFont systemFontOfSize:12.0f]];
+    [badnetLabel setFont:[UIFont systemFontOfSize:15.0f]];
     [badnetLabel setLineBreakMode:NSLineBreakByWordWrapping];
     [badnetLabel setNumberOfLines:0];
-    UIButton *badnetButton = [[UIButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width-94.0f)/2, 260.0f, 94.0f, 29.0f)];
+    UIButton *badnetButton = [[UIButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width-94.0f)/2, 290.0f, 94.0f, 29.0f)];
     [badnetButton setTitle:@"重新加载" forState:UIControlStateNormal];
-    [[badnetButton titleLabel] setFont:[UIFont systemFontOfSize:15.0f]];
+    [[badnetButton titleLabel] setFont:[UIFont systemFontOfSize:16.0f]];
     [badnetButton addTarget:self action:@selector(badnetTryAgain) forControlEvents:UIControlEventTouchUpInside];
     [badnetButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [badnetButton setBackgroundImage:[UIImage imageNamed:@"start_btn_bg"] forState:UIControlStateNormal];
