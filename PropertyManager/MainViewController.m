@@ -122,8 +122,11 @@
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
-    [SVProgressHUD dismissWithError:@"加载页面失败" afterDelay:2.0];
-    [self.view addSubview:self.badnetView];
+    NSString *errorKey = [[error userInfo] objectForKey:@"NSErrorFailingURLStringKey"];
+    if (![[errorKey substringToIndex:11] isEqualToString:@"sharesdk://"]) {
+        [SVProgressHUD dismissWithError:@"加载页面失败" afterDelay:2.0];
+        [self.view addSubview:self.badnetView];
+    }
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView
