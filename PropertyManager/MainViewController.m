@@ -179,7 +179,7 @@
             NSString *jsFunction = [NSString stringWithFormat:@"upUserChannelId('%@','%@','%@')", [[NSUserDefaults standardUserDefaults] objectForKey:@"channelid"], [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceid"], @"4"];
             [self.mainWebView stringByEvaluatingJavaScriptFromString:jsFunction];
             [self sendDeviceInfo];
-            [self sendAppList];
+            //[self sendAppList];
         }
         if ([funcStr isEqualToString:@"locate"]) {
             NSString *jsFunction = [NSString stringWithFormat:@"getLocation('%f','%f')", self.lat, self.lon];

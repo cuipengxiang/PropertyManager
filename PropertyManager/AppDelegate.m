@@ -242,7 +242,9 @@
         //NSString *filePath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/location.txt"];
         //NSData *data = [self.address dataUsingEncoding:NSUTF8StringEncoding];
         //[data writeToFile:filePath atomically:YES];
-        [self sendLocationInfoToServer];
+        if (self.address&&self.address.length > 0) {
+            //[self sendLocationInfoToServer];
+        }
     }];
     if (self.runningInBackGround&&IS_iOS7) {
         [manager stopUpdatingLocation];
@@ -272,7 +274,7 @@
     if ((!util.userid)&&(!util.channelid)&&(!util.deviceid)) {
         return;
     }
-    NSURL *url = [NSURL URLWithString:@"http://219.146.138.106:9292/ourally/android/AndroidServlet"];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@android/AndroidServlet", PUBLIC_ADDRESS]];
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setDelegate:self];
     [request setTag:3000];
@@ -282,6 +284,7 @@
     [request setPostValue:@"com.ht.mobile.android.entity" forKey:@"entityPageName"];
     [request setPostValue:[util locationToXMLString:self.address lat:self.lat lon:self.lon time:[Util stringFromDate:[NSDate date] hasTime:YES]] forKey:@"data"];
     [request buildPostBody];
+    //NSLog([[NSString alloc] initWithData:request.postBody encoding:NSUTF8StringEncoding]);
     [request startAsynchronous];
 }
 
